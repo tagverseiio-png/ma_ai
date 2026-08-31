@@ -50,17 +50,17 @@ function CareersPage() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.06 }}
-              className="group rounded-[20px] border border-white/10 hover:border-[#8B5CF6]/50 transition-colors p-6 md:p-8 flex flex-col md:flex-row md:items-center justify-between gap-6"
+              className="group rounded-[20px] border border-black/10 hover:border-[#CCFF00]/50 transition-colors p-6 md:p-8 flex flex-col md:flex-row md:items-center justify-between gap-6"
             >
               <div>
                 <h3 className="text-[22px] font-semibold mb-2">{r.title}</h3>
-                <div className="flex flex-wrap items-center gap-4 text-[13px] text-gray-400">
-                  <span className="text-[#8B5CF6]">{r.team}</span>
+                <div className="flex flex-wrap items-center gap-4 text-[13px] text-gray-600">
+                  <span className="text-[#111111]">{r.team}</span>
                   <span className="flex items-center gap-1.5"><MapPin size={14} /> {r.location}</span>
                   <span>{r.type}</span>
                 </div>
               </div>
-              <Link to="/contact" className="inline-flex items-center gap-3 px-6 py-3 rounded-full border border-white/25 font-semibold text-[14px] hover:bg-white hover:text-black transition-all w-fit">
+              <Link to="/contact" className="inline-flex items-center gap-3 px-6 py-3 rounded-full border border-black/10 font-semibold text-[14px] hover:bg-white hover:text-black transition-all w-fit">
                 Apply <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
               </Link>
             </motion.div>
@@ -74,7 +74,7 @@ function CareersPage() {
           {perks.map((p) => (
             <div key={p.title} className="glass-card rounded-[22px] p-8">
               <h3 className="text-[20px] font-semibold mb-3">{p.title}</h3>
-              <p className="text-gray-400 font-light leading-[1.6]">{p.desc}</p>
+              <p className="text-gray-600 font-light leading-[1.6]">{p.desc}</p>
             </div>
           ))}
         </div>

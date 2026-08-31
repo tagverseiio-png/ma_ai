@@ -72,16 +72,16 @@ function FaqPage() {
             <motion.div
               key={index}
               variants={fadeInUp}
-              className="border-b border-white/10 last:border-b-0"
+              className="border-b border-black/10 last:border-b-0"
             >
               <button
                 onClick={() => setOpenIndex(openIndex === index ? null : index)}
                 className="w-full py-6 flex items-start justify-between gap-6 text-left group"
               >
-                <span className="text-lg md:text-xl font-semibold text-white group-hover:text-[#8B5CF6] transition-colors">
+                <span className="text-lg md:text-xl font-semibold text-[#111111] group-hover:text-[#111111] transition-colors">
                   {faq.question}
                 </span>
-                <span className="shrink-0 w-8 h-8 rounded-full border border-white/20 flex items-center justify-center text-white group-hover:border-[#8B5CF6] group-hover:text-[#8B5CF6] transition-colors mt-1">
+                <span className="shrink-0 w-8 h-8 rounded-full border border-black/10 flex items-center justify-center text-[#111111] group-hover:border-[#CCFF00] group-hover:text-[#111111] transition-colors mt-1">
                   {openIndex === index ? <Minus size={16} /> : <Plus size={16} />}
                 </span>
               </button>
@@ -93,7 +93,7 @@ function FaqPage() {
                   transition={{ duration: 0.3 }}
                   className="overflow-hidden"
                 >
-                  <p className="pb-6 text-gray-400 leading-relaxed">{faq.answer}</p>
+                  <p className="pb-6 text-gray-600 leading-relaxed">{faq.answer}</p>
                 </motion.div>
               )}
             </motion.div>

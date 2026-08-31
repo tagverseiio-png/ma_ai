@@ -44,29 +44,29 @@ function ServicesPage() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.08, duration: 0.6 }}
-              className="glass-card rounded-[24px] p-8 hover:border-[#8B5CF6]/40 transition-colors group"
+              className="glass-card rounded-[24px] p-8 hover:border-[#CCFF00]/40 transition-colors group"
             >
-              <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-[#4F46E5] to-[#8B5CF6] flex items-center justify-center mb-8 shadow-[0_10px_30px_rgba(79,70,229,0.35)]">
-                <s.icon size={24} className="text-white" />
+              <div className="w-14 h-14 rounded-2xl text-[#111111] flex items-center justify-center mb-8 shadow-[0_10px_30px_rgba(79,70,229,0.35)]">
+                <s.icon size={24} className="text-[#111111]" />
               </div>
               <h2 className="text-[24px] font-semibold mb-3">{s.title}</h2>
-              <p className="text-gray-400 font-light leading-[1.6] mb-6">{s.desc}</p>
-              <ul className="space-y-2 text-[14px] text-gray-300">
+              <p className="text-gray-600 font-light leading-[1.6] mb-6">{s.desc}</p>
+              <ul className="space-y-2 text-[14px] text-gray-600">
                 {s.points.map((p) => (
                   <li key={p} className="flex items-center gap-3">
-                    <span className="w-1.5 h-1.5 rounded-full bg-[#8B5CF6]" />
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#CCFF00]" />
                     {p}
                   </li>
                 ))}
               </ul>
             </motion.div>
           ))}
-          <motion.div variants={fadeInUp} initial="hidden" whileInView="visible" viewport={{ once: true }} className="rounded-[24px] p-8 bg-gradient-to-br from-[#4F46E5] to-[#7C3AED] flex flex-col justify-between">
+          <motion.div variants={fadeInUp} initial="hidden" whileInView="visible" viewport={{ once: true }} className="rounded-[24px] p-8 text-[#111111] flex flex-col justify-between">
             <div>
               <h2 className="text-[26px] font-semibold mb-3">Not sure where to start?</h2>
-              <p className="text-white/80 font-light leading-[1.6]">Book a 30-minute discovery call and we will map the fastest path to value.</p>
+              <p className="text-[#111111]/80 font-light leading-[1.6]">Book a 30-minute discovery call and we will map the fastest path to value.</p>
             </div>
-            <Link to="/contact" className="mt-8 inline-flex items-center gap-3 px-6 py-3 rounded-full bg-white text-[#4F46E5] font-semibold text-[15px] w-fit hover:bg-white/90 transition-colors">
+            <Link to="/contact" className="mt-8 inline-flex items-center gap-3 px-6 py-3 rounded-full bg-white text-[#111111] font-semibold text-[15px] w-fit hover:bg-white/90 transition-colors">
               Start a conversation <ArrowRight size={18} />
             </Link>
           </motion.div>

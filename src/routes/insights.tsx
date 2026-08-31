@@ -44,29 +44,29 @@ function InsightsPage() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.07, duration: 0.6 }}
-              className="glass-card rounded-[24px] p-8 flex flex-col hover:border-[#8B5CF6]/40 transition-colors group"
+              className="glass-card rounded-[24px] p-8 flex flex-col hover:border-[#CCFF00]/40 transition-colors group"
             >
-              <div className="flex items-center gap-3 text-[11px] uppercase tracking-[0.18em] text-gray-500 mb-6">
-                <span className="text-[#8B5CF6]">{p.tag}</span>
+              <div className="flex items-center gap-3 text-[11px] uppercase tracking-[0.18em] text-gray-700 mb-6">
+                <span className="text-[#111111]">{p.tag}</span>
                 <span className="w-1 h-1 rounded-full bg-gray-600" />
                 <span>{p.date}</span>
               </div>
               <h2 className="text-[22px] font-semibold leading-snug mb-4">{p.title}</h2>
-              <p className="text-gray-400 font-light text-[15px] leading-[1.65] mb-8">{p.excerpt}</p>
-              <div className="mt-auto flex items-center justify-between text-[13px] text-gray-500">
+              <p className="text-gray-600 font-light text-[15px] leading-[1.65] mb-8">{p.excerpt}</p>
+              <div className="mt-auto flex items-center justify-between text-[13px] text-gray-700">
                 <span>{p.read} read</span>
-                <ArrowRight size={16} className="text-[#8B5CF6] group-hover:translate-x-1 transition-transform" />
+                <ArrowRight size={16} className="text-[#111111] group-hover:translate-x-1 transition-transform" />
               </div>
             </motion.article>
           ))}
         </div>
 
-        <div className="mt-16 rounded-[24px] border border-white/10 p-10 flex flex-col md:flex-row items-center justify-between gap-8 bg-gradient-to-r from-[#0B0D1A] to-[#05050A]">
+        <div className="mt-16 rounded-[24px] border border-black/10 p-10 flex flex-col md:flex-row items-center justify-between gap-8 text-[#111111]">
           <div>
             <h2 className="text-[26px] font-semibold mb-2">Want these in your inbox?</h2>
-            <p className="text-gray-400 font-light">One considered email a month. No noise.</p>
+            <p className="text-gray-600 font-light">One considered email a month. No noise.</p>
           </div>
-          <Link to="/contact" className="inline-flex items-center gap-3 px-7 py-3.5 rounded-full bg-[#4F46E5] font-semibold text-[15px] hover:bg-[#4338CA] transition-colors">
+          <Link to="/contact" className="inline-flex items-center gap-3 px-7 py-3.5 rounded-full bg-[#CCFF00] font-semibold text-[15px] hover:bg-[#CCFF00] hover:text-[#111111] transition-colors">
             Subscribe <ArrowRight size={18} />
           </Link>
         </div>

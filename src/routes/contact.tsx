@@ -46,33 +46,45 @@ function ContactPage() {
               <Field label="Budget range" id="budget" placeholder="e.g. $25k – $50k" required={false} />
             </div>
             <div className="mt-6">
-              <label htmlFor="brief" className="block text-[13px] text-gray-400 mb-2">What are you building?</label>
+              <label htmlFor="brief" className="block text-[13px] text-gray-600 mb-2">What are you building?</label>
               <textarea
                 id="brief"
                 required
                 rows={5}
                 placeholder="A short brief — the problem, who it is for, and where you are today."
-                className="w-full rounded-2xl bg-white/5 border border-white/10 px-5 py-4 text-[15px] text-white placeholder:text-gray-600 focus:outline-none focus:border-[#8B5CF6] transition-colors"
+                className="w-full rounded-2xl bg-white/5 border border-black/10 px-5 py-4 text-[15px] text-[#111111] placeholder:text-gray-600 focus:outline-none focus:border-[#CCFF00] transition-colors"
               />
             </div>
             <button
               type="submit"
-              className="mt-8 inline-flex items-center gap-3 px-8 py-4 rounded-full bg-[#4F46E5] font-semibold text-[15px] hover:bg-[#4338CA] transition-colors shadow-[0_0_30px_rgba(79,70,229,0.35)]"
+              className="mt-8 inline-flex items-center gap-3 px-8 py-4 rounded-full bg-[#CCFF00] font-semibold text-[15px] hover:bg-[#CCFF00] hover:text-[#111111] transition-colors shadow-[0_0_30px_rgba(79,70,229,0.35)]"
             >
               {sent ? (<>Message received <Check size={18} /></>) : (<>Send the brief <ArrowRight size={18} /></>)}
             </button>
             {sent && (
-              <p className="mt-4 text-[14px] text-[#8B5CF6]">Thanks — we will get back to you at the email above within two working days.</p>
+              <p className="mt-4 text-[14px] text-[#111111]">Thanks — we will get back to you at the email above within two working days.</p>
             )}
           </motion.form>
 
           <div className="space-y-4">
-            <ContactCard icon={Mail} label="Email" value="hello@ma.ai" href="mailto:hello@ma.ai" />
-            <ContactCard icon={Phone} label="Phone" value="+91 95516 12345" href="tel:+919551612345" />
-            <ContactCard icon={MapPin} label="Studio" value={'No. 34, 2nd Floor, Eldams Road,\nAlwarpet, Chennai – 600018, India'} />
-            <div className="rounded-[22px] border border-white/10 p-7 bg-gradient-to-br from-[#0B0D1A] to-[#05050A]">
+            <ContactCard 
+              icon={Mail} 
+              label="Team Emails" 
+              value={
+                <div className="flex flex-col gap-1 mt-1 text-[13.5px]">
+                  <a href="mailto:meena.chabbria@maonline.ai" className="hover:text-gray-500 transition-colors">meena.chabbria@maonline.ai</a>
+                  <a href="mailto:prarthana.chabbria@maonline.ai" className="hover:text-gray-500 transition-colors">prarthana.chabbria@maonline.ai</a>
+                  <a href="mailto:vinay.sakhrani@maonline.ai" className="hover:text-gray-500 transition-colors">vinay.sakhrani@maonline.ai</a>
+                  <a href="mailto:souvik.seal@maonline.ai" className="hover:text-gray-500 transition-colors">souvik.seal@maonline.ai</a>
+                  <a href="mailto:harsh.gulwani@maonline.ai" className="hover:text-gray-500 transition-colors">harsh.gulwani@maonline.ai</a>
+                </div>
+              } 
+            />
+            <ContactCard icon={Phone} label="Phone" value="+91 99621 49035" href="tel:+919962149035" />
+            <ContactCard icon={MapPin} label="Studio" value={'No. 45, Pulla Avenue,\nShenoy Nagar, Chennai,\nTamil Nadu, 600030'} />
+            <div className="rounded-[22px] border border-black/10 p-7 text-[#111111]">
               <h3 className="text-[18px] font-semibold mb-2">Prefer a call?</h3>
-              <p className="text-gray-400 font-light text-[14px] leading-[1.6]">Mention a couple of time windows in your brief and we will send an invite.</p>
+              <p className="text-gray-600 font-light text-[14px] leading-[1.6]">Mention a couple of time windows in your brief and we will send an invite.</p>
             </div>
           </div>
         </div>
@@ -84,29 +96,29 @@ function ContactPage() {
 function Field({ label, id, type = 'text', placeholder, required = true }: { label: string; id: string; type?: string; placeholder: string; required?: boolean }) {
   return (
     <div>
-      <label htmlFor={id} className="block text-[13px] text-gray-400 mb-2">{label}</label>
+      <label htmlFor={id} className="block text-[13px] text-gray-600 mb-2">{label}</label>
       <input
         id={id}
         type={type}
         required={required}
         placeholder={placeholder}
-        className="w-full rounded-2xl bg-white/5 border border-white/10 px-5 py-3.5 text-[15px] text-white placeholder:text-gray-600 focus:outline-none focus:border-[#8B5CF6] transition-colors"
+        className="w-full rounded-2xl bg-white/5 border border-black/10 px-5 py-3.5 text-[15px] text-[#111111] placeholder:text-gray-600 focus:outline-none focus:border-[#CCFF00] transition-colors"
       />
     </div>
   );
 }
 
-function ContactCard({ icon: Icon, label, value, href }: { icon: typeof Mail; label: string; value: string; href?: string }) {
+function ContactCard({ icon: Icon, label, value, href }: { icon: typeof Mail; label: string; value: React.ReactNode; href?: string }) {
   const body = (
-    <div className="rounded-[22px] border border-white/10 p-6 flex items-start gap-4 hover:border-[#8B5CF6]/50 transition-colors">
-      <div className="w-11 h-11 rounded-[12px] bg-white/5 border border-white/10 flex items-center justify-center text-[#8B5CF6] shrink-0">
+    <div className="rounded-[22px] border border-black/10 p-6 flex items-start gap-4 hover:border-black/20 transition-colors">
+      <div className="w-11 h-11 rounded-[12px] bg-white/5 border border-black/10 flex items-center justify-center text-[#111111] shrink-0">
         <Icon size={18} />
       </div>
       <div>
-        <p className="text-[11px] uppercase tracking-[0.18em] text-gray-500 mb-1">{label}</p>
-        <p className="text-[15px] whitespace-pre-line leading-[1.6]">{value}</p>
+        <p className="text-[11px] uppercase tracking-[0.18em] text-gray-500 mb-1 font-bold">{label}</p>
+        <div className="text-[15px] whitespace-pre-line leading-[1.6]">{value}</div>
       </div>
     </div>
   );
-  return href ? <a href={href}>{body}</a> : body;
+  return href ? <a href={href} className="block">{body}</a> : body;
 }

@@ -50,9 +50,9 @@ export const GlobalCursor = () => {
         className="absolute -translate-x-1/2 -translate-y-1/2 top-0 left-0"
       >
         <div className="relative w-16 h-16 flex items-center justify-center">
-          <div className="absolute inset-0 rounded-full border-[1.5px] border-dashed border-white/30 mix-blend-difference animate-[spin_10s_linear_infinite]" />
-          <div className="absolute inset-3 rounded-full border border-white/15 mix-blend-difference" />
-          <div className="absolute inset-4 rounded-full bg-[#8B5CF6]/25 blur-lg" />
+          <div className="absolute inset-0 rounded-full border-[1.5px] border-dashed border-black/10 mix-blend-difference animate-[spin_10s_linear_infinite]" />
+          <div className="absolute inset-3 rounded-full border border-black/10 mix-blend-difference" />
+          <div className="absolute inset-4 rounded-full bg-[#CCFF00]/25 blur-lg" />
         </div>
       </motion.div>
       <motion.div
