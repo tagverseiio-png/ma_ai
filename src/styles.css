@@ -95,6 +95,35 @@
   --sidebar-accent-foreground: oklch(0.208 0.042 265.755);
   --sidebar-border: oklch(0.929 0.013 255.508);
   --sidebar-ring: oklch(0.704 0.04 256.788);
+
+  /* Site-specific theme tokens */
+  --site-bg: #F4F4F0;
+  --site-fg: #111111;
+  --site-muted: #6b7280;
+  --site-surface: #ffffff;
+  --site-border: rgba(0, 0, 0, 0.1);
+  --site-card-bg: #ffffff;
+  --site-input-bg: #ffffff;
+  --site-input-border: #e5e7eb;
+  --site-selection: rgba(204, 255, 0, 0.3);
+
+  /* Glass card — light */
+  --glass-card-bg: linear-gradient(135deg, rgba(0,0,0,0.03) 0%, rgba(0,0,0,0.01) 100%);
+  --glass-card-border: rgba(0,0,0,0.06);
+
+  /* Services section — light */
+  --services-bg: #F4F4F0;
+  --services-text: #111111;
+  --services-text-muted: rgba(17,17,17,0.55);
+  --services-text-secondary: rgba(17,17,17,0.75);
+  --services-border: rgba(0,0,0,0.1);
+  --services-id-dim: rgba(17,17,17,0.35);
+  --services-btn-bg: #111111;
+  --services-btn-text: #ffffff;
+  --services-wash-from: rgba(204,255,0,0.07);
+  --services-wash-via: rgba(0,0,0,0.02);
+  --services-accent-glow-1: rgba(204,255,0,0.12);
+  --services-accent-glow-2: rgba(204,255,0,0.06);
 }
 
 .dark {
@@ -130,6 +159,35 @@
   --sidebar-accent-foreground: oklch(0.984 0.003 247.858);
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.551 0.027 264.364);
+
+  /* Site-specific theme tokens — dark */
+  --site-bg: #0B0B13;
+  --site-fg: #F0F0F0;
+  --site-muted: #9ca3af;
+  --site-surface: #1a1a2e;
+  --site-border: rgba(255, 255, 255, 0.1);
+  --site-card-bg: #16162a;
+  --site-input-bg: #1a1a2e;
+  --site-input-border: rgba(255, 255, 255, 0.15);
+  --site-selection: rgba(204, 255, 0, 0.25);
+
+  /* Glass card — dark */
+  --glass-card-bg: linear-gradient(135deg, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0.01) 100%);
+  --glass-card-border: rgba(255,255,255,0.05);
+
+  /* Services section — dark */
+  --services-bg: #111111;
+  --services-text: #ffffff;
+  --services-text-muted: rgba(255,255,255,0.55);
+  --services-text-secondary: rgba(255,255,255,0.75);
+  --services-border: rgba(255,255,255,0.1);
+  --services-id-dim: rgba(255,255,255,0.4);
+  --services-btn-bg: transparent;
+  --services-btn-text: #ffffff;
+  --services-wash-from: rgba(204,255,0,0.07);
+  --services-wash-via: rgba(255,255,255,0.02);
+  --services-accent-glow-1: rgba(204,255,0,0.07);
+  --services-accent-glow-2: rgba(204,255,0,0.04);
 }
 
 @layer base {
@@ -138,7 +196,8 @@
   }
 
   body {
-    background-color: var(--color-background);
-    color: var(--color-foreground);
+    background-color: var(--site-bg);
+    color: var(--site-fg);
+    transition: background-color 0.3s ease, color 0.3s ease;
   }
 }

@@ -73,7 +73,7 @@ function WorkPage() {
 
             return (
               <div key={category} className="flex flex-col gap-8">
-                <h2 className="text-[32px] md:text-[40px] font-bold text-[#111111] tracking-[-0.04em] pb-4 border-b border-black/10">
+                <h2 className="text-[32px] md:text-[40px] font-bold text-[var(--site-fg)] tracking-[-0.04em] pb-4 border-b border-[var(--site-border)]">
                   {category}
                 </h2>
                 <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -84,15 +84,15 @@ function WorkPage() {
                       whileInView={{ opacity: 1, y: 0 }}
                       viewport={{ once: true }}
                       transition={{ delay: i * 0.08, duration: 0.6 }}
-                      className="group relative rounded-[24px] overflow-hidden border border-black/10 hover:border-[#CCFF00]/50 transition-colors"
+                      className="group relative rounded-[24px] overflow-hidden border border-[var(--site-border)] hover:border-[#CCFF00]/50 transition-colors"
                     >
                       <div className="aspect-[4/5] overflow-hidden">
                         <img src={p.image} alt={p.title} loading="lazy" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
                       </div>
                       <div className="absolute inset-0 bg-gradient-to-t from-[#05050A] via-[#05050A]/20 to-transparent" />
                       <Link to="/contact" className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity" aria-label={`Enquire about ${p.title}`}>
-                        <span className="w-16 h-16 rounded-full bg-white/20 backdrop-blur-md border border-black/10 flex items-center justify-center">
-                          <Play size={22} className="text-[#111111] fill-white ml-1" />
+                        <span className="w-16 h-16 rounded-full bg-white/20 backdrop-blur-md border border-[var(--site-border)] flex items-center justify-center">
+                          <Play size={22} className="text-[var(--site-fg)] fill-white ml-1" />
                         </span>
                       </Link>
 
@@ -110,9 +110,9 @@ function WorkPage() {
             );
           })}
 
-          <div className="rounded-[24px] border border-dashed border-black/10 p-12 flex flex-col justify-center items-center gap-6 text-center bg-[#F4F4F0]/50 mt-12">
-            <h2 className="text-[32px] font-semibold leading-tight text-[#111111]">Your story could be next.</h2>
-            <Link to="/contact" className="inline-flex items-center gap-3 px-8 py-4 rounded-full bg-[#111111] text-[#CCFF00] font-semibold text-[15px] hover:bg-[#CCFF00] hover:text-[#111111] transition-colors">
+          <div className="rounded-[24px] border border-dashed border-[var(--site-border)] p-12 flex flex-col justify-center items-center gap-6 text-center bg-[var(--site-bg)]/50 mt-12">
+            <h2 className="text-[32px] font-semibold leading-tight text-[var(--site-fg)]">Your story could be next.</h2>
+            <Link to="/contact" className="inline-flex items-center gap-3 px-8 py-4 rounded-full bg-[#111111] text-[#CCFF00] font-semibold text-[15px] hover:bg-[#CCFF00] hover:text-[var(--site-fg)] transition-colors">
               Brief us <ArrowRight size={18} />
             </Link>
           </div>

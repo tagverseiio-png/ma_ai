@@ -31,53 +31,53 @@ function CookiesPage() {
           initial="hidden"
           animate="visible"
           variants={fadeInUp}
-          className="max-w-[900px] mx-auto space-y-12 text-gray-600"
+          className="max-w-[900px] mx-auto space-y-12 text-[var(--site-muted)]"
         >
           <div className="space-y-4">
-            <h2 className="text-2xl font-bold text-[#111111]">1. What are cookies?</h2>
+            <h2 className="text-2xl font-bold text-[var(--site-fg)]">1. What are cookies?</h2>
             <p className="leading-relaxed">
               Cookies are small text files placed on your device when you visit a website. They help the site remember your preferences, understand how you interact with it, and improve your experience.
             </p>
           </div>
 
           <div className="space-y-4">
-            <h2 className="text-2xl font-bold text-[#111111]">2. How we use cookies</h2>
+            <h2 className="text-2xl font-bold text-[var(--site-fg)]">2. How we use cookies</h2>
             <p className="leading-relaxed">
               We use cookies to keep our site secure, measure performance, remember your preferences, and understand how visitors move through our content. This helps us refine the experience over time.
             </p>
           </div>
 
           <div className="space-y-4">
-            <h2 className="text-2xl font-bold text-[#111111]">3. Types of cookies we use</h2>
+            <h2 className="text-2xl font-bold text-[var(--site-fg)]">3. Types of cookies we use</h2>
             <ul className="list-disc pl-6 space-y-2 leading-relaxed">
-              <li><strong className="text-[#111111]">Essential cookies:</strong> Required for the site to function and cannot be switched off.</li>
-              <li><strong className="text-[#111111]">Analytics cookies:</strong> Help us understand how visitors use our site so we can improve it.</li>
-              <li><strong className="text-[#111111]">Preference cookies:</strong> Remember settings and choices you make during your visit.</li>
+              <li><strong className="text-[var(--site-fg)]">Essential cookies:</strong> Required for the site to function and cannot be switched off.</li>
+              <li><strong className="text-[var(--site-fg)]">Analytics cookies:</strong> Help us understand how visitors use our site so we can improve it.</li>
+              <li><strong className="text-[var(--site-fg)]">Preference cookies:</strong> Remember settings and choices you make during your visit.</li>
             </ul>
           </div>
 
           <div className="space-y-4">
-            <h2 className="text-2xl font-bold text-[#111111]">4. Managing cookies</h2>
+            <h2 className="text-2xl font-bold text-[var(--site-fg)]">4. Managing cookies</h2>
             <p className="leading-relaxed">
               Most web browsers allow you to control cookies through their settings. You can choose to block or delete cookies, but doing so may affect how our site functions.
             </p>
           </div>
 
           <div className="space-y-4">
-            <h2 className="text-2xl font-bold text-[#111111]">5. Third-party cookies</h2>
+            <h2 className="text-2xl font-bold text-[var(--site-fg)]">5. Third-party cookies</h2>
             <p className="leading-relaxed">
               We may allow trusted analytics partners to set cookies on our site. These partners process data according to their own privacy policies.
             </p>
           </div>
 
           <div className="space-y-4">
-            <h2 className="text-2xl font-bold text-[#111111]">6. Updates</h2>
+            <h2 className="text-2xl font-bold text-[var(--site-fg)]">6. Updates</h2>
             <p className="leading-relaxed">
               We may update this Cookie Policy as our site or practices change. Please review it periodically for the latest information.
             </p>
           </div>
 
-          <div className="pt-8 border-t border-black/10">
+          <div className="pt-8 border-t border-[var(--site-border)]">
             <p className="text-sm text-gray-700">
               Effective date: {new Date().getFullYear()}. For questions, contact hello@ma.ai.
             </p>

@@ -46,12 +46,12 @@ function ServicesPage() {
               transition={{ delay: i * 0.08, duration: 0.6 }}
               className="glass-card rounded-[24px] p-8 hover:border-[#CCFF00]/40 transition-colors group"
             >
-              <div className="w-14 h-14 rounded-2xl text-[#111111] flex items-center justify-center mb-8 shadow-[0_10px_30px_rgba(79,70,229,0.35)]">
-                <s.icon size={24} className="text-[#111111]" />
+              <div className="w-14 h-14 rounded-2xl text-[var(--site-fg)] flex items-center justify-center mb-8 shadow-[0_10px_30px_rgba(79,70,229,0.35)]">
+                <s.icon size={24} className="text-[var(--site-fg)]" />
               </div>
               <h2 className="text-[24px] font-semibold mb-3">{s.title}</h2>
-              <p className="text-gray-600 font-light leading-[1.6] mb-6">{s.desc}</p>
-              <ul className="space-y-2 text-[14px] text-gray-600">
+              <p className="text-[var(--site-muted)] font-light leading-[1.6] mb-6">{s.desc}</p>
+              <ul className="space-y-2 text-[14px] text-[var(--site-muted)]">
                 {s.points.map((p) => (
                   <li key={p} className="flex items-center gap-3">
                     <span className="w-1.5 h-1.5 rounded-full bg-[#CCFF00]" />
@@ -61,12 +61,12 @@ function ServicesPage() {
               </ul>
             </motion.div>
           ))}
-          <motion.div variants={fadeInUp} initial="hidden" whileInView="visible" viewport={{ once: true }} className="rounded-[24px] p-8 text-[#111111] flex flex-col justify-between">
+          <motion.div variants={fadeInUp} initial="hidden" whileInView="visible" viewport={{ once: true }} className="rounded-[24px] p-8 text-[var(--site-fg)] flex flex-col justify-between">
             <div>
               <h2 className="text-[26px] font-semibold mb-3">Not sure where to start?</h2>
-              <p className="text-[#111111]/80 font-light leading-[1.6]">Book a 30-minute discovery call and we will map the fastest path to value.</p>
+              <p className="font-light leading-[1.6]" style={{ color: 'var(--site-muted)' }}>Book a 30-minute discovery call and we will map the fastest path to value.</p>
             </div>
-            <Link to="/contact" className="mt-8 inline-flex items-center gap-3 px-6 py-3 rounded-full bg-white text-[#111111] font-semibold text-[15px] w-fit hover:bg-white/90 transition-colors">
+            <Link to="/contact" className="mt-8 inline-flex items-center gap-3 px-6 py-3 rounded-full font-semibold text-[15px] w-fit transition-colors hover:opacity-90" style={{ backgroundColor: 'var(--site-surface)', color: 'var(--site-fg)', border: '1px solid var(--site-border)' }}>
               Start a conversation <ArrowRight size={18} />
             </Link>
           </motion.div>

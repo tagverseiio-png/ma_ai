@@ -1,9 +1,10 @@
 import { useState, useEffect } from 'react';
 import { Link } from '@tanstack/react-router';
-import { Menu, X, ArrowRight, Instagram, Linkedin, Mail, Phone, MapPin } from 'lucide-react';
+import { Menu, X, ArrowRight, Instagram, Linkedin, Mail, Phone, MapPin, Sun, Moon } from 'lucide-react';
 import { MaLogo } from '../MaLogo';
 import { motion } from 'framer-motion';
 import ctaLogo3d from '@/assets/cta-logo3d.png';
+import { useTheme } from '@/hooks/use-theme';
 
 // Injecting precise fonts matching the mockup
 export const fontStyles = `
@@ -15,9 +16,9 @@ export const fontStyles = `
   }
 
   .glass-card {
-    background: linear-gradient(135deg, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0.01) 100%);
+    background: var(--glass-card-bg, linear-gradient(135deg, rgba(0,0,0,0.03) 0%, rgba(0,0,0,0.01) 100%));
     backdrop-filter: blur(20px);
-    border: 1px solid rgba(255,255,255,0.05);
+    border: 1px solid var(--glass-card-border, rgba(0,0,0,0.06));
   }
 `;
 
@@ -48,6 +49,29 @@ const navLinks = [
   { label: 'Contact', to: '/contact' },
 ] as const;
 
+const ThemeToggle = () => {
+  const { theme, toggleTheme } = useTheme();
+
+  return (
+    <button
+      type="button"
+      onClick={toggleTheme}
+      aria-label={`Switch to ${theme === 'light' ? 'dark' : 'light'} mode`}
+      className="relative w-11 h-11 rounded-full border border-[var(--site-border)] flex items-center justify-center text-[var(--site-fg)] hover:bg-[#CCFF00] hover:text-[#111111] hover:border-[#CCFF00] transition-all duration-300 overflow-hidden"
+    >
+      <motion.div
+        key={theme}
+        initial={{ y: theme === 'dark' ? -20 : 20, opacity: 0, rotate: -90 }}
+        animate={{ y: 0, opacity: 1, rotate: 0 }}
+        exit={{ y: theme === 'dark' ? 20 : -20, opacity: 0, rotate: 90 }}
+        transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+      >
+        {theme === 'light' ? <Moon size={18} /> : <Sun size={18} />}
+      </motion.div>
+    </button>
+  );
+};
+
 export const SiteNav = () => {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
@@ -66,54 +90,62 @@ export const SiteNav = () => {
 
   return (
     <>
-      <nav className={`fixed top-0 w-full z-[101] transition-all duration-300 ${scrolled || open ? 'bg-[#F4F4F0]/90 backdrop-blur-xl' : 'bg-[#F4F4F0]'} border-b border-black/10`}>
+      <nav className={`fixed top-0 w-full z-[101] transition-all duration-300 ${scrolled || open ? 'backdrop-blur-xl' : ''} border-b border-[var(--site-border)]`} style={{ backgroundColor: scrolled || open ? 'color-mix(in srgb, var(--site-bg) 90%, transparent)' : 'var(--site-bg)' }}>
         <div className="max-w-[1400px] mx-auto px-5 md:px-12 h-[80px] grid grid-cols-[minmax(0,1fr)_auto] items-center gap-4 md:flex md:justify-between">
           <Link to="/" className="flex items-center gap-3 cursor-pointer" onClick={() => setOpen(false)}>
             <MaLogo className="w-10 h-auto" />
-            <span className="text-[#111111] font-bold text-[24px] tracking-tight">ma.ai</span>
+            <span className="font-bold text-[24px] tracking-tight" style={{ color: 'var(--site-fg)' }}>ma.ai</span>
           </Link>
 
-          <div className="hidden md:flex items-center gap-8 text-[15px] font-medium text-gray-600">
+          <div className="hidden md:flex items-center gap-8 text-[15px] font-medium" style={{ color: 'var(--site-muted)' }}>
             {navLinks.map((item) => (
               <Link
                 key={item.to}
                 to={item.to}
-                className="hover:text-[#111111] transition-colors"
-                activeProps={{ className: 'text-[#111111]' }}
+                className="hover:opacity-100 transition-colors"
+                style={{ color: 'inherit' }}
+                activeProps={{ style: { color: 'var(--site-fg)' } }}
               >
                 {item.label}
               </Link>
             ))}
+            <ThemeToggle />
             <Link
               to="/contact"
-              className="ml-4 px-6 py-2.5 rounded-[40px] border-[1.5px] border-[#111111] text-[#111111] font-bold hover:bg-[#111111] hover:text-[#CCFF00] transition-all flex items-center gap-2"
+              className="ml-2 px-6 py-2.5 rounded-[40px] border-[1.5px] font-bold hover:bg-[#111111] hover:text-[#CCFF00] hover:border-[#111111] transition-all flex items-center gap-2"
+              style={{ borderColor: 'var(--site-fg)', color: 'var(--site-fg)' }}
             >
               Let's talk <ArrowRight size={16} />
             </Link>
           </div>
 
-          <button
-            type="button"
-            onClick={() => setOpen((v) => !v)}
-            aria-label={open ? 'Close menu' : 'Open menu'}
-            aria-expanded={open}
-            className="md:hidden shrink-0 w-11 h-11 rounded-full border border-black/10 text-[#111111] flex items-center justify-center"
-          >
-            {open ? <X size={20} /> : <Menu size={20} />}
-          </button>
+          <div className="md:hidden flex items-center gap-3">
+            <ThemeToggle />
+            <button
+              type="button"
+              onClick={() => setOpen((v) => !v)}
+              aria-label={open ? 'Close menu' : 'Open menu'}
+              aria-expanded={open}
+              className="shrink-0 w-11 h-11 rounded-full border border-[var(--site-border)] flex items-center justify-center"
+              style={{ color: 'var(--site-fg)' }}
+            >
+              {open ? <X size={20} /> : <Menu size={20} />}
+            </button>
+          </div>
         </div>
       </nav>
 
       {open && (
-        <div className="md:hidden fixed inset-x-0 top-[72px] bottom-0 z-[100] bg-[#F4F4F0] border-t border-black/10 px-5 py-8 overflow-y-auto">
+        <div className="md:hidden fixed inset-x-0 top-[72px] bottom-0 z-[100] border-t border-[var(--site-border)] px-5 py-8 overflow-y-auto" style={{ backgroundColor: 'var(--site-bg)' }}>
           <div className="flex flex-col gap-1">
             {navLinks.map((item) => (
               <Link
                 key={item.to}
                 to={item.to}
                 onClick={() => setOpen(false)}
-                className="py-4 border-b border-black/10 text-[#111111] text-[18px] font-bold tracking-[-0.03em] uppercase"
-                activeProps={{ className: 'text-[#111111]' }}
+                className="py-4 border-b border-[var(--site-border)] text-[18px] font-bold tracking-[-0.03em] uppercase"
+                style={{ color: 'var(--site-fg)' }}
+                activeProps={{ style: { color: 'var(--site-fg)' } }}
               >
                 {item.label}
               </Link>
@@ -150,13 +182,14 @@ const NewsletterForm = () => {
         onChange={(e) => { setEmail(e.target.value); setSent(false); }}
         placeholder="Your email address"
         aria-label="Your email address"
-        className="w-full bg-white border border-gray-200 rounded-lg px-4 py-3 text-[14px] focus:outline-none focus:border-[#111111] shadow-sm"
+        className="w-full border rounded-lg px-4 py-3 text-[14px] focus:outline-none shadow-sm transition-colors duration-300"
+        style={{ backgroundColor: 'var(--site-input-bg)', borderColor: 'var(--site-input-border)', color: 'var(--site-fg)' }}
       />
       <button type="submit" aria-label="Subscribe" className="absolute right-1 top-1 bottom-1 bg-[#111111] text-[#CCFF00] px-5 rounded-md hover:bg-[#CCFF00] hover:text-[#111111] transition-colors flex items-center justify-center shadow-md">
         <ArrowRight size={18} />
       </button>
       {sent && (
-        <p className="absolute -bottom-6 left-0 text-[12px] font-semibold text-[#111111]">Thanks — you're on the list.</p>
+        <p className="absolute -bottom-6 left-0 text-[12px] font-semibold" style={{ color: 'var(--site-fg)' }}>Thanks — you're on the list.</p>
       )}
     </form>
   );
@@ -164,32 +197,32 @@ const NewsletterForm = () => {
 
 export const SiteFooter = () => {
   return (
-    <footer className="bg-[#F4F4F0] pt-24 md:pt-40">
+    <footer className="pt-24 md:pt-40 transition-colors duration-300" style={{ backgroundColor: 'var(--site-bg)' }}>
       <div className="max-w-[1400px] mx-auto px-5 md:px-12">
         
         <div className="flex items-center mb-8">
-          <span className="text-[#111111] text-[13px] tracking-[0.1em] uppercase font-bold">03 / START SOMETHING LOUD</span>
+          <span className="text-[13px] tracking-[0.1em] uppercase font-bold" style={{ color: 'var(--site-fg)' }}>03 / START SOMETHING LOUD</span>
         </div>
         
-        <h2 className="text-[52px] sm:text-[80px] md:text-[100px] lg:text-[110px] font-bold text-[#111111] leading-[0.9] tracking-[-0.05em] mb-12 md:mb-16 max-w-[1200px]">
+        <h2 className="text-[52px] sm:text-[80px] md:text-[100px] lg:text-[110px] font-bold leading-[0.9] tracking-[-0.05em] mb-12 md:mb-16 max-w-[1200px]" style={{ color: 'var(--site-fg)' }}>
           Bring the brief. We'll bring<br />the Future.
         </h2>
 
-        <hr className="border-black/10" />
+        <hr className="border-[var(--site-border)]" />
 
         <div className="py-10 md:py-14 flex flex-col md:flex-row md:items-center justify-between gap-6">
-          <span className="text-[#111111] text-[18px] md:text-[20px] font-medium">info@maonline.ai</span>
+          <span className="text-[18px] md:text-[20px] font-medium" style={{ color: 'var(--site-fg)' }}>info@maonline.ai</span>
           
           <Link to="/contact" className="group px-8 py-4 rounded-[40px] bg-[#111111] text-white hover:opacity-90 transition-opacity text-[13px] tracking-[0.08em] uppercase font-bold flex items-center justify-center gap-3">
              MAKE IT MOVE <ArrowRight size={15} className="text-[#CCFF00] group-hover:translate-x-1 transition-transform" />
           </Link>
         </div>
 
-        <hr className="border-black/10" />
+        <hr className="border-[var(--site-border)]" />
 
         <div className="py-8 flex flex-col md:flex-row md:items-center gap-6 md:gap-8 mb-16 md:mb-24">
-          <span className="text-gray-500 text-[11px] md:text-[12px] tracking-[0.1em] uppercase font-bold">BUILT IN CONVERSATION WITH</span>
-          <div className="flex items-center gap-6 text-[#111111]">
+          <span className="text-[11px] md:text-[12px] tracking-[0.1em] uppercase font-bold" style={{ color: 'var(--site-muted)' }}>BUILT IN CONVERSATION WITH</span>
+          <div className="flex items-center gap-6" style={{ color: 'var(--site-fg)' }}>
              <span className="text-[22px] font-black tracking-tighter">AI</span>
              <span className="text-[22px]">✦</span>
              <span className="text-[26px] font-medium leading-none">∞</span>
@@ -203,58 +236,64 @@ export const SiteFooter = () => {
             <Link to="/" className="flex items-center mb-6">
               <MaLogo className="w-16 h-auto" />
             </Link>
-            <p className="text-gray-600 text-[14px] mb-8 md:mb-12 font-normal leading-[1.5]">
+            <p className="text-[14px] mb-8 md:mb-12 font-normal leading-[1.5]" style={{ color: 'var(--site-muted)' }}>
               A team of strategists, creators and engineers building AI with purpose.
             </p>
           </div>
 
           <div>
-            <h4 className="font-bold text-[#111111] mb-6 md:mb-8 text-[12px] tracking-widest uppercase border-b-[2px] border-[#111111] inline-block pb-2">Company</h4>
-            <ul className="space-y-4 text-[14px] text-gray-600 font-medium">
-              <li><Link to="/about" className="hover:text-[#111111] transition-colors">About us</Link></li>
-              <li><Link to="/work" className="hover:text-[#111111] transition-colors">Our work</Link></li>
-              <li><Link to="/about" className="hover:text-[#111111] transition-colors">Team</Link></li>
-              <li><Link to="/careers" className="hover:text-[#111111] transition-colors">Careers</Link></li>
-              <li><Link to="/insights" className="hover:text-[#111111] transition-colors">Blog</Link></li>
+            <h4 className="font-bold mb-6 md:mb-8 text-[12px] tracking-widest uppercase border-b-[2px] inline-block pb-2" style={{ color: 'var(--site-fg)', borderColor: 'var(--site-fg)' }}>Company</h4>
+            <ul className="space-y-4 text-[14px] font-medium" style={{ color: 'var(--site-muted)' }}>
+              <li><Link to="/about" className="hover:opacity-80 transition-colors">About us</Link></li>
+              <li><Link to="/work" className="hover:opacity-80 transition-colors">Our work</Link></li>
+              <li><Link to="/about" className="hover:opacity-80 transition-colors">Team</Link></li>
+              <li><Link to="/careers" className="hover:opacity-80 transition-colors">Careers</Link></li>
+              <li><Link to="/insights" className="hover:opacity-80 transition-colors">Blog</Link></li>
             </ul>
           </div>
 
           <div>
-            <h4 className="font-bold text-[#111111] mb-6 md:mb-8 text-[12px] tracking-widest uppercase border-b-[2px] border-[#111111] inline-block pb-2">Services</h4>
-            <ul className="space-y-4 text-[14px] text-gray-600 font-medium">
-              <li><Link to="/services" className="hover:text-[#111111] transition-colors">AI Strategy</Link></li>
-              <li><Link to="/services" className="hover:text-[#111111] transition-colors">Product Design</Link></li>
-              <li><Link to="/services" className="hover:text-[#111111] transition-colors">Engineering</Link></li>
-              <li><Link to="/services" className="hover:text-[#111111] transition-colors">Data & Intelligence</Link></li>
-              <li><Link to="/services" className="hover:text-[#111111] transition-colors">Brand & Experience</Link></li>
+            <h4 className="font-bold mb-6 md:mb-8 text-[12px] tracking-widest uppercase border-b-[2px] inline-block pb-2" style={{ color: 'var(--site-fg)', borderColor: 'var(--site-fg)' }}>Services</h4>
+            <ul className="space-y-4 text-[14px] font-medium" style={{ color: 'var(--site-muted)' }}>
+              <li><Link to="/services" className="hover:opacity-80 transition-colors">AI Strategy</Link></li>
+              <li><Link to="/services" className="hover:opacity-80 transition-colors">Product Design</Link></li>
+              <li><Link to="/services" className="hover:opacity-80 transition-colors">Engineering</Link></li>
+              <li><Link to="/services" className="hover:opacity-80 transition-colors">Data & Intelligence</Link></li>
+              <li><Link to="/services" className="hover:opacity-80 transition-colors">Brand & Experience</Link></li>
             </ul>
           </div>
 
           <div>
-            <h4 className="font-bold text-[#111111] mb-6 md:mb-8 text-[12px] tracking-widest uppercase border-b-[2px] border-[#111111] inline-block pb-2">Resources</h4>
-            <ul className="space-y-4 text-[14px] text-gray-600 font-medium">
-              <li><Link to="/work" className="hover:text-[#111111] transition-colors">Case studies</Link></li>
-              <li><Link to="/insights" className="hover:text-[#111111] transition-colors">Insights</Link></li>
-              <li><Link to="/insights" className="hover:text-[#111111] transition-colors">Newsroom</Link></li>
-              <li><Link to="/faq" className="hover:text-[#111111] transition-colors">FAQs</Link></li>
+            <h4 className="font-bold mb-6 md:mb-8 text-[12px] tracking-widest uppercase border-b-[2px] inline-block pb-2" style={{ color: 'var(--site-fg)', borderColor: 'var(--site-fg)' }}>Resources</h4>
+            <ul className="space-y-4 text-[14px] font-medium" style={{ color: 'var(--site-muted)' }}>
+              <li><Link to="/work" className="hover:opacity-80 transition-colors">Case studies</Link></li>
+              <li><Link to="/insights" className="hover:opacity-80 transition-colors">Insights</Link></li>
+              <li><Link to="/insights" className="hover:opacity-80 transition-colors">Newsroom</Link></li>
+              <li><Link to="/faq" className="hover:opacity-80 transition-colors">FAQs</Link></li>
             </ul>
           </div>
 
           <div className="col-span-2 lg:col-span-1">
             <div className="mb-10">
-              <h4 className="font-bold text-[#111111] mb-6 md:mb-8 text-[12px] tracking-widest uppercase border-b-[2px] border-[#111111] inline-block pb-2">Get in touch</h4>
-              <ul className="space-y-6 text-[14px] text-gray-600">
-                <li className="flex items-center gap-4">
-                  <div className="w-10 h-10 rounded-[10px] bg-white border border-gray-200 text-[#111111] flex items-center justify-center shrink-0 shadow-sm"><Mail size={16} /></div>
-                  <span className="font-medium text-[13px]">hello@ma.ai</span>
+              <h4 className="font-bold mb-6 md:mb-8 text-[12px] tracking-widest uppercase border-b-[2px] inline-block pb-2" style={{ color: 'var(--site-fg)', borderColor: 'var(--site-fg)' }}>Get in touch</h4>
+              <ul className="space-y-6 text-[14px]" style={{ color: 'var(--site-muted)' }}>
+                <li className="flex items-start gap-4">
+                  <div className="w-10 h-10 rounded-[10px] border flex items-center justify-center shrink-0 mt-1 shadow-sm transition-colors duration-300" style={{ backgroundColor: 'var(--site-surface)', borderColor: 'var(--site-border)', color: 'var(--site-fg)' }}><Mail size={16} /></div>
+                  <div className="flex flex-col gap-2 font-medium text-[12px] pt-1">
+                    <a href="mailto:meena.chabbria@maonline.ai" className="hover:opacity-80 transition-opacity">meena.chabbria@maonline.ai</a>
+                    <a href="mailto:prarthana.chabbria@maonline.ai" className="hover:opacity-80 transition-opacity">prarthana.chabbria@maonline.ai</a>
+                    <a href="mailto:vinay.sakhrani@maonline.ai" className="hover:opacity-80 transition-opacity">vinay.sakhrani@maonline.ai</a>
+                    <a href="mailto:souvik.seal@maonline.ai" className="hover:opacity-80 transition-opacity">souvik.seal@maonline.ai</a>
+                    <a href="mailto:harsh.gulwani@maonline.ai" className="hover:opacity-80 transition-opacity">harsh.gulwani@maonline.ai</a>
+                  </div>
                 </li>
                 <li className="flex items-center gap-4">
-                  <div className="w-10 h-10 rounded-[10px] bg-white border border-gray-200 text-[#111111] flex items-center justify-center shrink-0 shadow-sm"><Phone size={16} /></div>
-                  <span className="font-medium text-[13px]">+91 95516 12345</span>
+                  <div className="w-10 h-10 rounded-[10px] border flex items-center justify-center shrink-0 shadow-sm transition-colors duration-300" style={{ backgroundColor: 'var(--site-surface)', borderColor: 'var(--site-border)', color: 'var(--site-fg)' }}><Phone size={16} /></div>
+                  <span className="font-medium text-[13px]">+91 99621 49035</span>
                 </li>
                 <li className="flex items-start gap-4">
-                  <div className="w-10 h-10 rounded-[10px] bg-white border border-gray-200 text-[#111111] flex items-center justify-center shrink-0 mt-1 shadow-sm"><MapPin size={16} /></div>
-                  <span className="leading-[1.6] font-medium text-[13px]">No. 34, 2nd Floor,<br />Eldams Road, Alwarpet,<br />Chennai – 600018, India</span>
+                  <div className="w-10 h-10 rounded-[10px] border flex items-center justify-center shrink-0 mt-1 shadow-sm transition-colors duration-300" style={{ backgroundColor: 'var(--site-surface)', borderColor: 'var(--site-border)', color: 'var(--site-fg)' }}><MapPin size={16} /></div>
+                  <span className="leading-[1.6] font-medium text-[13px]">No. 45, Pulla Avenue,<br />Shenoy Nagar, Chennai,<br />Tamil Nadu, 600030</span>
                 </li>
               </ul>
             </div>
@@ -265,16 +304,16 @@ export const SiteFooter = () => {
         {/* Restored Connect & Newsletter row */}
         <div className="flex flex-col lg:flex-row lg:justify-between gap-12 lg:gap-16 mb-16 md:mb-24">
           <div className="max-w-[300px]">
-            <h4 className="font-bold text-[#111111] mb-6 text-[12px] tracking-widest uppercase border-b-[2px] border-[#111111] inline-block pb-2">Connect</h4>
+            <h4 className="font-bold mb-6 text-[12px] tracking-widest uppercase border-b-[2px] inline-block pb-2" style={{ color: 'var(--site-fg)', borderColor: 'var(--site-fg)' }}>Connect</h4>
             <div className="flex gap-4 mt-2">
-              <a href="https://www.linkedin.com/" target="_blank" rel="noreferrer noopener" className="w-12 h-12 rounded-full bg-white border border-black/10 flex items-center justify-center text-[#111111] hover:bg-[#CCFF00] transition-colors"><Instagram size={20} /></a>
-              <a href="https://www.linkedin.com/" target="_blank" rel="noreferrer noopener" className="w-12 h-12 rounded-full bg-white border border-black/10 flex items-center justify-center text-[#111111] hover:bg-[#CCFF00] transition-colors"><Linkedin size={20} /></a>
-              <a href="https://www.linkedin.com/" target="_blank" rel="noreferrer noopener" className="w-12 h-12 rounded-full bg-white border border-black/10 flex items-center justify-center text-[#111111] hover:bg-[#CCFF00] transition-colors font-bold text-[20px]">X</a>
+              <a href="https://www.linkedin.com/" target="_blank" rel="noreferrer noopener" className="w-12 h-12 rounded-full border flex items-center justify-center hover:bg-[#CCFF00] hover:border-[#CCFF00] transition-colors" style={{ backgroundColor: 'var(--site-surface)', borderColor: 'var(--site-border)', color: 'var(--site-fg)' }}><Instagram size={20} /></a>
+              <a href="https://www.linkedin.com/" target="_blank" rel="noreferrer noopener" className="w-12 h-12 rounded-full border flex items-center justify-center hover:bg-[#CCFF00] hover:border-[#CCFF00] transition-colors" style={{ backgroundColor: 'var(--site-surface)', borderColor: 'var(--site-border)', color: 'var(--site-fg)' }}><Linkedin size={20} /></a>
+              <a href="https://www.linkedin.com/" target="_blank" rel="noreferrer noopener" className="w-12 h-12 rounded-full border flex items-center justify-center hover:bg-[#CCFF00] hover:border-[#CCFF00] transition-colors font-bold text-[20px]" style={{ backgroundColor: 'var(--site-surface)', borderColor: 'var(--site-border)', color: 'var(--site-fg)' }}>X</a>
             </div>
           </div>
           <div className="w-full max-w-[400px]">
-            <h4 className="font-bold text-[#111111] mb-6 text-[12px] tracking-widest uppercase border-b-[2px] border-[#111111] inline-block pb-2">Stay Updated</h4>
-            <p className="text-gray-600 text-[13px] mb-4 mt-2 font-medium">Get insights on AI, strategy and what's next.</p>
+            <h4 className="font-bold mb-6 text-[12px] tracking-widest uppercase border-b-[2px] inline-block pb-2" style={{ color: 'var(--site-fg)', borderColor: 'var(--site-fg)' }}>Stay Updated</h4>
+            <p className="text-[13px] mb-4 mt-2 font-medium" style={{ color: 'var(--site-muted)' }}>Get insights on AI, strategy and what's next.</p>
             <NewsletterForm />
           </div>
         </div>

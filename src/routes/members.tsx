@@ -94,13 +94,13 @@ function MembersPage() {
 
         {/* 20 Empty Grid Members section */}
         <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-          <h2 className="text-[32px] md:text-[48px] font-bold text-[#111111] mb-12 tracking-[-0.04em]">Members</h2>
+          <h2 className="text-[32px] md:text-[48px] font-bold text-[var(--site-fg)] mb-12 tracking-[-0.04em]">Members</h2>
           
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 md:gap-6">
             {Array.from({ length: 20 }).map((_, i) => (
               <div 
                 key={i} 
-                className="aspect-square bg-black/5 border border-black/10 rounded-2xl flex items-center justify-center relative overflow-hidden group hover:border-[#CCFF00] transition-colors"
+                className="aspect-square bg-black/5 border border-[var(--site-border)] rounded-2xl flex items-center justify-center relative overflow-hidden group hover:border-[#CCFF00] transition-colors"
               >
                 <span className="text-black/20 font-bold text-xl group-hover:text-[#CCFF00]/50 transition-colors">#{i + 1}</span>
               </div>

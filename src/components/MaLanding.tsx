@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence, useMotionValue, useSpring, useTransform } from 'framer-motion';
+import { motion, AnimatePresence, useMotionValue, useSpring, useTransform, useScroll } from 'framer-motion';
 import { Link } from '@tanstack/react-router';
 import {
   ArrowRight, Play, ChevronDown, Linkedin,
@@ -20,14 +20,31 @@ import team3 from '@/assets/team-3.jpg';
 import storySphere from '@/assets/story-sphere.png';
 import whyCube from '@/assets/why-cube.png';
 import teamOrbit from '@/assets/team-orbit.jpg';
+import teamOrbitWhite from '@/assets/team-orbit-white-theme.png';
 import ctaLogo3d from '@/assets/cta-logo3d.png';
 import showReelVideo from '@/assets/SHOW REEL HD .mp4';
 import { SiteNav, SiteFooter, Logo, fontStyles, fadeInUp, staggerContainer } from '@/components/site/SiteChrome';
 import { ServicesSection } from '@/components/site/ServicesSection';
+import { useTheme } from '@/hooks/use-theme';
 
 
 
 const HeroSection = () => {
+  const { scrollY } = useScroll();
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth < 768);
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  const contentOpacity = useTransform(scrollY, [0, 150], [0, 1]);
+  const contentY = useTransform(scrollY, [0, 150], [20, 0]);
+  const titleY = useTransform(scrollY, [0, 150], [isMobile ? 70 : 160, 0]);
+  const pointerEvents = useTransform(scrollY, (v) => (v > 50 ? 'auto' : 'none'));
+
   return (
     <section className="relative min-h-screen pt-32 pb-12 md:pt-48 md:pb-16 bg-[#111111] flex flex-col justify-end overflow-hidden">
       
@@ -38,8 +55,9 @@ const HeroSection = () => {
         muted 
         playsInline 
         className="absolute inset-0 w-full h-full object-cover z-0 opacity-90"
+        suppressHydrationWarning
       >
-        <source src={showReelVideo} type="video/mp4" />
+        <source src={showReelVideo} type="video/mp4" suppressHydrationWarning />
       </video>
       
       {/* Subtle bottom gradient to make text readable without blocking video */}
@@ -48,7 +66,7 @@ const HeroSection = () => {
       <div className="max-w-[1400px] mx-auto px-5 md:px-12 w-full relative z-10">
         
         {/* Top Label */}
-        <motion.div initial="hidden" animate="visible" variants={fadeInUp} className="flex items-center gap-3 mb-6 md:mb-8">
+        <motion.div style={{ opacity: contentOpacity, y: titleY }} className="flex items-center gap-3 mb-6 md:mb-8">
           <div className="w-2.5 h-2.5 rounded-full bg-[#CCFF00]"></div>
           <span className="text-white text-[12px] md:text-[13px] tracking-[0.1em] uppercase font-bold drop-shadow-md">
             01 / Welcome to ma.ai
@@ -56,29 +74,29 @@ const HeroSection = () => {
         </motion.div>
         
         {/* Huge Heading */}
-        <motion.div initial="hidden" animate="visible" variants={fadeInUp} className="mb-8 md:mb-12">
+        <motion.div style={{ y: titleY }} className="mb-8 md:mb-12">
           <h1 className="text-[40px] sm:text-[60px] md:text-[80px] lg:text-[100px] font-bold text-white tracking-[-0.05em] leading-[0.9] max-w-[1200px] drop-shadow-lg">
             We build worlds<br />that move you.
           </h1>
         </motion.div>
 
         {/* Full width divider */}
-        <hr className="border-white/20 mb-6 md:mb-8" />
+        <motion.hr style={{ opacity: contentOpacity }} className="border-white/20 mb-6 md:mb-8" />
 
         {/* Bottom Split */}
         <div className="flex flex-col md:flex-row md:items-start justify-between gap-6 md:gap-10">
-          <motion.p initial="hidden" animate="visible" variants={fadeInUp} className="text-white/90 text-[15px] md:text-[16px] max-w-[500px] leading-[1.4] font-medium drop-shadow-md">
+          <motion.p style={{ opacity: contentOpacity, pointerEvents, y: contentY }} className="text-white/90 text-[15px] md:text-[16px] max-w-[500px] leading-[1.4] font-medium drop-shadow-md">
             We partner with ambitious brands to create AI-powered solutions that drive impact, automate complexity, and shape the future.
           </motion.p>
           
-          <motion.div initial="hidden" animate="visible" variants={fadeInUp} className="flex flex-col sm:flex-row gap-4 shrink-0">
+          <div className="flex flex-col sm:flex-row gap-4 shrink-0">
             <Link to="/work" className="group px-8 py-4 rounded-[40px] bg-[#CCFF00] text-[#111111] hover:bg-white hover:text-[#111111] transition-colors text-[13px] tracking-[0.08em] uppercase font-bold flex items-center justify-center gap-3 shadow-lg">
               Explore our work <ArrowRight size={15} className="group-hover:translate-x-1 transition-transform" />
             </Link>
             <Link to="/services" className="px-8 py-4 rounded-[40px] border-[1.5px] border-white text-white hover:bg-white hover:text-[#111111] transition-colors text-[13px] tracking-[0.08em] uppercase font-bold flex items-center justify-center gap-3 shadow-lg backdrop-blur-sm">
               What we do
             </Link>
-          </motion.div>
+          </div>
         </div>
         
       </div>
@@ -88,7 +106,7 @@ const HeroSection = () => {
 
 const StorySection = () => {
   return (
-    <section id="about" className="py-24 md:py-40 bg-[#F4F4F0] relative overflow-hidden border-t border-black/10">
+    <section id="about" className="py-24 md:py-40 relative overflow-hidden border-t border-[var(--site-border)] transition-colors duration-300" style={{ backgroundColor: 'var(--site-bg)' }}>
 
       <div className="max-w-[1400px] mx-auto px-5 md:px-12 relative z-10">
         
@@ -96,18 +114,18 @@ const StorySection = () => {
         <div className="flex flex-col items-start mb-16 relative z-10 text-left">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeInUp} className="flex items-center gap-3 mb-10">
             <div className="w-2.5 h-2.5 rounded-full bg-[#CCFF00]"></div>
-            <span className="text-[#111111] text-[13px] tracking-[0.1em] uppercase font-bold">02 / The ma.ai story</span>
+            <span className="text-[13px] tracking-[0.1em] uppercase font-bold" style={{ color: 'var(--site-fg)' }}>02 / The ma.ai story</span>
           </motion.div>
         </div>
 
         <div className="grid lg:grid-cols-2 gap-16 items-center">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={staggerContainer} className="relative z-20">
             
-            <motion.h2 variants={fadeInUp} className="text-[32px] sm:text-[40px] md:text-[56px] lg:text-[72px] font-bold text-[#111111] tracking-[-0.04em] leading-[1] mb-8 whitespace-nowrap">
-              From <span className="text-[#7C3AED]">ma</span> <span className="text-gray-400 font-normal text-[0.6em]">(間)</span> to <span className="text-[#7C3AED]">maa</span> <span className="text-gray-400 font-normal text-[0.6em]">(माँ)</span>
+            <motion.h2 variants={fadeInUp} className="text-[32px] sm:text-[40px] md:text-[56px] lg:text-[72px] font-bold tracking-[-0.04em] leading-[1] mb-8 whitespace-nowrap" style={{ color: 'var(--site-fg)' }}>
+              From <span className="text-[#7C3AED]">ma</span> <span className="font-normal text-[0.6em]" style={{ color: 'var(--site-muted)' }}>(間)</span> to <span className="text-[#7C3AED]">maa</span> <span className="font-normal text-[0.6em]" style={{ color: 'var(--site-muted)' }}>(माँ)</span>
             </motion.h2>
 
-            <motion.div variants={fadeInUp} className="flex items-center gap-6 text-[11px] text-[#111111] tracking-[0.25em] uppercase mb-16 font-bold">
+            <motion.div variants={fadeInUp} className="flex items-center gap-6 text-[11px] tracking-[0.25em] uppercase mb-16 font-bold" style={{ color: 'var(--site-fg)' }}>
               <span>Space</span>
               <span className="w-1.5 h-1.5 rounded-full bg-[#CCFF00]"></span>
               <span>Care</span>
@@ -116,13 +134,13 @@ const StorySection = () => {
             </motion.div>
 
             <motion.div variants={fadeInUp} className="relative pl-5 sm:pl-8 border-l-[3px] border-[#CCFF00] mb-16">
-              <p className="text-[20px] sm:text-[26px] text-[#111111] leading-[1.4] font-light">
+              <p className="text-[20px] sm:text-[26px] leading-[1.4] font-light" style={{ color: 'var(--site-fg)' }}>
                 AI that gives <span className="font-bold">room.</span><br />
                 <span className="font-bold">Present</span> when needed.
               </p>
             </motion.div>
 
-            <motion.div variants={fadeInUp} className="inline-flex items-center gap-4 px-6 py-4 rounded-full bg-white border border-black/10 text-[#111111] font-bold text-[13px] tracking-[0.05em] uppercase">
+            <motion.div variants={fadeInUp} className="inline-flex items-center gap-4 px-6 py-4 rounded-full border border-[var(--site-border)] font-bold text-[13px] tracking-[0.05em] uppercase transition-colors duration-300" style={{ backgroundColor: 'var(--site-surface)', color: 'var(--site-fg)' }}>
               <div className="w-4 h-4 rounded-full border-[3px] border-[#CCFF00] flex items-center justify-center">
                 <div className="w-1.5 h-1.5 bg-[#CCFF00] rounded-full"></div>
               </div>
@@ -135,19 +153,19 @@ const StorySection = () => {
 
             {/* Floating UI Tags - preserved */}
             <motion.div animate={{ y: [-10, 10, -10] }} transition={{ repeat: Infinity, duration: 5, ease: "easeInOut" }} className="absolute top-[2%] left-0 z-30 scale-[0.8] origin-left sm:scale-100">
-              <div className="bg-white px-4 py-2.5 rounded-xl shadow-sm border border-black/10 flex items-center gap-3 text-[13px] font-bold text-[#111111]">
+              <div className="px-4 py-2.5 rounded-xl shadow-sm border border-[var(--site-border)] flex items-center gap-3 text-[13px] font-bold transition-colors duration-300" style={{ backgroundColor: 'var(--site-surface)', color: 'var(--site-fg)' }}>
                 <Activity size={16} className="text-[#CCFF00]" /> Understands context
               </div>
             </motion.div>
 
             <motion.div animate={{ y: [10, -10, 10] }} transition={{ repeat: Infinity, duration: 6, ease: "easeInOut" }} className="hidden sm:block absolute top-[5%] right-[5%] z-30">
-              <div className="bg-white px-4 py-2.5 rounded-xl shadow-sm border border-black/10 flex items-center gap-3 text-[13px] font-bold text-[#111111]">
+              <div className="px-4 py-2.5 rounded-xl shadow-sm border border-[var(--site-border)] flex items-center gap-3 text-[13px] font-bold transition-colors duration-300" style={{ backgroundColor: 'var(--site-surface)', color: 'var(--site-fg)' }}>
                 <Sparkles size={16} className="text-[#CCFF00]" /> Adapts intelligently
               </div>
             </motion.div>
 
             <motion.div animate={{ y: [-8, 8, -8] }} transition={{ repeat: Infinity, duration: 5.5, ease: "easeInOut" }} className="absolute bottom-[4%] left-0 z-30 scale-[0.8] origin-left sm:scale-100 sm:left-[20%]">
-              <div className="bg-white px-4 py-2.5 rounded-xl shadow-sm border border-black/10 flex items-center gap-3 text-[13px] font-bold text-[#111111]">
+              <div className="px-4 py-2.5 rounded-xl shadow-sm border border-[var(--site-border)] flex items-center gap-3 text-[13px] font-bold transition-colors duration-300" style={{ backgroundColor: 'var(--site-surface)', color: 'var(--site-fg)' }}>
                 <Users size={16} className="text-[#CCFF00]" /> Works with you, not over you
               </div>
             </motion.div>
@@ -161,19 +179,19 @@ const StorySection = () => {
               <img src={storySphere} alt="ma.ai intelligence sphere" loading="lazy" className="relative w-full h-auto drop-shadow-[0_40px_80px_rgba(0,0,0,0.15)]" />
               <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
                 <Logo light={true} className="w-[60px] h-[42px] sm:w-[90px] sm:h-[62px] mb-1" />
-                <span className="text-[#111111] font-bold text-[22px] sm:text-[32px] tracking-tight">ma.ai</span>
+                <span className="font-bold text-[22px] sm:text-[32px] tracking-tight" style={{ color: 'var(--site-fg)' }}>ma.ai</span>
               </div>
             </motion.div>
 
             {/* Right side floating characters - preserved */}
-            <div className="hidden lg:flex absolute right-[-20px] top-[20%] flex flex-col gap-6 text-[#111111] text-xl font-light items-center">
+            <div className="hidden lg:flex absolute right-[-20px] top-[20%] flex flex-col gap-6 text-xl font-light items-center" style={{ color: 'var(--site-fg)' }}>
               <span>間</span>
               <span className="w-1.5 h-1.5 rounded-full bg-[#CCFF00]"></span>
-              <span className="w-1 h-1 rounded-full bg-gray-300"></span>
+              <span className="w-1 h-1 rounded-full" style={{ backgroundColor: 'var(--site-muted)' }}></span>
               <div className="w-6 h-6 rounded-full bg-[#CCFF00]/20 flex items-center justify-center border border-[#CCFF00]">
                 <div className="w-2 h-2 rounded-full bg-[#CCFF00]"></div>
               </div>
-              <span className="w-1 h-1 rounded-full bg-gray-300"></span>
+              <span className="w-1 h-1 rounded-full" style={{ backgroundColor: 'var(--site-muted)' }}></span>
               <span className="w-1.5 h-1.5 rounded-full bg-[#CCFF00]"></span>
               <span>माँ</span>
             </div>
@@ -237,7 +255,7 @@ const WorksSection = () => {
     });
 
   return (
-    <section id="work" className="py-24 md:py-40 bg-[#F4F4F0] relative overflow-hidden border-t border-black/10">
+    <section id="work" className="py-24 md:py-40 relative overflow-hidden border-t border-[var(--site-border)] transition-colors duration-300" style={{ backgroundColor: 'var(--site-bg)' }}>
 
       <div className="max-w-[1400px] mx-auto px-5 md:px-12 relative z-10">
 
@@ -246,20 +264,20 @@ const WorksSection = () => {
           <div className="flex flex-col items-start text-left">
             <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeInUp} className="flex items-center gap-3 mb-10">
               <div className="w-2.5 h-2.5 rounded-full bg-[#CCFF00]"></div>
-              <span className="text-[#111111] text-[13px] tracking-[0.1em] uppercase font-bold">03 / Works</span>
+              <span className="text-[13px] tracking-[0.1em] uppercase font-bold" style={{ color: 'var(--site-fg)' }}>03 / Works</span>
             </motion.div>
             
-            <motion.h2 initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeInUp} className="text-[52px] sm:text-[72px] md:text-[90px] lg:text-[100px] font-bold text-[#111111] mb-8 tracking-[-0.05em] leading-[0.9] max-w-[1000px]">
+            <motion.h2 initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeInUp} className="text-[52px] sm:text-[72px] md:text-[90px] lg:text-[100px] font-bold mb-8 tracking-[-0.05em] leading-[0.9] max-w-[1000px]" style={{ color: 'var(--site-fg)' }}>
               Where ideas<br/>come alive.
             </motion.h2>
           </div>
           
-          <motion.p initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeInUp} className="text-gray-600 text-[16px] md:text-[18px] font-normal leading-[1.5] max-w-[350px] md:mt-20">
+          <motion.p initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeInUp} className="text-[16px] md:text-[18px] font-normal leading-[1.5] max-w-[350px] md:mt-20" style={{ color: 'var(--site-muted)' }}>
             Built for attention. Designed for velocity.
           </motion.p>
         </div>
 
-        <hr className="border-black/10 mb-12" />
+        <hr className="border-[var(--site-border)] mb-12" />
 
         {/* 3-column card grid - editorial style from reference image 2 */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
@@ -270,7 +288,8 @@ const WorksSection = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.1, duration: 0.6 }}
-              className="bg-white rounded-[20px] border border-black/10 overflow-hidden group cursor-pointer"
+              className="rounded-[20px] border border-[var(--site-border)] overflow-hidden group cursor-pointer transition-colors duration-300"
+              style={{ backgroundColor: 'var(--site-card-bg)' }}
               onClick={() => setActive(i)}
             >
               {/* Neon green image area with asterisk */}
@@ -283,10 +302,10 @@ const WorksSection = () => {
               
               {/* Card body */}
               <div className="p-6">
-                <span className="text-[11px] tracking-[0.15em] uppercase font-bold text-[#111111] block mb-3">{work.type} / {work.duration}</span>
-                <h3 className="text-[22px] md:text-[26px] font-bold text-[#111111] tracking-[-0.03em] leading-[1.1] mb-3">{work.title}</h3>
-                <p className="text-gray-500 text-[14px] leading-[1.5] mb-6">A showcase of AI-crafted stories, films and experiences.</p>
-                <Link to="/work" className="text-[12px] tracking-[0.1em] uppercase font-bold text-[#111111] flex items-center gap-2 group-hover:gap-3 transition-all">
+                <span className="text-[11px] tracking-[0.15em] uppercase font-bold block mb-3" style={{ color: 'var(--site-fg)' }}>{work.type} / {work.duration}</span>
+                <h3 className="text-[22px] md:text-[26px] font-bold tracking-[-0.03em] leading-[1.1] mb-3" style={{ color: 'var(--site-fg)' }}>{work.title}</h3>
+                <p className="text-[14px] leading-[1.5] mb-6" style={{ color: 'var(--site-muted)' }}>A showcase of AI-crafted stories, films and experiences.</p>
+                <Link to="/work" className="text-[12px] tracking-[0.1em] uppercase font-bold flex items-center gap-2 group-hover:gap-3 transition-all" style={{ color: 'var(--site-fg)' }}>
                   EXPLORE SYSTEM <ArrowRight size={14} />
                 </Link>
               </div>
@@ -304,7 +323,8 @@ const WorksSection = () => {
                 key={cat.name}
                 aria-pressed={selected}
                 onClick={() => { setCategory(cat.match); setActive(0); }}
-                className={`px-5 py-2.5 rounded-full border ${selected ? 'border-[#CCFF00] bg-[#CCFF00] text-[#111111]' : 'border-black/10 bg-white text-[#111111]'} text-[11px] font-bold tracking-widest hover:bg-[#CCFF00] hover:border-[#CCFF00] transition-all flex items-center gap-2 uppercase`}
+                className={`px-5 py-2.5 rounded-full border ${selected ? 'border-[#CCFF00] bg-[#CCFF00] text-[#111111]' : 'border-[var(--site-border)] text-[var(--site-fg)]'} text-[11px] font-bold tracking-widest hover:bg-[#CCFF00] hover:border-[#CCFF00] hover:text-[#111111] transition-all flex items-center gap-2 uppercase`}
+                style={!selected ? { backgroundColor: 'var(--site-surface)' } : undefined}
               >
                 {cat.icon} {cat.name}
               </button>
@@ -313,14 +333,15 @@ const WorksSection = () => {
         </div>
 
         {/* View All CTA */}
-        <hr className="border-black/10" />
+        <hr className="border-[var(--site-border)]" />
         <div className="py-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
-          <p className="text-gray-600 text-[16px] font-normal max-w-[460px]">
+          <p className="text-[16px] font-normal max-w-[460px]" style={{ color: 'var(--site-muted)' }}>
             Over 120 films, campaigns and AI experiments delivered for brands across 14 markets.
           </p>
           <Link
             to="/work"
-            className="group px-8 py-3.5 rounded-[40px] border-[1.5px] border-[#111111] bg-white text-[#111111] font-bold hover:bg-[#111111] hover:text-[#CCFF00] transition-all inline-flex items-center gap-3 tracking-[0.08em] text-[13px] uppercase"
+            className="group px-8 py-3.5 rounded-[40px] border-[1.5px] font-bold hover:bg-[#111111] hover:text-[#CCFF00] hover:border-[#111111] transition-all inline-flex items-center gap-3 tracking-[0.08em] text-[13px] uppercase"
+            style={{ borderColor: 'var(--site-fg)', backgroundColor: 'var(--site-surface)', color: 'var(--site-fg)' }}
           >
             View all works
             <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
@@ -336,28 +357,28 @@ const WhySection = () => {
   const reasons = [
     {
       id: '01',
-      icon: <Users size={48} className="text-[#111111] drop-shadow-[0_5px_10px_rgba(0,0,0,0.5)]" />,
+      icon: <Users size={48} className="drop-shadow-[0_5px_10px_rgba(0,0,0,0.5)]" style={{ color: 'var(--site-fg)' }} />,
       title: 'Human-centred.',
       desc: 'Technology starts with people. Adoption is designed, not assumed.',
       baseColor: 'from-[#3B82F6] to-[#CCFF00]'
     },
     {
       id: '02',
-      icon: <Target size={48} className="text-[#111111] drop-shadow-[0_5px_10px_rgba(0,0,0,0.5)]" />,
+      icon: <Target size={48} className="drop-shadow-[0_5px_10px_rgba(0,0,0,0.5)]" style={{ color: 'var(--site-fg)' }} />,
       title: 'Outcome-first.',
       desc: 'We start with the end in mind and build what drives measurable impact.',
       baseColor: 'from-[#CCFF00] to-[#CCFF00]'
     },
     {
       id: '03',
-      icon: <Globe size={48} className="text-[#111111] drop-shadow-[0_5px_10px_rgba(0,0,0,0.5)]" />,
+      icon: <Globe size={48} className="drop-shadow-[0_5px_10px_rgba(0,0,0,0.5)]" style={{ color: 'var(--site-fg)' }} />,
       title: 'Globally fluent.',
       desc: '40+ languages. Cross-cultural teams. One global standard.',
       baseColor: 'from-[#0EA5E9] to-[#3B82F6]'
     },
     {
       id: '04',
-      icon: <ShieldCheck size={48} className="text-[#111111] drop-shadow-[0_5px_10px_rgba(0,0,0,0.5)]" />,
+      icon: <ShieldCheck size={48} className="drop-shadow-[0_5px_10px_rgba(0,0,0,0.5)]" style={{ color: 'var(--site-fg)' }} />,
       title: 'Responsibly delivered.',
       desc: 'Ethical by design. Secure by default. Governance built in.',
       baseColor: 'from-[#CCFF00] to-[#CCFF00]'
@@ -365,22 +386,22 @@ const WhySection = () => {
   ];
 
   return (
-    <section id="services" className="py-20 md:py-32 bg-[#F4F4F0] relative overflow-hidden">
+    <section id="services" className="py-20 md:py-32 relative overflow-hidden transition-colors duration-300" style={{ backgroundColor: 'var(--site-bg)' }}>
       <div className="max-w-[1400px] mx-auto px-5 md:px-12 relative z-10">
 
         {/* Top Split Area */}
         <div className="flex flex-col lg:flex-row justify-between items-center mb-16 md:mb-24 gap-12">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={staggerContainer} className="max-w-xl">
             <motion.div variants={fadeInUp} className="flex items-center mb-10">
-              <span className="text-[#111111] text-[13px] tracking-[0.1em] uppercase font-semibold">04 / Why ma.ai</span>
+              <span className="text-[13px] tracking-[0.1em] uppercase font-semibold" style={{ color: 'var(--site-fg)' }}>04 / Why ma.ai</span>
             </motion.div>
 
             <motion.div variants={fadeInUp} className="flex items-baseline gap-4 mb-6">
-              <h2 className="text-[48px] sm:text-[64px] md:text-[88px] font-bold text-[#111111] tracking-[-0.06em] leading-[0.9]">Why</h2>
-              <h2 className="text-[48px] sm:text-[64px] md:text-[88px] font-bold  text-[#111111] tracking-[-0.06em] leading-[0.9] pr-4">ma.ai?</h2>
+              <h2 className="text-[48px] sm:text-[64px] md:text-[88px] font-bold tracking-[-0.06em] leading-[0.9]" style={{ color: 'var(--site-fg)' }}>Why</h2>
+              <h2 className="text-[48px] sm:text-[64px] md:text-[88px] font-bold tracking-[-0.06em] leading-[0.9] pr-4" style={{ color: 'var(--site-fg)' }}>ma.ai?</h2>
             </motion.div>
 
-            <motion.p variants={fadeInUp} className="text-gray-600 text-[18px] sm:text-[20px] font-normal leading-[1.5] max-w-[500px]">
+            <motion.p variants={fadeInUp} className="text-[18px] sm:text-[20px] font-normal leading-[1.5] max-w-[500px]" style={{ color: 'var(--site-muted)' }}>
               We combine human insight, creative intelligence and AI capability to drive real business impact.
             </motion.p>
           </motion.div>
@@ -403,15 +424,15 @@ const WhySection = () => {
               <img src={whyCube} alt="ma.ai intelligence core" loading="lazy" className="relative w-full h-auto" />
               <div className="absolute inset-0 flex flex-col items-center justify-center pt-[6%] pointer-events-none">
                 <Logo light={false} className="w-[90px] h-[62px] mb-1 drop-shadow-[0_0_18px_rgba(255,255,255,0.6)]" />
-                <span className="text-[#111111] font-bold text-[28px] tracking-tight drop-shadow-md">ma.ai</span>
+                <span className="font-bold text-[28px] tracking-tight drop-shadow-md" style={{ color: 'var(--site-fg)' }}>ma.ai</span>
               </div>
             </motion.div>
 
             {/* Floating UI Elements from Mockup */}
-            <div className="absolute top-[10%] left-[5%] w-14 h-14 rounded-2xl glass-card flex items-center justify-center text-[#111111] shadow-[0_10px_20px_rgba(0,0,0,0.5)]"><Cpu size={24} /></div>
-            <div className="absolute top-[15%] right-[5%] w-14 h-14 rounded-2xl glass-card flex items-center justify-center text-[#111111] shadow-[0_10px_20px_rgba(0,0,0,0.5)]"><Sparkles size={24} /></div>
-            <div className="absolute bottom-[20%] left-[10%] w-14 h-14 rounded-2xl glass-card flex items-center justify-center text-[#111111] shadow-[0_10px_20px_rgba(0,0,0,0.5)]"><Users size={24} /></div>
-            <div className="absolute bottom-[25%] right-[10%] w-14 h-14 rounded-2xl glass-card flex items-center justify-center text-[#111111] shadow-[0_10px_20px_rgba(0,0,0,0.5)]"><ShieldCheck size={24} /></div>
+            <div className="absolute top-[10%] left-[5%] w-14 h-14 rounded-2xl glass-card flex items-center justify-center shadow-[0_10px_20px_rgba(0,0,0,0.5)]" style={{ color: 'var(--site-fg)' }}><Cpu size={24} /></div>
+            <div className="absolute top-[15%] right-[5%] w-14 h-14 rounded-2xl glass-card flex items-center justify-center shadow-[0_10px_20px_rgba(0,0,0,0.5)]" style={{ color: 'var(--site-fg)' }}><Sparkles size={24} /></div>
+            <div className="absolute bottom-[20%] left-[10%] w-14 h-14 rounded-2xl glass-card flex items-center justify-center shadow-[0_10px_20px_rgba(0,0,0,0.5)]" style={{ color: 'var(--site-fg)' }}><Users size={24} /></div>
+            <div className="absolute bottom-[25%] right-[10%] w-14 h-14 rounded-2xl glass-card flex items-center justify-center shadow-[0_10px_20px_rgba(0,0,0,0.5)]" style={{ color: 'var(--site-fg)' }}><ShieldCheck size={24} /></div>
           </motion.div>
         </div>
 
@@ -424,30 +445,31 @@ const WhySection = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.1, duration: 0.6 }}
-              className="bg-[#F4F4F0] border border-black/10 rounded-[24px] p-6 sm:p-8 hover:bg-[#F4F4F0] transition-all duration-300 relative overflow-hidden flex flex-col items-start"
+              className="border border-[var(--site-border)] rounded-[24px] p-6 sm:p-8 transition-all duration-300 relative overflow-hidden flex flex-col items-start"
+              style={{ backgroundColor: 'var(--site-bg)' }}
             >
-              <div className="text-[#111111] font-medium text-[15px] mb-8">{reason.id}</div>
+              <div className="font-medium text-[15px] mb-8" style={{ color: 'var(--site-fg)' }}>{reason.id}</div>
 
               {/* Emulated 3D Icon Base */}
               <div className="h-32 mb-8 relative w-full flex justify-center">
                 {/* The angled base platform */}
-                <div className="absolute bottom-4 w-32 h-12 text-[#111111] rounded-xl transform rotate-x-60 skew-x-12 border border-t-white/20 border-l-white/10 shadow-[0_20px_30px_rgba(0,0,0,0.8)] flex items-center justify-center">
+                <div className="absolute bottom-4 w-32 h-12 rounded-xl transform rotate-x-60 skew-x-12 border border-t-white/20 border-l-white/10 shadow-[0_20px_30px_rgba(0,0,0,0.8)] flex items-center justify-center" style={{ color: 'var(--site-fg)' }}>
                   {/* The glowing pad on top of base */}
                   <div className={`w-24 h-8 rounded-lg bg-gradient-to-r ${reason.baseColor} opacity-80 blur-[2px]`}></div>
                 </div>
                 {/* The Icon sitting on the pad */}
-                <div className={`absolute bottom-8 text-[#111111] filter drop-shadow-[0_10px_15px_rgba(0,0,0,0.8)]`}>
+                <div className={`absolute bottom-8 filter drop-shadow-[0_10px_15px_rgba(0,0,0,0.8)]`}>
                   {/* Applying a slight gradient to the icon itself using SVG definitions or just drop shadow */}
                   {reason.icon}
                 </div>
               </div>
 
-              <h3 className="text-[22px] font-bold text-[#111111] mb-6 relative tracking-[-0.02em]">
+              <h3 className="text-[22px] font-bold mb-6 relative tracking-[-0.02em]" style={{ color: 'var(--site-fg)' }}>
                 {reason.title}
                 {/* Thin colored underline matching mockup */}
                 <div className={`absolute -bottom-3 left-0 w-8 h-[2px] bg-gradient-to-r ${reason.baseColor}`}></div>
               </h3>
-              <p className="text-gray-600 text-[15px] leading-[1.5] mt-4 font-normal">
+              <p className="text-[15px] leading-[1.5] mt-4 font-normal" style={{ color: 'var(--site-muted)' }}>
                 {reason.desc}
               </p>
             </motion.div>
@@ -459,6 +481,8 @@ const WhySection = () => {
 };
 
 const TeamSection = () => {
+  const { theme } = useTheme();
+  
   const team = [
     {
       name: 'Meena Chabbria',
@@ -484,28 +508,29 @@ const TeamSection = () => {
     {
       name: 'Souvik Seal',
       role: 'Co-Founder & CEO',
-      bio: 'The brain of the operation, in the most literal sense. Souvik lives life on Sop’s and runs on spreadsheets, and cold hard data — a walking encyclopedia who somehow makes numbers sound like a personality trait.',
+      bio: 'The brain of the operation, in the most literal sense. Souvik lives life on Sop\'s and runs on spreadsheets, and cold hard data — a walking encyclopedia who somehow makes numbers sound like a personality trait.',
       ig: 'souvik_seal', // Placeholder as it was missing from prompt
       image: team1
     }
   ];
 
   return (
-    <section className="py-20 md:py-32 bg-[#F4F4F0] relative overflow-hidden border-t border-black/10">
+    <section className="py-20 md:py-32 relative overflow-hidden border-t border-[var(--site-border)] transition-colors duration-300" style={{ backgroundColor: 'var(--site-bg)' }}>
 
-      <div className="absolute right-[-20%] top-[-8%] w-[1100px] max-w-[110%] sm:right-[-10%] sm:max-w-[85%] pointer-events-none select-none">
-        <img src={teamOrbit} alt="" aria-hidden="true" loading="lazy" className="w-full h-auto opacity-80" />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#05050A] via-transparent to-transparent"></div>
-        <div className="absolute inset-0 bg-gradient-to-b from-[#05050A]/60 via-transparent to-[#05050A]"></div>
+      <div className="absolute right-[-45%] sm:right-[-10%] top-[2%] sm:top-[-8%] w-[1100px] max-w-[160%] sm:max-w-[85%] pointer-events-none select-none z-0">
+        <img src={theme === 'dark' ? teamOrbit : teamOrbitWhite} alt="" aria-hidden="true" loading="lazy" className="w-full h-auto opacity-40 sm:opacity-80" />
+        <div className="absolute inset-0" style={{ background: 'linear-gradient(to right, var(--site-bg) 0%, transparent 40%)' }}></div>
+        <div className="absolute inset-0" style={{ background: 'linear-gradient(to top, var(--site-bg) 0%, transparent 40%)' }}></div>
+        <div className="absolute inset-0" style={{ background: 'linear-gradient(to bottom, var(--site-bg) 0%, transparent 15%)' }}></div>
       </div>
 
       <div className="max-w-[1400px] mx-auto px-5 md:px-12 relative z-10">
         <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeInUp} className="mb-14 md:mb-20">
-          <span className="text-[#111111] text-[13px] tracking-[0.1em] uppercase font-semibold block mb-10">05 / The team</span>
-          <h2 className="text-[48px] sm:text-[64px] md:text-[80px] font-bold text-[#111111] tracking-[-0.06em] leading-[0.9]">The minds</h2>
-          <h2 className="text-[48px] sm:text-[64px] md:text-[80px] font-bold  text-[#111111] mb-8 tracking-[-0.06em] leading-[0.9]">behind ma.ai</h2>
+          <span className="text-[13px] tracking-[0.1em] uppercase font-semibold block mb-10" style={{ color: 'var(--site-fg)' }}>05 / The team</span>
+          <h2 className="text-[48px] sm:text-[64px] md:text-[80px] font-bold tracking-[-0.06em] leading-[0.9]" style={{ color: 'var(--site-fg)' }}>The minds</h2>
+          <h2 className="text-[48px] sm:text-[64px] md:text-[80px] font-bold mb-8 tracking-[-0.06em] leading-[0.9]" style={{ color: 'var(--site-fg)' }}>behind ma.ai</h2>
           <div className="h-[2px] w-20 bg-[#CCFF00]/40 mb-6"></div>
-          <p className="text-gray-600 text-[18px] max-w-[450px] font-normal leading-[1.5]">
+          <p className="text-[18px] max-w-[450px] font-normal leading-[1.5]" style={{ color: 'var(--site-muted)' }}>
             A team of strategists, creators and engineers building AI with purpose.
           </p>
         </motion.div>
@@ -552,7 +577,8 @@ const TeamSection = () => {
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="border border-black/10 rounded-[20px] p-6 md:p-8 flex flex-col md:flex-row items-center justify-between text-[#111111] relative overflow-hidden"
+          className="border border-[var(--site-border)] rounded-[20px] p-6 md:p-8 flex flex-col md:flex-row items-center justify-between relative overflow-hidden transition-colors duration-300"
+          style={{ color: 'var(--site-fg)' }}
         >
           {/* subtle left glow */}
           <div className="absolute left-0 top-0 w-[30%] h-full bg-gradient-to-r from-[#CCFF00]/5 to-transparent pointer-events-none"></div>
@@ -560,21 +586,21 @@ const TeamSection = () => {
           <div className="flex items-center gap-4 sm:gap-8 mb-6 md:mb-0 relative z-10">
             {/* The circular icon with dashed rings */}
             <div className="w-[72px] h-[72px] flex items-center justify-center relative">
-              <div className="absolute inset-0 border border-black/10 rounded-full border-dashed"></div>
-              <div className="absolute inset-2 border border-black/10 rounded-full"></div>
-              <div className="absolute inset-3 border border-[#CCFF00]/20 bg-[#F4F4F0] rounded-full flex items-center justify-center">
-                <Users size={24} className="text-[#111111]" />
+              <div className="absolute inset-0 border border-[var(--site-border)] rounded-full border-dashed"></div>
+              <div className="absolute inset-2 border border-[var(--site-border)] rounded-full"></div>
+              <div className="absolute inset-3 border border-[#CCFF00]/20 rounded-full flex items-center justify-center" style={{ backgroundColor: 'var(--site-bg)' }}>
+                <Users size={24} style={{ color: 'var(--site-fg)' }} />
               </div>
             </div>
 
-            <div className="border-l border-black/10 pl-4 sm:pl-8">
-              <h4 className="text-[19px] sm:text-[24px] font-bold text-[#111111] leading-tight tracking-[-0.02em]">Different minds.</h4>
-              <h4 className="text-[19px] sm:text-[24px] font-bold text-[#111111] leading-tight tracking-[-0.02em]">One shared purpose.</h4>
+            <div className="border-l border-[var(--site-border)] pl-4 sm:pl-8">
+              <h4 className="text-[19px] sm:text-[24px] font-bold leading-tight tracking-[-0.02em]" style={{ color: 'var(--site-fg)' }}>Different minds.</h4>
+              <h4 className="text-[19px] sm:text-[24px] font-bold leading-tight tracking-[-0.02em]" style={{ color: 'var(--site-fg)' }}>One shared purpose.</h4>
             </div>
           </div>
 
-          <Link to="/members" className="text-[#111111] hover:text-gray-600 transition-colors flex items-center gap-4 border-b border-gray-600 pb-2 text-[13px] tracking-[0.08em] uppercase font-semibold relative z-10 group">
-            View more <ArrowRight size={16} className="text-gray-600 group-hover:translate-x-1 transition-transform" />
+          <Link to="/members" className="hover:opacity-70 transition-colors flex items-center gap-4 border-b pb-2 text-[13px] tracking-[0.08em] uppercase font-semibold relative z-10 group" style={{ color: 'var(--site-fg)', borderColor: 'var(--site-muted)' }}>
+            View more <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" style={{ color: 'var(--site-muted)' }} />
           </Link>
 
         </motion.div>
@@ -588,7 +614,7 @@ export default function MaLanding() {
   return (
     <>
       <style>{fontStyles}</style>
-      <div className="min-h-screen bg-[#F4F4F0] text-[#111111] selection:bg-[#CCFF00]/30 scroll-smooth">
+      <div className="min-h-screen scroll-smooth transition-colors duration-300" style={{ backgroundColor: 'var(--site-bg)', color: 'var(--site-fg)', WebkitTextFillColor: 'inherit' }}>
         <SiteNav />
         <main>
           <HeroSection />

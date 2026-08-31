@@ -47,14 +47,14 @@ function AboutPage() {
         <div className="grid lg:grid-cols-2 gap-16 items-center">
           <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.7 }}>
             <h2 className="text-[28px] sm:text-[40px] md:text-[52px] font-bold leading-[1.1] mb-6">The ma.ai story</h2>
-            <p className="text-gray-600 font-light leading-[1.7] text-[17px] mb-6">
+            <p className="text-[var(--site-muted)] font-light leading-[1.7] text-[17px] mb-6">
               We started as a small group of strategists and engineers frustrated by AI projects that demoed well and shipped badly.
               So we built a studio around the missing half: adoption, craft and governance.
             </p>
-            <p className="text-gray-600 font-light leading-[1.7] text-[17px] mb-10">
+            <p className="text-[var(--site-muted)] font-light leading-[1.7] text-[17px] mb-10">
               Today we partner with ambitious brands across five continents — designing, building and delivering AI experiences that hold up in production.
             </p>
-            <Link to="/careers" className="inline-flex items-center gap-3 px-7 py-3.5 rounded-full border border-black/10 hover:bg-white hover:text-black transition-all font-semibold text-[15px]">
+            <Link to="/careers" className="inline-flex items-center gap-3 px-7 py-3.5 rounded-full border border-[var(--site-border)] hover:bg-[var(--site-surface)] hover:text-black transition-all font-semibold text-[15px]">
               Join the team <ArrowRight size={18} />
             </Link>
           </motion.div>
@@ -74,9 +74,9 @@ function AboutPage() {
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
           {values.map((v, i) => (
             <motion.div key={v.title} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.08 }} className="glass-card rounded-[22px] p-7">
-              <v.icon size={28} className="text-[#111111] mb-6" />
+              <v.icon size={28} className="text-[var(--site-fg)] mb-6" />
               <h3 className="text-[20px] font-semibold mb-2">{v.title}</h3>
-              <p className="text-gray-600 font-light text-[15px] leading-[1.6]">{v.desc}</p>
+              <p className="text-[var(--site-muted)] font-light text-[15px] leading-[1.6]">{v.desc}</p>
             </motion.div>
           ))}
         </div>
@@ -86,15 +86,15 @@ function AboutPage() {
         <h2 className="text-[28px] sm:text-[36px] md:text-[48px] font-bold mb-12">The minds behind ma.ai</h2>
         <div className="grid md:grid-cols-3 gap-6">
           {team.map((m, i) => (
-            <motion.div key={m.name} initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }} className="rounded-[24px] overflow-hidden border border-black/10 group">
-              <div className="h-[380px] overflow-hidden relative bg-[#F4F4F0]">
+            <motion.div key={m.name} initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }} className="rounded-[24px] overflow-hidden border border-[var(--site-border)] group">
+              <div className="h-[380px] overflow-hidden relative bg-[var(--site-bg)]">
                 <img src={m.image} alt={m.name} loading="lazy" className="w-full h-full object-cover object-top grayscale opacity-75 group-hover:opacity-100 group-hover:grayscale-[20%] group-hover:scale-105 transition-all duration-700" />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#05050A] via-[#05050A]/50 to-transparent" />
               </div>
               <div className="p-6">
                 <h3 className="text-[22px] font-semibold">{m.name}</h3>
-                <p className="text-[#111111] text-[14px] mb-3">{m.role}</p>
-                <p className="text-gray-600 font-light text-[14px] leading-[1.6]">{m.desc}</p>
+                <p className="text-[var(--site-fg)] text-[14px] mb-3">{m.role}</p>
+                <p className="text-[var(--site-muted)] font-light text-[14px] leading-[1.6]">{m.desc}</p>
               </div>
             </motion.div>
           ))}

@@ -47,26 +47,26 @@ function InsightsPage() {
               className="glass-card rounded-[24px] p-8 flex flex-col hover:border-[#CCFF00]/40 transition-colors group"
             >
               <div className="flex items-center gap-3 text-[11px] uppercase tracking-[0.18em] text-gray-700 mb-6">
-                <span className="text-[#111111]">{p.tag}</span>
+                <span className="text-[var(--site-fg)]">{p.tag}</span>
                 <span className="w-1 h-1 rounded-full bg-gray-600" />
                 <span>{p.date}</span>
               </div>
               <h2 className="text-[22px] font-semibold leading-snug mb-4">{p.title}</h2>
-              <p className="text-gray-600 font-light text-[15px] leading-[1.65] mb-8">{p.excerpt}</p>
+              <p className="text-[var(--site-muted)] font-light text-[15px] leading-[1.65] mb-8">{p.excerpt}</p>
               <div className="mt-auto flex items-center justify-between text-[13px] text-gray-700">
                 <span>{p.read} read</span>
-                <ArrowRight size={16} className="text-[#111111] group-hover:translate-x-1 transition-transform" />
+                <ArrowRight size={16} className="text-[var(--site-fg)] group-hover:translate-x-1 transition-transform" />
               </div>
             </motion.article>
           ))}
         </div>
 
-        <div className="mt-16 rounded-[24px] border border-black/10 p-10 flex flex-col md:flex-row items-center justify-between gap-8 text-[#111111]">
+        <div className="mt-16 rounded-[24px] border border-[var(--site-border)] p-10 flex flex-col md:flex-row items-center justify-between gap-8 text-[var(--site-fg)]">
           <div>
             <h2 className="text-[26px] font-semibold mb-2">Want these in your inbox?</h2>
-            <p className="text-gray-600 font-light">One considered email a month. No noise.</p>
+            <p className="text-[var(--site-muted)] font-light">One considered email a month. No noise.</p>
           </div>
-          <Link to="/contact" className="inline-flex items-center gap-3 px-7 py-3.5 rounded-full bg-[#CCFF00] font-semibold text-[15px] hover:bg-[#CCFF00] hover:text-[#111111] transition-colors">
+          <Link to="/contact" className="inline-flex items-center gap-3 px-7 py-3.5 rounded-full bg-[#CCFF00] font-semibold text-[15px] hover:bg-[#CCFF00] hover:text-[var(--site-fg)] transition-colors">
             Subscribe <ArrowRight size={18} />
           </Link>
         </div>
