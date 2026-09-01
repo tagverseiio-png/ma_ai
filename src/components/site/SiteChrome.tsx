@@ -112,8 +112,7 @@ export const SiteNav = () => {
             <ThemeToggle />
             <Link
               to="/contact"
-              className="ml-2 px-6 py-2.5 rounded-[40px] border-[1.5px] font-bold hover:bg-[#111111] hover:text-[#CCFF00] hover:border-[#111111] transition-all flex items-center gap-2"
-              style={{ borderColor: 'var(--site-fg)', color: 'var(--site-fg)' }}
+              className="ml-2 px-6 py-2.5 rounded-[40px] border-[1.5px] border-[var(--site-fg)] text-[var(--site-fg)] font-bold hover:bg-[#111111] hover:text-[#CCFF00] hover:border-[#111111] transition-all flex items-center gap-2"
             >
               Let's talk <ArrowRight size={16} />
             </Link>

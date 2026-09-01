@@ -325,8 +325,7 @@ const WorksSection = () => {
                 key={cat.name}
                 aria-pressed={selected}
                 onClick={() => { setCategory(cat.match); setActive(0); }}
-                className={`group h-[42px] px-[13px] rounded-full border ${selected ? 'border-[#CCFF00] bg-[#CCFF00] text-[#111111]' : 'border-[var(--site-border)] text-[var(--site-fg)]'} text-[11px] font-bold tracking-widest hover:bg-[#CCFF00] hover:border-[#CCFF00] hover:text-[#111111] transition-all duration-300 flex items-center uppercase overflow-hidden`}
-                style={!selected ? { backgroundColor: 'var(--site-surface)' } : undefined}
+                className={`group h-[42px] px-[13px] rounded-full border ${selected ? 'border-[#CCFF00] bg-[#CCFF00] text-[#111111]' : 'border-[var(--site-border)] text-[var(--site-fg)] bg-[var(--site-surface)]'} text-[11px] font-bold tracking-widest hover:bg-[#CCFF00] hover:border-[#CCFF00] hover:text-[#111111] transition-all duration-300 flex items-center uppercase overflow-hidden`}
               >
                 <div className="shrink-0 flex items-center justify-center">{cat.icon}</div>
                 <span className={`transition-all duration-300 whitespace-nowrap overflow-hidden inline-block flex items-center ${selected ? 'max-w-[200px] opacity-100 ml-2' : 'max-w-[200px] opacity-100 ml-2 md:max-w-0 md:opacity-0 md:ml-0 group-hover:max-w-[200px] group-hover:opacity-100 group-hover:ml-2'}`}>
@@ -345,8 +344,7 @@ const WorksSection = () => {
           </p>
           <Link
             to="/work"
-            className="group px-8 py-3.5 rounded-[40px] border-[1.5px] font-bold hover:bg-[#111111] hover:text-[#CCFF00] hover:border-[#111111] transition-all inline-flex items-center gap-3 tracking-[0.08em] text-[13px] uppercase"
-            style={{ borderColor: 'var(--site-fg)', backgroundColor: 'var(--site-surface)', color: 'var(--site-fg)' }}
+            className="group px-8 py-3.5 rounded-[40px] border-[1.5px] border-[var(--site-fg)] bg-[var(--site-surface)] text-[var(--site-fg)] font-bold hover:bg-[#111111] hover:text-[#CCFF00] hover:border-[#111111] transition-all inline-flex items-center gap-3 tracking-[0.08em] text-[13px] uppercase"
           >
             Explore our works
             <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
