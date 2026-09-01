@@ -17,6 +17,8 @@ import workTomorrow from '@/assets/work-tomorrow.jpg';
 import team1 from '@/assets/team-1.jpg';
 import team2 from '@/assets/team-2.jpg';
 import team3 from '@/assets/team-3.jpg';
+import teamMeena from '@/assets/team-meena.jpg';
+import teamPrarthana from '@/assets/team-prarthana.jpg';
 import storySphere from '@/assets/story-sphere.png';
 import whyCube from '@/assets/why-cube.png';
 import teamOrbit from '@/assets/team-orbit.jpg';
@@ -106,13 +108,13 @@ const HeroSection = () => {
 
 const StorySection = () => {
   return (
-    <section id="about" className="py-24 md:py-40 relative overflow-hidden border-t border-[var(--site-border)] transition-colors duration-300" style={{ backgroundColor: 'var(--site-bg)' }}>
+    <section id="about" className="pt-16 pb-24 md:pt-24 md:pb-40 relative overflow-hidden border-t border-[var(--site-border)] transition-colors duration-300" style={{ backgroundColor: 'var(--site-bg)' }}>
 
       <div className="max-w-[1400px] mx-auto px-5 md:px-12 relative z-10">
         
         {/* Top label */}
-        <div className="flex flex-col items-start mb-16 relative z-10 text-left">
-          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeInUp} className="flex items-center gap-3 mb-10">
+        <div className="flex flex-col items-start mb-6 md:mb-8 relative z-10 text-left">
+          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeInUp} className="flex items-center gap-3">
             <div className="w-2.5 h-2.5 rounded-full bg-[#CCFF00]"></div>
             <span className="text-[13px] tracking-[0.1em] uppercase font-bold" style={{ color: 'var(--site-fg)' }}>02 / The ma.ai story</span>
           </motion.div>
@@ -140,7 +142,7 @@ const StorySection = () => {
               </p>
             </motion.div>
 
-            <motion.div variants={fadeInUp} className="inline-flex items-center gap-4 px-6 py-4 rounded-full border border-[var(--site-border)] font-bold text-[13px] tracking-[0.05em] uppercase transition-colors duration-300" style={{ backgroundColor: 'var(--site-surface)', color: 'var(--site-fg)' }}>
+            <motion.div variants={fadeInUp} className="flex items-center gap-3 font-bold text-[13px] tracking-[0.05em] uppercase transition-colors duration-300" style={{ color: 'var(--site-fg)' }}>
               <div className="w-4 h-4 rounded-full border-[3px] border-[#CCFF00] flex items-center justify-center">
                 <div className="w-1.5 h-1.5 bg-[#CCFF00] rounded-full"></div>
               </div>
@@ -153,20 +155,20 @@ const StorySection = () => {
 
             {/* Floating UI Tags - preserved */}
             <motion.div animate={{ y: [-10, 10, -10] }} transition={{ repeat: Infinity, duration: 5, ease: "easeInOut" }} className="absolute top-[2%] left-0 z-30 scale-[0.8] origin-left sm:scale-100">
-              <div className="px-4 py-2.5 rounded-xl shadow-sm border border-[var(--site-border)] flex items-center gap-3 text-[13px] font-bold transition-colors duration-300" style={{ backgroundColor: 'var(--site-surface)', color: 'var(--site-fg)' }}>
-                <Activity size={16} className="text-[#CCFF00]" /> Understands context
+              <div className="flex items-center gap-2 text-[16px] font-bold transition-colors duration-300 drop-shadow-sm" style={{ color: 'var(--site-fg)' }}>
+                <Activity size={24} className="text-[#CCFF00]" /> Understands context
               </div>
             </motion.div>
 
             <motion.div animate={{ y: [10, -10, 10] }} transition={{ repeat: Infinity, duration: 6, ease: "easeInOut" }} className="hidden sm:block absolute top-[5%] right-[5%] z-30">
-              <div className="px-4 py-2.5 rounded-xl shadow-sm border border-[var(--site-border)] flex items-center gap-3 text-[13px] font-bold transition-colors duration-300" style={{ backgroundColor: 'var(--site-surface)', color: 'var(--site-fg)' }}>
-                <Sparkles size={16} className="text-[#CCFF00]" /> Adapts intelligently
+              <div className="flex items-center gap-2 text-[16px] font-bold transition-colors duration-300 drop-shadow-sm" style={{ color: 'var(--site-fg)' }}>
+                <Sparkles size={24} className="text-[#CCFF00]" /> Adapts intelligently
               </div>
             </motion.div>
 
             <motion.div animate={{ y: [-8, 8, -8] }} transition={{ repeat: Infinity, duration: 5.5, ease: "easeInOut" }} className="absolute bottom-[4%] left-0 z-30 scale-[0.8] origin-left sm:scale-100 sm:left-[20%]">
-              <div className="px-4 py-2.5 rounded-xl shadow-sm border border-[var(--site-border)] flex items-center gap-3 text-[13px] font-bold transition-colors duration-300" style={{ backgroundColor: 'var(--site-surface)', color: 'var(--site-fg)' }}>
-                <Users size={16} className="text-[#CCFF00]" /> Works with you, not over you
+              <div className="flex items-center gap-2 text-[16px] font-bold transition-colors duration-300 drop-shadow-sm" style={{ color: 'var(--site-fg)' }}>
+                <Users size={24} className="text-[#CCFF00]" /> Works with you, not over you
               </div>
             </motion.div>
 
@@ -273,7 +275,7 @@ const WorksSection = () => {
           </div>
           
           <motion.p initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeInUp} className="text-[16px] md:text-[18px] font-normal leading-[1.5] max-w-[350px] md:mt-20" style={{ color: 'var(--site-muted)' }}>
-            Built for attention. Designed for velocity.
+            Built for attention.<br />Designed for velocity.
           </motion.p>
         </div>
 
@@ -323,10 +325,13 @@ const WorksSection = () => {
                 key={cat.name}
                 aria-pressed={selected}
                 onClick={() => { setCategory(cat.match); setActive(0); }}
-                className={`px-5 py-2.5 rounded-full border ${selected ? 'border-[#CCFF00] bg-[#CCFF00] text-[#111111]' : 'border-[var(--site-border)] text-[var(--site-fg)]'} text-[11px] font-bold tracking-widest hover:bg-[#CCFF00] hover:border-[#CCFF00] hover:text-[#111111] transition-all flex items-center gap-2 uppercase`}
+                className={`group h-[42px] px-[13px] rounded-full border ${selected ? 'border-[#CCFF00] bg-[#CCFF00] text-[#111111]' : 'border-[var(--site-border)] text-[var(--site-fg)]'} text-[11px] font-bold tracking-widest hover:bg-[#CCFF00] hover:border-[#CCFF00] hover:text-[#111111] transition-all duration-300 flex items-center uppercase overflow-hidden`}
                 style={!selected ? { backgroundColor: 'var(--site-surface)' } : undefined}
               >
-                {cat.icon} {cat.name}
+                <div className="shrink-0 flex items-center justify-center">{cat.icon}</div>
+                <span className={`transition-all duration-300 whitespace-nowrap overflow-hidden inline-block flex items-center ${selected ? 'max-w-[200px] opacity-100 ml-2' : 'max-w-[200px] opacity-100 ml-2 md:max-w-0 md:opacity-0 md:ml-0 group-hover:max-w-[200px] group-hover:opacity-100 group-hover:ml-2'}`}>
+                  {cat.name}
+                </span>
               </button>
             );
           })}
@@ -343,7 +348,7 @@ const WorksSection = () => {
             className="group px-8 py-3.5 rounded-[40px] border-[1.5px] font-bold hover:bg-[#111111] hover:text-[#CCFF00] hover:border-[#111111] transition-all inline-flex items-center gap-3 tracking-[0.08em] text-[13px] uppercase"
             style={{ borderColor: 'var(--site-fg)', backgroundColor: 'var(--site-surface)', color: 'var(--site-fg)' }}
           >
-            View all works
+            Explore our works
             <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
           </Link>
         </div>
@@ -386,14 +391,15 @@ const WhySection = () => {
   ];
 
   return (
-    <section id="services" className="py-20 md:py-32 relative overflow-hidden transition-colors duration-300" style={{ backgroundColor: 'var(--site-bg)' }}>
+    <section id="services" className="pt-6 pb-20 md:pt-8 md:pb-32 relative overflow-hidden transition-colors duration-300" style={{ backgroundColor: 'var(--site-bg)' }}>
       <div className="max-w-[1400px] mx-auto px-5 md:px-12 relative z-10">
 
         {/* Top Split Area */}
         <div className="flex flex-col lg:flex-row justify-between items-center mb-16 md:mb-24 gap-12">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={staggerContainer} className="max-w-xl">
-            <motion.div variants={fadeInUp} className="flex items-center mb-10">
-              <span className="text-[13px] tracking-[0.1em] uppercase font-semibold" style={{ color: 'var(--site-fg)' }}>04 / Why ma.ai</span>
+            <motion.div variants={fadeInUp} className="flex items-center gap-3 mb-6 md:mb-8">
+              <div className="w-2.5 h-2.5 rounded-full bg-[#CCFF00]"></div>
+              <span className="text-[13px] tracking-[0.1em] uppercase font-bold" style={{ color: 'var(--site-fg)' }}>04 / Why ma.ai</span>
             </motion.div>
 
             <motion.div variants={fadeInUp} className="flex items-baseline gap-4 mb-6">
@@ -445,21 +451,16 @@ const WhySection = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.1, duration: 0.6 }}
-              className="border border-[var(--site-border)] rounded-[24px] p-6 sm:p-8 transition-all duration-300 relative overflow-hidden flex flex-col items-start"
+              className="border border-[var(--site-border)] rounded-[24px] p-6 sm:p-8 transition-all duration-300 relative overflow-hidden flex flex-col items-start group hover:border-[var(--site-fg)] hover:shadow-xl"
               style={{ backgroundColor: 'var(--site-bg)' }}
             >
               <div className="font-medium text-[15px] mb-8" style={{ color: 'var(--site-fg)' }}>{reason.id}</div>
 
-              {/* Emulated 3D Icon Base */}
-              <div className="h-32 mb-8 relative w-full flex justify-center">
-                {/* The angled base platform */}
-                <div className="absolute bottom-4 w-32 h-12 rounded-xl transform rotate-x-60 skew-x-12 border border-t-white/20 border-l-white/10 shadow-[0_20px_30px_rgba(0,0,0,0.8)] flex items-center justify-center" style={{ color: 'var(--site-fg)' }}>
-                  {/* The glowing pad on top of base */}
-                  <div className={`w-24 h-8 rounded-lg bg-gradient-to-r ${reason.baseColor} opacity-80 blur-[2px]`}></div>
-                </div>
-                {/* The Icon sitting on the pad */}
-                <div className={`absolute bottom-8 filter drop-shadow-[0_10px_15px_rgba(0,0,0,0.8)]`}>
-                  {/* Applying a slight gradient to the icon itself using SVG definitions or just drop shadow */}
+              {/* Clean Modern Icon Presentation */}
+              <div className="mb-10 relative flex justify-start items-center">
+                {/* Soft ambient glow behind the icon */}
+                <div className={`absolute top-1/2 left-6 -translate-x-1/2 -translate-y-1/2 w-16 h-16 bg-gradient-to-r ${reason.baseColor} opacity-20 group-hover:opacity-40 transition-opacity duration-300 blur-[20px] rounded-full`}></div>
+                <div className="relative z-10 transition-transform duration-300 group-hover:scale-110 group-hover:-translate-y-2">
                   {reason.icon}
                 </div>
               </div>
@@ -487,16 +488,16 @@ const TeamSection = () => {
     {
       name: 'Meena Chabbria',
       role: 'Founder & Chief Everything Officer',
-      bio: 'The one who started it all — quite literally. Meena is sales, strategy and spotlight energy rolled into one person, and somehow makes multitasking look like a superpower. If Ma.ai has a face and a heartbeat, it\'s her.',
+      bio: 'The one who started it all — quite literally. Meena is sales, strategy and spotlight energy rolled into one person, and somehow makes multitasking look like a superpower. If ma.ai has a face and a heartbeat, it\'s her.',
       ig: 'mee.a_chhabbria',
-      image: team3
+      image: teamMeena
     },
     {
       name: 'Prarthana Chabbria',
       role: 'Co-Founder & Head of Operations (Certified Diva Boss)',
       bio: 'Runs the entire operation on caffeine, precision and zero patience for anything less than excellent.',
       ig: 'Prarthana_chabbria',
-      image: team2
+      image: teamPrarthana
     },
     {
       name: 'Vinay Sakhrani',

@@ -92,9 +92,9 @@ export const SiteNav = () => {
     <>
       <nav className={`fixed top-0 w-full z-[101] transition-all duration-300 ${scrolled || open ? 'backdrop-blur-xl' : ''} border-b border-[var(--site-border)]`} style={{ backgroundColor: scrolled || open ? 'color-mix(in srgb, var(--site-bg) 90%, transparent)' : 'var(--site-bg)' }}>
         <div className="max-w-[1400px] mx-auto px-5 md:px-12 h-[80px] grid grid-cols-[minmax(0,1fr)_auto] items-center gap-4 md:flex md:justify-between">
-          <Link to="/" className="flex items-center gap-3 cursor-pointer" onClick={() => setOpen(false)}>
-            <MaLogo className="w-10 h-auto" />
-            <span className="font-bold text-[24px] tracking-tight" style={{ color: 'var(--site-fg)' }}>ma.ai</span>
+          <Link to="/" className="flex items-center gap-3 cursor-pointer select-none" onClick={() => { setOpen(false); window.scrollTo({ top: 0, behavior: 'smooth' }); }}>
+            <MaLogo className="w-[52px] h-auto" />
+            <span className="font-bold text-[32px] tracking-tight select-none cursor-pointer" style={{ color: 'var(--site-fg)' }}>ma.ai</span>
           </Link>
 
           <div className="hidden md:flex items-center gap-8 text-[15px] font-medium" style={{ color: 'var(--site-muted)' }}>
@@ -196,25 +196,53 @@ const NewsletterForm = () => {
 };
 
 export const SiteFooter = () => {
+  const emails = [
+    'meena.chabbria@maonline.ai',
+    'prarthana.chabbria@maonline.ai',
+    'vinay.sakhrani@maonline.ai',
+    'souvik.seal@maonline.ai',
+    'harsh.gulwani@maonline.ai',
+  ];
+  const [emailIndex, setEmailIndex] = useState(0);
+  const [fade, setFade] = useState(true);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setFade(false);
+      setTimeout(() => {
+        setEmailIndex((prev) => (prev + 1) % emails.length);
+        setFade(true);
+      }, 400);
+    }, 10000);
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <footer className="pt-24 md:pt-40 transition-colors duration-300" style={{ backgroundColor: 'var(--site-bg)' }}>
       <div className="max-w-[1400px] mx-auto px-5 md:px-12">
-        
-        <div className="flex items-center mb-8">
+
+        <div className="flex items-center gap-3 mb-8">
+          <div className="w-2.5 h-2.5 rounded-full bg-[#CCFF00]"></div>
           <span className="text-[13px] tracking-[0.1em] uppercase font-bold" style={{ color: 'var(--site-fg)' }}>03 / START SOMETHING LOUD</span>
         </div>
-        
-        <h2 className="text-[52px] sm:text-[80px] md:text-[100px] lg:text-[110px] font-bold leading-[0.9] tracking-[-0.05em] mb-12 md:mb-16 max-w-[1200px]" style={{ color: 'var(--site-fg)' }}>
-          Bring the brief. We'll bring<br />the Future.
+
+        <h2 className="text-[48px] sm:text-[64px] md:text-[80px] lg:text-[90px] xl:text-[110px] font-bold leading-[0.9] tracking-[-0.05em] mb-12 md:mb-16 w-full" style={{ color: 'var(--site-fg)' }}>
+          Bring the brief.<br />We'll bring the Future.
         </h2>
 
         <hr className="border-[var(--site-border)]" />
 
         <div className="py-10 md:py-14 flex flex-col md:flex-row md:items-center justify-between gap-6">
-          <span className="text-[18px] md:text-[20px] font-medium" style={{ color: 'var(--site-fg)' }}>info@maonline.ai</span>
-          
+          <a
+            href={`mailto:${emails[emailIndex]}`}
+            className="text-[18px] md:text-[20px] font-medium hover:opacity-70 transition-all duration-400"
+            style={{ color: 'var(--site-fg)', opacity: fade ? 1 : 0 }}
+          >
+            {emails[emailIndex]}
+          </a>
+
           <Link to="/contact" className="group px-8 py-4 rounded-[40px] bg-[#111111] text-white hover:opacity-90 transition-opacity text-[13px] tracking-[0.08em] uppercase font-bold flex items-center justify-center gap-3">
-             MAKE IT MOVE <ArrowRight size={15} className="text-[#CCFF00] group-hover:translate-x-1 transition-transform" />
+            MAKE IT MOVE <ArrowRight size={15} className="text-[#CCFF00] group-hover:translate-x-1 transition-transform" />
           </Link>
         </div>
 
@@ -222,10 +250,9 @@ export const SiteFooter = () => {
 
         <div className="py-8 flex flex-col md:flex-row md:items-center gap-6 md:gap-8 mb-16 md:mb-24">
           <span className="text-[11px] md:text-[12px] tracking-[0.1em] uppercase font-bold" style={{ color: 'var(--site-muted)' }}>BUILT IN CONVERSATION WITH</span>
-          <div className="flex items-center gap-6" style={{ color: 'var(--site-fg)' }}>
-             <span className="text-[22px] font-black tracking-tighter">AI</span>
-             <span className="text-[22px]">✦</span>
-             <span className="text-[26px] font-medium leading-none">∞</span>
+          <div className="flex items-center gap-6">
+            <img src="/gemini-logo.png" alt="Google Gemini" className="h-[28px] w-auto mix-blend-multiply object-contain" />
+            <img src="/meta-logo.png" alt="Meta" className="h-[28px] w-auto mix-blend-multiply object-contain" />
           </div>
         </div>
 
@@ -233,8 +260,9 @@ export const SiteFooter = () => {
         <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-6 gap-x-6 md:gap-x-8 gap-y-10 md:gap-y-16 mb-16 md:mb-20">
 
           <div className="col-span-2 lg:col-span-2 lg:pr-12">
-            <Link to="/" className="flex items-center mb-6">
-              <MaLogo className="w-16 h-auto" />
+            <Link to="/" className="flex items-center gap-4 mb-6">
+              <MaLogo className="w-[60px] md:w-[84px] h-auto" />
+              <span className="font-bold text-[36px] md:text-[52px] tracking-tight" style={{ color: 'var(--site-fg)' }}>ma.ai</span>
             </Link>
             <p className="text-[14px] mb-8 md:mb-12 font-normal leading-[1.5]" style={{ color: 'var(--site-muted)' }}>
               A team of strategists, creators and engineers building AI with purpose.
@@ -303,34 +331,30 @@ export const SiteFooter = () => {
 
         {/* Restored Connect & Newsletter row */}
         <div className="flex flex-col lg:flex-row lg:justify-between gap-12 lg:gap-16 mb-16 md:mb-24">
-          <div className="max-w-[300px]">
-            <h4 className="font-bold mb-6 text-[12px] tracking-widest uppercase border-b-[2px] inline-block pb-2" style={{ color: 'var(--site-fg)', borderColor: 'var(--site-fg)' }}>Connect</h4>
-            <div className="flex gap-4 mt-2">
+          <div className="max-w-[300px] flex flex-col">
+            <h4 className="font-bold mb-6 text-[12px] tracking-widest uppercase border-b-[2px] inline-block pb-2 self-start" style={{ color: 'var(--site-fg)', borderColor: 'var(--site-fg)' }}>Connect</h4>
+            <div className="flex gap-4 mt-auto">
               <a href="https://www.linkedin.com/" target="_blank" rel="noreferrer noopener" className="w-12 h-12 rounded-full border flex items-center justify-center hover:bg-[#CCFF00] hover:border-[#CCFF00] transition-colors" style={{ backgroundColor: 'var(--site-surface)', borderColor: 'var(--site-border)', color: 'var(--site-fg)' }}><Instagram size={20} /></a>
               <a href="https://www.linkedin.com/" target="_blank" rel="noreferrer noopener" className="w-12 h-12 rounded-full border flex items-center justify-center hover:bg-[#CCFF00] hover:border-[#CCFF00] transition-colors" style={{ backgroundColor: 'var(--site-surface)', borderColor: 'var(--site-border)', color: 'var(--site-fg)' }}><Linkedin size={20} /></a>
               <a href="https://www.linkedin.com/" target="_blank" rel="noreferrer noopener" className="w-12 h-12 rounded-full border flex items-center justify-center hover:bg-[#CCFF00] hover:border-[#CCFF00] transition-colors font-bold text-[20px]" style={{ backgroundColor: 'var(--site-surface)', borderColor: 'var(--site-border)', color: 'var(--site-fg)' }}>X</a>
             </div>
           </div>
-          <div className="w-full max-w-[400px]">
-            <h4 className="font-bold mb-6 text-[12px] tracking-widest uppercase border-b-[2px] inline-block pb-2" style={{ color: 'var(--site-fg)', borderColor: 'var(--site-fg)' }}>Stay Updated</h4>
-            <p className="text-[13px] mb-4 mt-2 font-medium" style={{ color: 'var(--site-muted)' }}>Get insights on AI, strategy and what's next.</p>
-            <NewsletterForm />
-          </div>
+
         </div>
       </div>
 
       {/* The Bottom Banner */}
       <div className="w-full bg-[#CCFF00] py-6 px-5 md:px-12 flex flex-col md:flex-row justify-between items-center gap-4">
-         <div className="flex gap-4 items-center">
-           <span className="text-[#111111] text-[12px] md:text-[13px] tracking-[0.1em] uppercase font-bold">MA.AI / 2026</span>
-           <span className="text-[#111111] text-[12px] tracking-widest hidden md:inline">|</span>
-           <div className="hidden md:flex gap-4 items-center text-[11px] font-bold uppercase tracking-widest text-[#111111]">
-             <Link to="/privacy" className="hover:opacity-60 transition-opacity">Privacy Policy</Link>
-             <Link to="/terms" className="hover:opacity-60 transition-opacity">Terms of Service</Link>
-             <Link to="/cookies" className="hover:opacity-60 transition-opacity">Cookie Policy</Link>
-           </div>
-         </div>
-         <span className="text-[#111111] text-[12px] md:text-[13px] tracking-[0.1em] uppercase font-bold">ADVERTISING AFTER THE ALGORITHM.</span>
+        <div className="flex gap-4 items-center">
+          <span className="text-[#111111] text-[12px] md:text-[13px] tracking-[0.1em] uppercase font-bold">ma.ai / 2026</span>
+          <span className="text-[#111111] text-[12px] tracking-widest hidden md:inline">|</span>
+          <div className="hidden md:flex gap-4 items-center text-[11px] font-bold uppercase tracking-widest text-[#111111]">
+            <Link to="/privacy" className="hover:opacity-60 transition-opacity">Privacy Policy</Link>
+            <Link to="/terms" className="hover:opacity-60 transition-opacity">Terms of Service</Link>
+            <Link to="/cookies" className="hover:opacity-60 transition-opacity">Cookie Policy</Link>
+          </div>
+        </div>
+        <span className="text-[#111111] text-[12px] md:text-[13px] tracking-[0.1em] uppercase font-bold">ADVERTISING AFTER THE ALGORITHM.</span>
       </div>
     </footer>
   );
