@@ -5,7 +5,9 @@ import { MaLogo } from '../MaLogo';
 import { motion } from 'framer-motion';
 import ctaLogo3d from '@/assets/cta-logo3d.png';
 import navLogoImg from '@/assets/Ma_footer_logo_132x33.png';
+import navLogoDarkImg from '@/assets/Ma_nav_logo_dark.png';
 import footerLogoImg from '@/assets/Ma_footer_logo_200x160.png';
+import footerLogoDarkImg from '@/assets/Ma_footer_logo_dark.png';
 import { useTheme } from '@/hooks/use-theme';
 
 // Injecting precise fonts matching the mockup
@@ -40,6 +42,28 @@ export const staggerContainer = {
 // Perfectly mimicking the continuous loop 'M' logo
 export const Logo = ({ className = "w-8 h-8", light = false }) => (
   <MaLogo className={className} />
+);
+
+// The shipped logo pairs a purple/blue gradient mark with a near-black #494949
+// "ma.ai" wordmark, so on the dark background both the wordmark and the
+// multiply blend disappear. Swap in the light-wordmark variant via the .dark
+// class instead: same intrinsic size, so nothing reflows, and the switch is
+// pure CSS so it follows the theme toggle instantly.
+const ThemedLogo = ({
+  light,
+  dark,
+  className,
+  loading,
+}: {
+  light: string;
+  dark: string;
+  className: string;
+  loading: 'eager' | 'lazy';
+}) => (
+  <>
+    <img src={light} alt="MA Logo" className={`${className} mix-blend-multiply dark:hidden`} loading={loading} />
+    <img src={dark} alt="MA Logo" className={`${className} hidden dark:block`} loading={loading} />
+  </>
 );
 
 const navLinks = [
@@ -95,7 +119,7 @@ export const SiteNav = () => {
       <nav className={`fixed top-0 w-full z-[101] transition-all duration-300 ${scrolled || open ? 'backdrop-blur-xl' : ''} border-b border-[var(--site-border)]`} style={{ backgroundColor: scrolled || open ? 'color-mix(in srgb, var(--site-bg) 90%, transparent)' : 'var(--site-bg)' }}>
         <div className="max-w-[1400px] mx-auto px-5 md:px-12 h-[80px] grid grid-cols-[minmax(0,1fr)_auto] items-center gap-4 md:flex md:justify-between">
           <Link to="/" className="flex items-center gap-3 cursor-pointer select-none" onClick={() => { setOpen(false); window.scrollTo({ top: 0, behavior: 'smooth' }); }}>
-            <img src={navLogoImg} alt="MA Logo" className="w-[120px] h-auto mix-blend-multiply" loading="eager" />
+            <ThemedLogo light={navLogoImg} dark={navLogoDarkImg} className="w-[120px] h-auto" loading="eager" />
           </Link>
 
           <div className="hidden md:flex items-center gap-8 text-[15px] font-medium" style={{ color: 'var(--site-muted)' }}>
@@ -261,7 +285,7 @@ export const SiteFooter = () => {
 
           <div className="col-span-2 lg:col-span-2 lg:pr-12">
             <Link to="/" className="flex items-center gap-4 mb-6">
-              <img src={footerLogoImg} alt="MA Logo" className="w-[80px] md:w-[100px] h-auto mix-blend-multiply" loading="lazy" />
+              <ThemedLogo light={footerLogoImg} dark={footerLogoDarkImg} className="w-[80px] md:w-[100px] h-auto" loading="lazy" />
             </Link>
             <p className="text-[14px] mb-8 md:mb-12 font-normal leading-[1.5]" style={{ color: 'var(--site-muted)' }}>
               A team of strategists, creators and engineers building AI with purpose.
