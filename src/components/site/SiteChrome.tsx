@@ -4,6 +4,8 @@ import { Menu, X, ArrowRight, Instagram, Linkedin, Mail, Phone, MapPin, Sun, Moo
 import { MaLogo } from '../MaLogo';
 import { motion } from 'framer-motion';
 import ctaLogo3d from '@/assets/cta-logo3d.png';
+import navLogoImg from '@/assets/Ma_footer_logo_132x33.png';
+import footerLogoImg from '@/assets/Ma_footer_logo_200x160.png';
 import { useTheme } from '@/hooks/use-theme';
 
 // Injecting precise fonts matching the mockup
@@ -93,8 +95,7 @@ export const SiteNav = () => {
       <nav className={`fixed top-0 w-full z-[101] transition-all duration-300 ${scrolled || open ? 'backdrop-blur-xl' : ''} border-b border-[var(--site-border)]`} style={{ backgroundColor: scrolled || open ? 'color-mix(in srgb, var(--site-bg) 90%, transparent)' : 'var(--site-bg)' }}>
         <div className="max-w-[1400px] mx-auto px-5 md:px-12 h-[80px] grid grid-cols-[minmax(0,1fr)_auto] items-center gap-4 md:flex md:justify-between">
           <Link to="/" className="flex items-center gap-3 cursor-pointer select-none" onClick={() => { setOpen(false); window.scrollTo({ top: 0, behavior: 'smooth' }); }}>
-            <MaLogo className="w-[52px] h-auto" />
-            <span className="font-bold text-[32px] tracking-tight select-none cursor-pointer" style={{ color: 'var(--site-fg)' }}>ma.ai</span>
+            <img src={navLogoImg} alt="MA Logo" className="w-[120px] h-auto mix-blend-multiply" loading="eager" />
           </Link>
 
           <div className="hidden md:flex items-center gap-8 text-[15px] font-medium" style={{ color: 'var(--site-muted)' }}>
@@ -260,8 +261,7 @@ export const SiteFooter = () => {
 
           <div className="col-span-2 lg:col-span-2 lg:pr-12">
             <Link to="/" className="flex items-center gap-4 mb-6">
-              <MaLogo className="w-[60px] md:w-[84px] h-auto" />
-              <span className="font-bold text-[36px] md:text-[52px] tracking-tight" style={{ color: 'var(--site-fg)' }}>ma.ai</span>
+              <img src={footerLogoImg} alt="MA Logo" className="w-[80px] md:w-[100px] h-auto mix-blend-multiply" loading="lazy" />
             </Link>
             <p className="text-[14px] mb-8 md:mb-12 font-normal leading-[1.5]" style={{ color: 'var(--site-muted)' }}>
               A team of strategists, creators and engineers building AI with purpose.

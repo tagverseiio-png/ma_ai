@@ -5,6 +5,8 @@ import { Instagram } from 'lucide-react';
 import team1 from '@/assets/team-1.jpg';
 import team2 from '@/assets/team-2.jpg';
 import team3 from '@/assets/team-3.jpg';
+import teamVinay from '@/assets/1ebc6027-b395-4200-8c9d-b996c087f377.JPG.jpeg';
+import teamSouvik from '@/assets/ChatGPT Image Sep 2, 2026, 04_39_27 PM.png';
 
 export const Route = createFileRoute('/members')({
   head: () => ({
@@ -22,7 +24,8 @@ const majorFigures = [
     role: 'Founder & Chief Everything Officer',
     bio: 'The one who started it all — quite literally. Meena is sales, strategy and spotlight energy rolled into one person, and somehow makes multitasking look like a superpower. If Ma.ai has a face and a heartbeat, it\'s her.',
     ig: 'mee.a_chhabbria',
-    image: team3
+    image: team3,
+    imagePosition: 'object-center'
   },
   {
     name: 'Prarthana Chabbria',
@@ -36,14 +39,15 @@ const majorFigures = [
     role: 'Co-Founder & Creative Director',
     bio: 'The creative brain behind everything you see. Big believer in work-life balance — until a deadline says otherwise, and then it\'s an all-nighter, no questions asked. Chill by default, unstoppable on demand.',
     ig: 'Vinay_sakhrani',
-    image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'
+    image: teamVinay
   },
   {
     name: 'Souvik Seal',
     role: 'Co-Founder & CEO',
     bio: 'The brain of the operation, in the most literal sense. Souvik lives life on Sop’s and runs on spreadsheets, and cold hard data — a walking encyclopedia who somehow makes numbers sound like a personality trait.',
     ig: 'souvik_seal',
-    image: team1
+    image: teamSouvik,
+    imagePosition: 'object-center'
   }
 ];
 
@@ -72,7 +76,7 @@ function MembersPage() {
               <div className="absolute bottom-0 left-0 w-full h-[150px] bg-gradient-to-t from-[#7C3AED]/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10 pointer-events-none"></div>
 
               <div className="h-[320px] sm:h-[380px] overflow-hidden relative bg-[#0B0B13]">
-                <img src={member.image} alt={member.name} className="w-full h-full object-cover object-top grayscale opacity-60 group-hover:opacity-90 group-hover:grayscale-[20%] group-hover:scale-105 transition-all duration-700" />
+                <img src={member.image} alt={member.name} className={`w-full h-full object-cover ${member.imagePosition || 'object-top'} grayscale opacity-60 group-hover:opacity-90 group-hover:grayscale-[20%] group-hover:scale-105 transition-all duration-700`} />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#0B0B13] via-[#0B0B13]/70 to-transparent z-10"></div>
               </div>
 
