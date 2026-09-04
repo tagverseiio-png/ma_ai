@@ -44,6 +44,19 @@ export const Logo = ({ className = "w-8 h-8", light = false }) => (
   <MaLogo className={className} />
 );
 
+export const SectionEyebrow = ({ children }: { children: React.ReactNode }) => (
+  <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeInUp} className="flex items-center gap-4 mb-8 md:mb-10">
+    <div className="relative flex items-center justify-center shrink-0 w-6 h-6">
+      <div className="absolute inset-0 border-[1.5px] border-[#CCFF00]/40 rounded-full animate-[spin_4s_linear_infinite] border-dashed"></div>
+      <div className="absolute w-3.5 h-3.5 bg-[#CCFF00]/30 rounded-full animate-pulse"></div>
+      <div className="w-2 h-2 rounded-full bg-[#CCFF00] relative z-10 shadow-[0_0_10px_#CCFF00]"></div>
+    </div>
+    <span className="text-[14px] md:text-[15px] tracking-[0.2em] md:tracking-[0.25em] uppercase font-bold text-[var(--site-fg)]">
+      {children}
+    </span>
+  </motion.div>
+);
+
 // The shipped logo pairs a purple/blue gradient mark with a near-black #494949
 // "ma.ai" wordmark, so on the dark background both the wordmark and the
 // multiply blend disappear. Swap in the light-wordmark variant via the .dark
@@ -67,6 +80,7 @@ const ThemedLogo = ({
 );
 
 const navLinks = [
+  { label: 'Home', to: '/' },
   { label: 'Services', to: '/#services' },
   { label: 'Work', to: '/#work' },
   { label: 'About', to: '/#about' },
@@ -129,7 +143,8 @@ export const SiteNav = () => {
                 to={item.to}
                 className="hover:opacity-100 transition-colors"
                 style={{ color: 'inherit' }}
-                activeProps={{ style: { color: 'var(--site-fg)' } }}
+                activeProps={{ style: { color: 'var(--site-fg)', fontWeight: 'bold' } }}
+                activeOptions={{ exact: item.to === '/' }}
               >
                 {item.label}
               </Link>
@@ -170,6 +185,7 @@ export const SiteNav = () => {
                 className="py-4 border-b border-[var(--site-border)] text-[18px] font-bold tracking-[-0.03em] uppercase"
                 style={{ color: 'var(--site-fg)' }}
                 activeProps={{ style: { color: 'var(--site-fg)' } }}
+                activeOptions={{ exact: item.to === '/' }}
               >
                 {item.label}
               </Link>
@@ -242,13 +258,9 @@ export const SiteFooter = () => {
   }, []);
 
   return (
-    <footer className="pt-24 md:pt-40 transition-colors duration-300" style={{ backgroundColor: 'var(--site-bg)' }}>
+    <footer className="pt-16 md:pt-20 transition-colors duration-300" style={{ backgroundColor: 'var(--site-bg)' }}>
       <div className="max-w-[1400px] mx-auto px-5 md:px-12">
-
-        <div className="flex items-center gap-3 mb-8">
-          <div className="w-2.5 h-2.5 rounded-full bg-[#CCFF00]"></div>
-          <span className="text-[13px] tracking-[0.1em] uppercase font-bold" style={{ color: 'var(--site-fg)' }}>03 / START SOMETHING LOUD</span>
-        </div>
+        <SectionEyebrow>03 / START SOMETHING LOUD</SectionEyebrow>
 
         <h2 className="text-[48px] sm:text-[64px] md:text-[80px] lg:text-[90px] xl:text-[110px] font-bold leading-[0.9] tracking-[-0.05em] mb-12 md:mb-16 w-full" style={{ color: 'var(--site-fg)' }}>
           Bring the brief.<br />We'll bring the Future.

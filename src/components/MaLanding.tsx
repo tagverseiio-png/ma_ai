@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence, useMotionValue, useSpring, useTransform, useScroll } from 'framer-motion';
 import { Link } from '@tanstack/react-router';
 import {
@@ -6,9 +6,10 @@ import {
   Mail, Phone, MapPin, Instagram, Twitter, Heart,
   Users, Target, Globe, ShieldCheck, PlayCircle,
   Film, Box, Megaphone, AudioLines,
-  Activity, Sparkles, Cpu, ChevronLeft, ChevronRight
+  Activity, Sparkles, Cpu, ChevronLeft, ChevronRight, Volume2, VolumeX, X
 } from 'lucide-react';
 import heroCity from '@/assets/hero-city.jpg';
+import { SectionEyebrow } from '@/components/site/SiteChrome';
 import workNightDrive from '@/assets/work-night-drive.jpg';
 import workZeroGravity from '@/assets/work-zero-gravity.jpg';
 import workColors from '@/assets/work-colors.jpg';
@@ -45,13 +46,11 @@ const HeroSection = () => {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  const contentOpacity = useTransform(scrollY, [0, 150], [0, 1]);
-  const contentY = useTransform(scrollY, [0, 150], [20, 0]);
-  const titleY = useTransform(scrollY, [0, 150], [isMobile ? 70 : 160, 0]);
-  const pointerEvents = useTransform(scrollY, (v) => (v > 50 ? 'auto' : 'none'));
+  const contentOpacity = useTransform(scrollY, [0, 150], [1, 0]);
+  const pointerEvents = useTransform(scrollY, (v) => (v > 50 ? 'none' : 'auto'));
 
   return (
-    <section className="relative min-h-screen pt-32 pb-12 md:pt-48 md:pb-16 bg-[#111111] flex flex-col justify-end overflow-hidden">
+    <section className="relative min-h-screen bg-[#111111] flex flex-col overflow-hidden">
       
       {/* Background Video */}
       <video 
@@ -59,71 +58,70 @@ const HeroSection = () => {
         loop 
         muted 
         playsInline 
-        className="absolute inset-0 w-full h-full object-cover z-0 opacity-90"
+        className="absolute inset-0 w-full h-full object-cover z-0"
+        style={{ objectPosition: 'center' }}
         suppressHydrationWarning
       >
         <source src={showReelVideo} type="video/mp4" suppressHydrationWarning />
       </video>
       
-      {/* Subtle bottom gradient to make text readable without blocking video */}
-      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent z-0 pointer-events-none"></div>
+      {/* Dark gradient overlay for text legibility */}
+      <div className="absolute inset-0 bg-black/40 z-0 pointer-events-none"></div>
 
-      <div className="max-w-[1400px] mx-auto px-5 md:px-12 w-full relative z-10">
-        
-        {/* Top Label */}
-        <motion.div style={{ opacity: contentOpacity, y: titleY }} className="flex items-center gap-3 mb-6 md:mb-8">
-          <div className="w-2.5 h-2.5 rounded-full bg-[#CCFF00]"></div>
-          <span className="text-white text-[12px] md:text-[13px] tracking-[0.1em] uppercase font-bold drop-shadow-md">
-            01 / Welcome to ma.ai
-          </span>
-        </motion.div>
-        
-        {/* Huge Heading */}
-        <motion.div style={{ y: titleY }} className="mb-8 md:mb-12">
-          <h1 className="text-[40px] sm:text-[60px] md:text-[80px] lg:text-[100px] font-bold text-white tracking-[-0.05em] leading-[0.9] max-w-[1200px] drop-shadow-lg">
+      <motion.div style={{ opacity: contentOpacity }} className="relative z-10 flex-grow flex flex-col justify-center px-6 md:px-16 lg:px-24">
+        <div className="max-w-[700px]">
+          
+          <h1 className="text-[40px] sm:text-[50px] md:text-[64px] font-medium text-white leading-[1.1] mb-6 drop-shadow-md tracking-tight">
             We build worlds<br />that move you.
           </h1>
-        </motion.div>
 
-        {/* Full width divider */}
-        <motion.hr style={{ opacity: contentOpacity }} className="border-white/20 mb-6 md:mb-8" />
-
-        {/* Bottom Split */}
-        <div className="flex flex-col md:flex-row md:items-start justify-between gap-6 md:gap-10">
-          <motion.p style={{ opacity: contentOpacity, pointerEvents, y: contentY }} className="text-white/90 text-[15px] md:text-[16px] max-w-[500px] leading-[1.4] font-medium drop-shadow-md">
+          <p className="text-white/90 text-[14px] md:text-[16px] leading-[1.6] max-w-[500px] mb-8 font-light drop-shadow-md">
             We partner with ambitious brands to create AI-powered solutions that drive impact, automate complexity, and shape the future.
-          </motion.p>
+          </p>
           
-          <div className="flex flex-col sm:flex-row gap-4 shrink-0">
-            <Link to="/work" className="group px-8 py-4 rounded-[40px] bg-[#CCFF00] text-[#111111] hover:bg-white hover:text-[#111111] transition-colors text-[13px] tracking-[0.08em] uppercase font-bold flex items-center justify-center gap-3 shadow-lg">
-              Explore our work <ArrowRight size={15} className="group-hover:translate-x-1 transition-transform" />
-            </Link>
-            <Link to="/services" className="px-8 py-4 rounded-[40px] border-[1.5px] border-white text-white hover:bg-white hover:text-[#111111] transition-colors text-[13px] tracking-[0.08em] uppercase font-bold flex items-center justify-center gap-3 shadow-lg backdrop-blur-sm">
-              What we do
-            </Link>
-          </div>
+          <Link to="/work" className="inline-flex px-8 py-3.5 bg-white text-black font-semibold text-[12px] tracking-[0.1em] uppercase hover:bg-[#CCFF00] hover:text-black transition-colors duration-300">
+            Explore our work
+          </Link>
+
         </div>
-        
-      </div>
+      </motion.div>
+
+      {/* Floating Right Button */}
+      <motion.div style={{ opacity: contentOpacity, pointerEvents }} className="absolute right-6 md:right-16 top-1/2 -translate-y-1/2 z-20 hidden md:block">
+        <Link to="/services" className="px-6 py-3 rounded-[30px] bg-white text-black text-[12px] font-bold tracking-[0.08em] uppercase hover:bg-[#CCFF00] transition-colors shadow-lg">
+          What we do
+        </Link>
+      </motion.div>
+
+      {/* Bottom Footer Links */}
+      <motion.div style={{ opacity: contentOpacity, pointerEvents }} className="absolute bottom-10 left-6 md:left-16 lg:left-24 z-20 flex gap-6 md:gap-10">
+        <a href="#" className="text-white/80 hover:text-white text-[11px] font-bold tracking-[0.15em] uppercase transition-colors">
+          Website
+        </a>
+        <a href="#" className="text-white/80 hover:text-white text-[11px] font-bold tracking-[0.15em] uppercase transition-colors">
+          YouTube
+        </a>
+        <a href="#" className="text-white/80 hover:text-white text-[11px] font-bold tracking-[0.15em] uppercase transition-colors">
+          Instagram
+        </a>
+      </motion.div>
+      
     </section>
   );
 };
 
 const StorySection = () => {
   return (
-    <section id="about" className="pt-16 pb-24 md:pt-24 md:pb-40 relative overflow-hidden border-t border-[var(--site-border)] transition-colors duration-300" style={{ backgroundColor: 'var(--site-bg)' }}>
+    <section id="about" className="pt-10 pb-10 md:pt-12 md:pb-12 relative overflow-hidden border-t border-[var(--site-border)] transition-colors duration-300" style={{ backgroundColor: 'var(--site-bg)' }}>
 
       <div className="max-w-[1400px] mx-auto px-5 md:px-12 relative z-10">
         
         {/* Top label */}
         <div className="flex flex-col items-start mb-6 md:mb-8 relative z-10 text-left">
-          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeInUp} className="flex items-center gap-3">
-            <div className="w-2.5 h-2.5 rounded-full bg-[#CCFF00]"></div>
-            <span className="text-[13px] tracking-[0.1em] uppercase font-bold" style={{ color: 'var(--site-fg)' }}>02 / The ma.ai story</span>
-          </motion.div>
+          <SectionEyebrow>02 / The ma.ai story</SectionEyebrow>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-16 items-center">
+        <div className="grid lg:grid-cols-2 gap-10 lg:gap-12 items-center">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={staggerContainer} className="relative z-20">
             
             <motion.h2 variants={fadeInUp} className="text-[32px] sm:text-[40px] md:text-[56px] lg:text-[72px] font-bold tracking-[-0.04em] leading-[1] mb-8 whitespace-nowrap" style={{ color: 'var(--site-fg)' }}>
@@ -207,32 +205,133 @@ const StorySection = () => {
   );
 };
 
+import hotel1 from '@/assets/Client Case Studies/HOTEL 1 (1).mp4';
+import katha1 from '@/assets/Client Case Studies/KATHA  (1).mp4';
+import manali1 from '@/assets/Client Case Studies/MANALI HIGH RES (1).mp4';
+import ranthambore1 from '@/assets/Client Case Studies/RANTHAMBORE FINAL   (1).mp4';
+import tadoba1 from '@/assets/Client Case Studies/TADOBA 30 MARCH (1).mp4';
+import animation1 from '@/assets/Micro Drama Series/ANIMATION (1).mp4';
+import brandFilm1 from '@/assets/showreel-Brandfilms/MA AI BRAND FILM (1) (1).mp4';
+import showReel2 from '@/assets/showreel-Brandfilms/SHOW REEL HD (2) (1).mp4';
+import showReel3 from '@/assets/showreel-Brandfilms/SHOWREEL 2 (1).mp4';
+import ugc from '@/assets/showreel-Brandfilms/UGC.mp4';
+import hadaza1 from '@/assets/Social Media Vertical Content/HADAZA REEL FY.mp4';
+import realistic1 from '@/assets/Social Media Vertical Content/REALSTIC .mp4';
+import campus1 from '@/assets/VFX Content/CAMPUS SHOES HD.mp4';
+import fastPaced1 from '@/assets/VFX Content/FAST PACED AD  (1).mp4';
+import rareRabbit1 from '@/assets/VFX Content/RARE RABBIT AI MODEL AD .mp4';
+import yt1 from '@/assets/YouTube Video/Found Through Trust - goldenmatrimonial (1) (1).mp4';
+
 const worksData = [
   // Showreel / Brand Films
-  { id: 1, title: 'Night Drive', type: 'Showreel / Brand Films', duration: '00:52', image: workNightDrive },
-  { id: 2, title: 'Colors of Imagination', type: 'Showreel / Brand Films', duration: '01:28', image: workColors, featured: true },
-  { id: 3, title: 'Echoes of Time', type: 'Showreel / Brand Films', duration: '02:15', image: 'https://images.unsplash.com/photo-1536240478700-b869070f9279?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80' },
+  { id: 1, title: 'MA AI Brand Film', type: 'Showreel / Brand Films', duration: '01:00', video: brandFilm1, desc: 'A showcase of AI-crafted stories, films and experiences.', featured: true },
+  { id: 2, title: 'Show Reel HD', type: 'Showreel / Brand Films', duration: '00:45', video: showReel2, desc: 'A showcase of AI-crafted stories, films and experiences.' },
+  { id: 3, title: 'Showreel 2', type: 'Showreel / Brand Films', duration: '01:15', video: showReel3, desc: 'A showcase of AI-crafted stories, films and experiences.' },
+  { id: 4, title: 'UGC Content', type: 'Showreel / Brand Films', duration: '00:30', video: ugc, desc: 'A showcase of AI-crafted stories, films and experiences.' },
   // Client Case Studies
-  { id: 4, title: 'Zero Gravity', type: 'Client Case Studies', duration: '00:45', image: workZeroGravity },
-  { id: 5, title: 'Global Connect', type: 'Client Case Studies', duration: '01:10', image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80' },
-  { id: 6, title: 'Future Retail', type: 'Client Case Studies', duration: '01:45', image: 'https://images.unsplash.com/photo-1441986300917-64674bd600d8?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80' },
+  { id: 5, title: 'Hotel Feature', type: 'Client Case Studies', duration: '00:45', video: hotel1, desc: 'A showcase of AI-crafted stories, films and experiences.' },
+  { id: 6, title: 'Katha Story', type: 'Client Case Studies', duration: '01:10', video: katha1, desc: 'A showcase of AI-crafted stories, films and experiences.' },
+  { id: 7, title: 'Manali High Res', type: 'Client Case Studies', duration: '01:45', video: manali1, desc: 'A showcase of AI-crafted stories, films and experiences.' },
+  { id: 8, title: 'Ranthambore Final', type: 'Client Case Studies', duration: '01:45', video: ranthambore1, desc: 'A showcase of AI-crafted stories, films and experiences.' },
+  { id: 9, title: 'Tadoba March', type: 'Client Case Studies', duration: '01:45', video: tadoba1, desc: 'A showcase of AI-crafted stories, films and experiences.' },
   // Micro Drama Series
-  { id: 7, title: 'The Last Passenger', type: 'Micro Drama Series', duration: '03:20', image: 'https://images.unsplash.com/photo-1536440136628-849c177e76a1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80' },
-  { id: 8, title: 'Neon Shadows', type: 'Micro Drama Series', duration: '04:15', image: 'https://images.unsplash.com/photo-1604085572502-a39c44569eeb?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80' },
-  { id: 9, title: 'Silent Words', type: 'Micro Drama Series', duration: '02:55', image: 'https://images.unsplash.com/photo-1485846234645-a62644f84728?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80' },
+  { id: 10, title: 'Animation Story', type: 'Micro Drama Series', duration: '03:20', video: animation1, desc: 'A showcase of AI-crafted stories, films and experiences.' },
   // Social Media Vertical Content
-  { id: 10, title: 'Summer Drop', type: 'Social Media Vertical Content', duration: '00:15', image: 'https://images.unsplash.com/photo-1611162617474-5b21e879e113?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80' },
-  { id: 11, title: 'Tech Review #01', type: 'Social Media Vertical Content', duration: '00:30', image: 'https://images.unsplash.com/photo-1511512578047-dfb367046420?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80' },
-  { id: 12, title: 'Behind the Scenes', type: 'Social Media Vertical Content', duration: '00:45', image: 'https://images.unsplash.com/photo-1516035069371-29a1b244cc32?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80' },
-  // YouTube Video
-  { id: 13, title: 'The New Tomorrow', type: 'YouTube Video', duration: '00:58', image: workTomorrow },
-  { id: 14, title: 'AI in 2026', type: 'YouTube Video', duration: '12:30', image: 'https://images.unsplash.com/photo-1620712943543-bcc4688e7485?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80' },
-  { id: 15, title: 'Designing for the Future', type: 'YouTube Video', duration: '08:45', image: 'https://images.unsplash.com/photo-1550745165-9bc0b252726f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80' },
+  { id: 11, title: 'Hadaza Reel', type: 'Social Media Vertical Content', duration: '00:15', video: hadaza1, desc: 'A showcase of AI-crafted stories, films and experiences.' },
+  { id: 12, title: 'Realistic Vertical', type: 'Social Media Vertical Content', duration: '00:30', video: realistic1, desc: 'A showcase of AI-crafted stories, films and experiences.' },
   // VFX Content
-  { id: 16, title: 'Beyond Earth', type: 'VFX Content', duration: '01:12', image: workBeyondEarth },
-  { id: 17, title: 'City of Glass', type: 'VFX Content', duration: '00:40', image: 'https://images.unsplash.com/photo-1478760329108-5c3ed9d495a0?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80' },
-  { id: 18, title: 'Liquid Metal', type: 'VFX Content', duration: '00:25', image: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80' },
+  { id: 13, title: 'Campus Shoes', type: 'VFX Content', duration: '01:12', video: campus1, desc: 'A showcase of AI-crafted stories, films and experiences.' },
+  { id: 14, title: 'Fast Paced Ad', type: 'VFX Content', duration: '00:40', video: fastPaced1, desc: 'A showcase of AI-crafted stories, films and experiences.' },
+  { id: 15, title: 'Rare Rabbit AI Model', type: 'VFX Content', duration: '00:25', video: rareRabbit1, desc: 'A showcase of AI-crafted stories, films and experiences.' },
+  // YouTube Video
+  { id: 16, title: 'Golden Matrimonial', type: 'YouTube Video', duration: '00:58', video: yt1, desc: 'A showcase of AI-crafted stories, films and experiences.' },
 ];
+
+function HorizontalVideoCard({ p, index, onPlayFullscreen }: { p: typeof worksData[0], index: number, onPlayFullscreen: (videoUrl: string) => void }) {
+  const [isHovered, setIsHovered] = useState(false);
+  const [isMuted, setIsMuted] = useState(true);
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const timerRef = useRef<NodeJS.Timeout>();
+
+  const handleMouseEnter = () => {
+    setIsHovered(true);
+    if (videoRef.current) {
+      videoRef.current.currentTime = 0;
+      videoRef.current.play().catch(() => {});
+      
+      timerRef.current = setTimeout(() => {
+        if (videoRef.current) {
+          videoRef.current.pause();
+        }
+      }, 5000);
+    }
+  };
+
+  const handleMouseLeave = () => {
+    setIsHovered(false);
+    if (videoRef.current) {
+      videoRef.current.pause();
+      videoRef.current.currentTime = 0;
+    }
+    if (timerRef.current) clearTimeout(timerRef.current);
+  };
+
+  return (
+    <motion.article
+      layout
+      initial={{ opacity: 0, x: -40 }}
+      whileInView={{ opacity: 1, x: 0 }}
+      exit={{ opacity: 0, x: 40, scale: 0.95 }}
+      viewport={{ once: true, margin: "-50px" }}
+      transition={{ delay: index * 0.1, duration: 0.5, ease: "easeOut" }}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+      className="group relative rounded-[20px] overflow-hidden bg-white dark:bg-transparent border border-[var(--site-border)] transition-shadow hover:shadow-xl cursor-pointer flex flex-col"
+      onClick={() => onPlayFullscreen(p.video)}
+    >
+      <div className="relative h-[220px] md:h-[260px] overflow-hidden bg-[#05050A]">
+        <video
+          ref={videoRef}
+          src={p.video}
+          muted={isMuted}
+          playsInline
+          loop={false}
+          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+        />
+        
+        <div className={`absolute top-4 right-4 transition-opacity duration-300 z-10 ${isHovered ? 'opacity-100' : 'opacity-0'}`}>
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+              setIsMuted(!isMuted);
+            }}
+            className="w-10 h-10 rounded-full bg-black/50 backdrop-blur-md flex items-center justify-center text-[#CCFF00] hover:bg-black/70 transition-colors"
+          >
+            {isMuted ? <VolumeX size={18} /> : <Volume2 size={18} />}
+          </button>
+        </div>
+
+        <div className={`absolute top-4 right-4 transition-opacity duration-300 pointer-events-none ${!isHovered ? 'opacity-100' : 'opacity-0'}`}>
+          <div className="w-10 h-10 rounded-full bg-black flex items-center justify-center">
+            <Play size={16} className="text-[#CCFF00] fill-[#CCFF00] ml-1" />
+          </div>
+        </div>
+      </div>
+
+      <div className="p-6 flex flex-col flex-grow">
+        <p className="text-[11px] font-bold tracking-widest uppercase text-gray-500 mb-3">
+          {p.type} / {p.duration}
+        </p>
+        <h3 className="text-[22px] md:text-[26px] font-bold text-black dark:text-white tracking-tight mb-3">{p.title}</h3>
+        <p className="text-[14px] text-gray-500 mb-6 flex-grow leading-relaxed">{p.desc}</p>
+        
+        <div className="flex items-center text-[12px] font-bold text-black dark:text-white tracking-widest uppercase mt-auto">
+          EXPLORE SYSTEM <ArrowRight size={16} className="ml-2 group-hover:translate-x-1 transition-transform" />
+        </div>
+      </div>
+    </motion.article>
+  );
+}
 
 const categories = [
   { name: 'ALL WORK', icon: <Film size={16} />, match: null as string | null },
@@ -246,30 +345,19 @@ const categories = [
 
 const WorksSection = () => {
   const [category, setCategory] = useState<string | null>(null);
-  const [active, setActive] = useState(2);
+  const [fullscreenVideo, setFullscreenVideo] = useState<string | null>(null);
 
   const visibleWorks = category ? worksData.filter((w) => w.type === category) : worksData;
-  const activeIndex = Math.min(active, visibleWorks.length - 1);
-
-  const move = (dir: number) =>
-    setActive((prev) => {
-      const len = visibleWorks.length;
-      const current = Math.min(prev, len - 1);
-      return (current + dir + len) % len;
-    });
 
   return (
-    <section id="work" className="py-24 md:py-40 relative overflow-hidden border-t border-[var(--site-border)] transition-colors duration-300" style={{ backgroundColor: 'var(--site-bg)' }}>
+    <section id="work" className="py-10 md:py-12 relative overflow-hidden border-t border-[var(--site-border)] transition-colors duration-300" style={{ backgroundColor: 'var(--site-bg)' }}>
 
       <div className="max-w-[1400px] mx-auto px-5 md:px-12 relative z-10">
 
         {/* Header row */}
-        <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-6 mb-14 md:mb-20">
+        <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-6 mb-10 md:mb-14">
           <div className="flex flex-col items-start text-left">
-            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeInUp} className="flex items-center gap-3 mb-10">
-              <div className="w-2.5 h-2.5 rounded-full bg-[#CCFF00]"></div>
-              <span className="text-[13px] tracking-[0.1em] uppercase font-bold" style={{ color: 'var(--site-fg)' }}>03 / Works</span>
-            </motion.div>
+            <SectionEyebrow>03 / Works</SectionEyebrow>
             
             <motion.h2 initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeInUp} className="text-[52px] sm:text-[72px] md:text-[90px] lg:text-[100px] font-bold mb-8 tracking-[-0.05em] leading-[0.9] max-w-[1000px]" style={{ color: 'var(--site-fg)' }}>
               Where ideas<br/>come alive.
@@ -283,38 +371,13 @@ const WorksSection = () => {
 
         <hr className="border-[var(--site-border)] mb-12" />
 
-        {/* 3-column card grid - editorial style from reference image 2 */}
+        {/* 3-column card grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
-          {visibleWorks.slice(0, 3).map((work, i) => (
-            <motion.div
-              key={work.id}
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.1, duration: 0.6 }}
-              className="rounded-[20px] border border-[var(--site-border)] overflow-hidden group cursor-pointer transition-colors duration-300"
-              style={{ backgroundColor: 'var(--site-card-bg)' }}
-              onClick={() => setActive(i)}
-            >
-              {/* Neon green image area with asterisk */}
-              <div className="relative h-[220px] md:h-[260px] overflow-hidden">
-                <img src={work.image} alt={work.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-                <div className="absolute top-4 right-4 w-8 h-8 rounded-full bg-[#111111] text-[#CCFF00] flex items-center justify-center">
-                  <Play size={14} className="fill-current ml-0.5" />
-                </div>
-              </div>
-              
-              {/* Card body */}
-              <div className="p-6">
-                <span className="text-[11px] tracking-[0.15em] uppercase font-bold block mb-3" style={{ color: 'var(--site-fg)' }}>{work.type} / {work.duration}</span>
-                <h3 className="text-[22px] md:text-[26px] font-bold tracking-[-0.03em] leading-[1.1] mb-3" style={{ color: 'var(--site-fg)' }}>{work.title}</h3>
-                <p className="text-[14px] leading-[1.5] mb-6" style={{ color: 'var(--site-muted)' }}>A showcase of AI-crafted stories, films and experiences.</p>
-                <Link to="/work" className="text-[12px] tracking-[0.1em] uppercase font-bold flex items-center gap-2 group-hover:gap-3 transition-all" style={{ color: 'var(--site-fg)' }}>
-                  EXPLORE SYSTEM <ArrowRight size={14} />
-                </Link>
-              </div>
-            </motion.div>
-          ))}
+          <AnimatePresence mode="popLayout">
+            {visibleWorks.slice(0, 3).map((work, i) => (
+              <HorizontalVideoCard key={work.id} p={work} index={i} onPlayFullscreen={setFullscreenVideo} />
+            ))}
+          </AnimatePresence>
         </div>
 
         {/* Categories Pill Grid */}
@@ -326,8 +389,8 @@ const WorksSection = () => {
                 type="button"
                 key={cat.name}
                 aria-pressed={selected}
-                onClick={() => { setCategory(cat.match); setActive(0); }}
-                className={`group h-[42px] px-[13px] rounded-full border ${selected ? 'border-[#CCFF00] bg-[#CCFF00] text-[#111111]' : 'border-[var(--site-border)] text-[var(--site-fg)] bg-[var(--site-surface)]'} text-[11px] font-bold tracking-widest hover:bg-[#CCFF00] hover:border-[#CCFF00] hover:text-[#111111] transition-all duration-300 flex items-center uppercase overflow-hidden`}
+                onClick={() => setCategory(cat.match)}
+                className={`group h-[42px] px-[13px] rounded-full border ${selected ? 'border-[#CCFF00] bg-[#CCFF00] text-[#111111]' : 'border-[var(--site-border)] text-[var(--site-fg)] bg-white dark:bg-transparent'} text-[11px] font-bold tracking-widest hover:bg-[#CCFF00] hover:border-[#CCFF00] hover:text-[#111111] transition-all duration-300 flex items-center uppercase overflow-hidden`}
               >
                 <div className="shrink-0 flex items-center justify-center">{cat.icon}</div>
                 <span className={`transition-all duration-300 whitespace-nowrap overflow-hidden inline-block flex items-center ${selected ? 'max-w-[200px] opacity-100 ml-2' : 'max-w-[200px] opacity-100 ml-2 md:max-w-0 md:opacity-0 md:ml-0 group-hover:max-w-[200px] group-hover:opacity-100 group-hover:ml-2'}`}>
@@ -346,7 +409,7 @@ const WorksSection = () => {
           </p>
           <Link
             to="/work"
-            className="group px-8 py-3.5 rounded-[40px] border-[1.5px] border-[var(--site-fg)] bg-[var(--site-surface)] text-[var(--site-fg)] font-bold hover:bg-[#111111] hover:text-[#CCFF00] hover:border-[#111111] transition-all inline-flex items-center gap-3 tracking-[0.08em] text-[13px] uppercase"
+            className="group px-8 py-3.5 rounded-[40px] border-[1.5px] border-[var(--site-fg)] bg-transparent text-[var(--site-fg)] font-bold hover:bg-[#111111] hover:text-[#CCFF00] hover:border-[#111111] transition-all inline-flex items-center gap-3 tracking-[0.08em] text-[13px] uppercase"
           >
             Explore our works
             <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
@@ -354,6 +417,42 @@ const WorksSection = () => {
         </div>
       </div>
 
+      <AnimatePresence>
+        {fullscreenVideo && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[100] bg-black/95 flex items-center justify-center p-4 md:p-12"
+            onClick={() => setFullscreenVideo(null)}
+          >
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                setFullscreenVideo(null);
+              }}
+              className="absolute top-6 right-6 w-12 h-12 rounded-full bg-white/20 hover:bg-white/40 text-white flex items-center justify-center transition-colors z-[110] cursor-pointer"
+              aria-label="Close fullscreen"
+            >
+              <X size={24} />
+            </button>
+            <motion.div
+              initial={{ scale: 0.95 }}
+              animate={{ scale: 1 }}
+              exit={{ scale: 0.95 }}
+              className="w-full max-w-6xl aspect-video rounded-2xl overflow-hidden shadow-2xl relative flex items-center justify-center bg-black"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <video
+                src={fullscreenVideo}
+                controls
+                autoPlay
+                className="max-w-full max-h-[80vh] object-contain"
+              />
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   );
 };
@@ -391,16 +490,13 @@ const WhySection = () => {
   ];
 
   return (
-    <section id="services" className="pt-6 pb-20 md:pt-8 md:pb-32 relative overflow-hidden transition-colors duration-300" style={{ backgroundColor: 'var(--site-bg)' }}>
+    <section id="services" className="pt-10 pb-10 md:pt-12 md:pb-12 relative overflow-hidden transition-colors duration-300" style={{ backgroundColor: 'var(--site-bg)' }}>
       <div className="max-w-[1400px] mx-auto px-5 md:px-12 relative z-10">
 
         {/* Top Split Area */}
-        <div className="flex flex-col lg:flex-row justify-between items-center mb-16 md:mb-24 gap-12">
+        <div className="flex flex-col lg:flex-row justify-between items-center mb-12 md:mb-16 gap-8">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={staggerContainer} className="max-w-xl">
-            <motion.div variants={fadeInUp} className="flex items-center gap-3 mb-6 md:mb-8">
-              <div className="w-2.5 h-2.5 rounded-full bg-[#CCFF00]"></div>
-              <span className="text-[13px] tracking-[0.1em] uppercase font-bold" style={{ color: 'var(--site-fg)' }}>04 / Why ma.ai</span>
-            </motion.div>
+            <SectionEyebrow>04 / Why ma.ai</SectionEyebrow>
 
             <motion.div variants={fadeInUp} className="flex items-baseline gap-4 mb-6">
               <h2 className="text-[48px] sm:text-[64px] md:text-[88px] font-bold tracking-[-0.06em] leading-[0.9]" style={{ color: 'var(--site-fg)' }}>Why</h2>
@@ -428,10 +524,7 @@ const WhySection = () => {
             >
               <div className="absolute inset-[15%] bg-[#6D28D9]/40 blur-[80px] rounded-full"></div>
               <img src={whyCube} alt="ma.ai intelligence core" loading="lazy" className="relative w-full h-auto" />
-              <div className="absolute inset-0 flex flex-col items-center justify-center pt-[6%] pointer-events-none">
-                <Logo light={false} className="w-[90px] h-[62px] mb-1 drop-shadow-[0_0_18px_rgba(255,255,255,0.6)]" />
-                <span className="font-bold text-[28px] tracking-tight drop-shadow-md" style={{ color: 'var(--site-fg)' }}>ma.ai</span>
-              </div>
+
             </motion.div>
 
             {/* Floating UI Elements from Mockup */}
@@ -518,7 +611,7 @@ const TeamSection = () => {
   ];
 
   return (
-    <section className="py-20 md:py-32 relative overflow-hidden border-t border-[var(--site-border)] transition-colors duration-300" style={{ backgroundColor: 'var(--site-bg)' }}>
+    <section className="py-10 md:py-12 relative overflow-hidden border-t border-[var(--site-border)] transition-colors duration-300" style={{ backgroundColor: 'var(--site-bg)' }}>
 
       <div className="absolute right-[-45%] sm:right-[-10%] top-[2%] sm:top-[-8%] w-[1100px] max-w-[160%] sm:max-w-[85%] pointer-events-none select-none z-0">
         <img src={theme === 'dark' ? teamOrbit : teamOrbitWhite} alt="" aria-hidden="true" loading="lazy" className="w-full h-auto opacity-40 sm:opacity-80" />
@@ -528,8 +621,8 @@ const TeamSection = () => {
       </div>
 
       <div className="max-w-[1400px] mx-auto px-5 md:px-12 relative z-10">
-        <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeInUp} className="mb-14 md:mb-20">
-          <span className="text-[13px] tracking-[0.1em] uppercase font-semibold block mb-10" style={{ color: 'var(--site-fg)' }}>05 / The team</span>
+        <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeInUp} className="mb-10 md:mb-14">
+          <SectionEyebrow>05 / The team</SectionEyebrow>
           <h2 className="text-[48px] sm:text-[64px] md:text-[80px] font-bold tracking-[-0.06em] leading-[0.9]" style={{ color: 'var(--site-fg)' }}>The minds</h2>
           <h2 className="text-[48px] sm:text-[64px] md:text-[80px] font-bold mb-8 tracking-[-0.06em] leading-[0.9]" style={{ color: 'var(--site-fg)' }}>behind ma.ai</h2>
           <div className="h-[2px] w-20 bg-[#CCFF00]/40 mb-6"></div>
