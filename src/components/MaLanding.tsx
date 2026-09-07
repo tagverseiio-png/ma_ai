@@ -112,7 +112,7 @@ const HeroSection = () => {
 
 const StorySection = () => {
   return (
-    <section id="about" className="pt-10 pb-10 md:pt-12 md:pb-12 relative overflow-hidden border-t border-[var(--site-border)] transition-colors duration-300" style={{ backgroundColor: 'var(--site-bg)' }}>
+    <section id="about" className="py-16 md:py-24 relative overflow-hidden border-t border-[var(--site-border)] transition-colors duration-300" style={{ backgroundColor: 'var(--site-bg)' }}>
 
       <div className="max-w-[1400px] mx-auto px-5 md:px-12 relative z-10">
         
@@ -124,7 +124,7 @@ const StorySection = () => {
         <div className="grid lg:grid-cols-2 gap-10 lg:gap-12 items-center">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={staggerContainer} className="relative z-20">
             
-            <motion.h2 variants={fadeInUp} className="text-[32px] sm:text-[40px] md:text-[56px] lg:text-[72px] font-bold tracking-[-0.04em] leading-[1] mb-8 whitespace-nowrap" style={{ color: 'var(--site-fg)' }}>
+            <motion.h2 variants={fadeInUp} className="text-[48px] sm:text-[64px] md:text-[80px] lg:text-[96px] font-bold tracking-[-0.04em] leading-[0.9] mb-8 whitespace-nowrap" style={{ color: 'var(--site-fg)' }}>
               From <span className="text-[#7C3AED]">ma</span> <span className="font-normal text-[0.6em]" style={{ color: 'var(--site-muted)' }}>(間)</span> to <span className="text-[#7C3AED]">maa</span> <span className="font-normal text-[0.6em]" style={{ color: 'var(--site-muted)' }}>(माँ)</span>
             </motion.h2>
 
@@ -350,7 +350,7 @@ const WorksSection = () => {
   const visibleWorks = category ? worksData.filter((w) => w.type === category) : worksData;
 
   return (
-    <section id="work" className="py-10 md:py-12 relative overflow-hidden border-t border-[var(--site-border)] transition-colors duration-300" style={{ backgroundColor: 'var(--site-bg)' }}>
+    <section id="work" className="py-16 md:py-24 relative overflow-hidden border-t border-[var(--site-border)] transition-colors duration-300" style={{ backgroundColor: 'var(--site-bg)' }}>
 
       <div className="max-w-[1400px] mx-auto px-5 md:px-12 relative z-10">
 
@@ -359,7 +359,7 @@ const WorksSection = () => {
           <div className="flex flex-col items-start text-left">
             <SectionEyebrow>03 / Works</SectionEyebrow>
             
-            <motion.h2 initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeInUp} className="text-[52px] sm:text-[72px] md:text-[90px] lg:text-[100px] font-bold mb-8 tracking-[-0.05em] leading-[0.9] max-w-[1000px]" style={{ color: 'var(--site-fg)' }}>
+            <motion.h2 initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeInUp} className="text-[48px] sm:text-[64px] md:text-[80px] lg:text-[96px] font-bold mb-8 tracking-[-0.04em] leading-[0.9] max-w-[1000px]" style={{ color: 'var(--site-fg)' }}>
               Where ideas<br/>come alive.
             </motion.h2>
           </div>
@@ -403,7 +403,7 @@ const WorksSection = () => {
 
         {/* View All CTA */}
         <hr className="border-[var(--site-border)]" />
-        <div className="py-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+        <div className="pt-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
           <p className="text-[16px] font-normal max-w-[460px]" style={{ color: 'var(--site-muted)' }}>
             Over 120 films, campaigns and AI experiments delivered for brands across 14 markets.
           </p>
@@ -490,7 +490,7 @@ const WhySection = () => {
   ];
 
   return (
-    <section id="services" className="pt-10 pb-10 md:pt-12 md:pb-12 relative overflow-hidden transition-colors duration-300" style={{ backgroundColor: 'var(--site-bg)' }}>
+    <section id="services" className="py-16 md:py-24 relative overflow-hidden transition-colors duration-300" style={{ backgroundColor: 'var(--site-bg)' }}>
       <div className="max-w-[1400px] mx-auto px-5 md:px-12 relative z-10">
 
         {/* Top Split Area */}
@@ -499,8 +499,8 @@ const WhySection = () => {
             <SectionEyebrow>04 / Why ma.ai</SectionEyebrow>
 
             <motion.div variants={fadeInUp} className="flex items-baseline gap-4 mb-6">
-              <h2 className="text-[48px] sm:text-[64px] md:text-[88px] font-bold tracking-[-0.06em] leading-[0.9]" style={{ color: 'var(--site-fg)' }}>Why</h2>
-              <h2 className="text-[48px] sm:text-[64px] md:text-[88px] font-bold tracking-[-0.06em] leading-[0.9] pr-4" style={{ color: 'var(--site-fg)' }}>ma.ai?</h2>
+              <h2 className="text-[48px] sm:text-[64px] md:text-[80px] lg:text-[96px] font-bold tracking-[-0.04em] leading-[0.9]" style={{ color: 'var(--site-fg)' }}>Why</h2>
+              <h2 className="text-[48px] sm:text-[64px] md:text-[80px] lg:text-[96px] font-bold tracking-[-0.04em] leading-[0.9] pr-4" style={{ color: 'var(--site-fg)' }}>ma.ai?</h2>
             </motion.div>
 
             <motion.p variants={fadeInUp} className="text-[18px] sm:text-[20px] font-normal leading-[1.5] max-w-[500px]" style={{ color: 'var(--site-muted)' }}>
@@ -523,7 +523,7 @@ const WhySection = () => {
               className="relative z-10 w-[420px]"
             >
               <div className="absolute inset-[15%] bg-[#6D28D9]/40 blur-[80px] rounded-full"></div>
-              <img src={whyCube} alt="ma.ai intelligence core" loading="lazy" className="relative w-full h-auto" />
+              <img src={footerLogoImg} alt="ma.ai intelligence core" loading="lazy" className="relative w-[120px] md:w-[160px] h-auto mx-auto mix-blend-multiply dark:mix-blend-normal dark:invert" />
 
             </motion.div>
 
@@ -611,7 +611,7 @@ const TeamSection = () => {
   ];
 
   return (
-    <section className="py-10 md:py-12 relative overflow-hidden border-t border-[var(--site-border)] transition-colors duration-300" style={{ backgroundColor: 'var(--site-bg)' }}>
+    <section className="py-16 md:py-24 relative overflow-hidden border-t border-[var(--site-border)] transition-colors duration-300" style={{ backgroundColor: 'var(--site-bg)' }}>
 
       <div className="absolute right-[-45%] sm:right-[-10%] top-[2%] sm:top-[-8%] w-[1100px] max-w-[160%] sm:max-w-[85%] pointer-events-none select-none z-0">
         <img src={theme === 'dark' ? teamOrbit : teamOrbitWhite} alt="" aria-hidden="true" loading="lazy" className="w-full h-auto opacity-40 sm:opacity-80" />
@@ -623,8 +623,8 @@ const TeamSection = () => {
       <div className="max-w-[1400px] mx-auto px-5 md:px-12 relative z-10">
         <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeInUp} className="mb-10 md:mb-14">
           <SectionEyebrow>05 / The team</SectionEyebrow>
-          <h2 className="text-[48px] sm:text-[64px] md:text-[80px] font-bold tracking-[-0.06em] leading-[0.9]" style={{ color: 'var(--site-fg)' }}>The minds</h2>
-          <h2 className="text-[48px] sm:text-[64px] md:text-[80px] font-bold mb-8 tracking-[-0.06em] leading-[0.9]" style={{ color: 'var(--site-fg)' }}>behind ma.ai</h2>
+          <h2 className="text-[48px] sm:text-[64px] md:text-[80px] lg:text-[96px] font-bold tracking-[-0.04em] leading-[0.9]" style={{ color: 'var(--site-fg)' }}>The minds</h2>
+          <h2 className="text-[48px] sm:text-[64px] md:text-[80px] lg:text-[96px] font-bold mb-8 tracking-[-0.04em] leading-[0.9]" style={{ color: 'var(--site-fg)' }}>behind ma.ai</h2>
           <div className="h-[2px] w-20 bg-[#CCFF00]/40 mb-6"></div>
           <p className="text-[18px] max-w-[450px] font-normal leading-[1.5]" style={{ color: 'var(--site-muted)' }}>
             A team of strategists, creators and engineers building AI with purpose.

@@ -222,7 +222,7 @@ export const ServicesSection = () => {
   return (
     <section
       id="services"
-      className="relative overflow-hidden py-24 md:py-40"
+      className="relative overflow-hidden py-16 md:py-24"
       style={{
         backgroundColor: 'var(--services-bg)',
         borderTopWidth: '1px',
@@ -266,7 +266,7 @@ export const ServicesSection = () => {
               whileInView="visible"
               viewport={{ once: true }}
               variants={fadeInUp}
-              className="max-w-[900px] text-[44px] font-bold leading-[0.9] tracking-[-0.05em] sm:text-[60px] md:text-[76px] lg:text-[88px]"
+              className="max-w-[900px] text-[48px] sm:text-[64px] md:text-[80px] lg:text-[96px] font-bold leading-[0.9] tracking-[-0.04em]"
               style={{ color: 'var(--services-text)' }}
             >
               Built around
