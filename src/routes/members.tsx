@@ -6,7 +6,14 @@ import team1 from '@/assets/team-1.jpg';
 import team2 from '@/assets/team-2.jpg';
 import team3 from '@/assets/team-3.jpg';
 import teamVinay from '@/assets/1ebc6027-b395-4200-8c9d-b996c087f377.JPG.jpeg';
-import teamSouvik from '@/assets/ChatGPT Image Sep 2, 2026, 04_39_27 PM.png';
+import teamSouvik from '@/assets/Souvik seal - ceo.jpeg';
+
+// AI Creators
+import imgAdithya from '@/assets/ai_creators/Adithya Krishna - ai creator.jpeg';
+import imgAjith from '@/assets/ai_creators/Ajith ( ai creator ).jpeg';
+import imgImran from '@/assets/ai_creators/SYED IMRAN ai creator.jpeg';
+import imgUnknown from '@/assets/ai_creators/WhatsApp Image 2026-09-10 at 00.15.49.jpeg';
+import imgAyush from '@/assets/ai_creators/ayush - ai creator.jpeg';
 
 export const Route = createFileRoute('/members')({
   head: () => ({
@@ -44,12 +51,22 @@ const majorFigures = [
   {
     name: 'Souvik Seal',
     role: 'Co-Founder & CEO',
-    bio: 'The brain of the operation, in the most literal sense. Souvik lives life on Sop’s and runs on spreadsheets, and cold hard data — a walking encyclopedia who somehow makes numbers sound like a personality trait.',
+    bio: 'The brain of the operation, in the most literal sense. Souvik lives life on Sop\'s and runs on spreadsheets, and cold hard data — a walking encyclopedia who somehow makes numbers sound like a personality trait.',
     ig: 'souvik_seal',
     image: teamSouvik,
     imagePosition: 'object-center'
   }
 ];
+
+const gridMembers: { name: string; role: string; image: string; imagePosition?: string }[] = [
+  { name: 'Adithya Krishna', role: 'AI Creator', image: imgAdithya },
+  { name: 'Ajith', role: 'AI Creator', image: imgAjith },
+  { name: 'Syed Imran', role: 'AI Creator', image: imgImran, imagePosition: 'object-center' },
+  { name: 'Ayush', role: 'AI Creator', image: imgAyush },
+  { name: '', role: '', image: imgUnknown },
+];
+
+const TOTAL_GRID_SLOTS = 20;
 
 function MembersPage() {
   return (
@@ -76,7 +93,7 @@ function MembersPage() {
               <div className="absolute bottom-0 left-0 w-full h-[150px] bg-gradient-to-t from-[#7C3AED]/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10 pointer-events-none"></div>
 
               <div className="h-[320px] sm:h-[380px] overflow-hidden relative bg-[#0B0B13]">
-                <img src={member.image} alt={member.name} className={`w-full h-full object-cover ${member.imagePosition || 'object-top'} grayscale opacity-60 group-hover:opacity-90 group-hover:grayscale-[20%] group-hover:scale-105 transition-all duration-700`} />
+                <img loading="lazy" decoding="async" src={member.image} alt={member.name} className={`w-full h-full object-cover ${member.imagePosition || 'object-top'} grayscale opacity-60 group-hover:opacity-90 group-hover:grayscale-[20%] group-hover:scale-105 transition-[transform,opacity,filter] duration-700 will-change-transform`} />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#0B0B13] via-[#0B0B13]/70 to-transparent z-10"></div>
               </div>
 
@@ -96,17 +113,45 @@ function MembersPage() {
           ))}
         </div>
 
-        {/* 20 Empty Grid Members section */}
+        {/* Members Grid section */}
         <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
           <h2 className="text-[32px] md:text-[48px] font-bold text-[var(--site-fg)] mb-12 tracking-[-0.04em]">Members</h2>
           
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 md:gap-6">
-            {Array.from({ length: 20 }).map((_, i) => (
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6 lg:gap-8">
+            {/* Filled member cards */}
+            {gridMembers.map((member, i) => (
+              <motion.div
+                key={`member-${i}`}
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.08, duration: 0.5 }}
+                className="aspect-square bg-[#0B0B13] border border-[var(--site-border)] rounded-2xl relative overflow-hidden group hover:border-[#CCFF00] transition-all duration-300"
+              >
+                <img
+                  loading="lazy"
+                  decoding="async"
+                  src={member.image}
+                  alt={member.name || 'Team member'}
+                  className={`w-full h-full object-cover ${member.imagePosition || 'object-top'} grayscale opacity-70 group-hover:opacity-100 group-hover:grayscale-0 group-hover:scale-110 transition-[transform,opacity,filter] duration-500 will-change-transform`}
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent z-10" />
+                <div className="absolute bottom-0 left-0 right-0 p-3 md:p-4 z-20">
+                  <h4 className="text-white font-semibold text-sm md:text-base truncate">{member.name || '—'}</h4>
+                  {member.role && (
+                    <p className="text-[#CCFF00] text-[10px] md:text-xs font-medium tracking-wider uppercase mt-0.5">{member.role}</p>
+                  )}
+                </div>
+              </motion.div>
+            ))}
+
+            {/* Remaining empty slots */}
+            {Array.from({ length: TOTAL_GRID_SLOTS - gridMembers.length }).map((_, i) => (
               <div 
-                key={i} 
+                key={`empty-${i}`} 
                 className="aspect-square bg-black/5 border border-[var(--site-border)] rounded-2xl flex items-center justify-center relative overflow-hidden group hover:border-[#CCFF00] transition-colors"
               >
-                <span className="text-black/20 font-bold text-xl group-hover:text-[#CCFF00]/50 transition-colors">#{i + 1}</span>
+                <span className="text-black/20 font-bold text-xl group-hover:text-[#CCFF00]/50 transition-colors">#{gridMembers.length + i + 1}</span>
               </div>
             ))}
           </div>

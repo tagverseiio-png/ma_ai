@@ -5,8 +5,8 @@ import { SiteNav, SiteFooter, fontStyles, fadeInUp, SectionEyebrow } from '@/com
 interface PageShellProps {
   index: string;
   eyebrow: string;
-  title: string;
-  accent: string;
+  title: ReactNode;
+  accent: ReactNode;
   intro: string;
   children: ReactNode;
 }
@@ -27,7 +27,7 @@ export const PageShell = ({ index, eyebrow, title, accent, intro, children }: Pa
                   <SectionEyebrow>{index} / {eyebrow}</SectionEyebrow>
                 </div>
                 <h1 className="text-[34px] sm:text-[52px] md:text-[84px] font-bold leading-[1.03] tracking-[-0.02em] max-w-[900px]">
-                  {title}{' '}
+                  {title}<br />
                   <span style={{ color: 'var(--site-fg)' }}>{accent}</span>
                 </h1>
                 <p className="text-[18px] md:text-[20px] font-light leading-[1.6] max-w-[620px] mt-8" style={{ color: 'var(--site-muted)' }}>{intro}</p>

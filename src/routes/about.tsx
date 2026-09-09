@@ -2,7 +2,7 @@ import { createFileRoute, Link } from '@tanstack/react-router';
 import { motion } from 'framer-motion';
 import { ArrowRight, Users, Target, Globe, ShieldCheck } from 'lucide-react';
 import { PageShell, Section } from '@/components/site/PageShell';
-import team1 from '@/assets/team-1.jpg';
+import team1 from '@/assets/Souvik seal - ceo.jpeg';
 import team2 from '@/assets/team-2.jpg';
 import team3 from '@/assets/team-3.jpg';
 import storySphere from '@/assets/story-sphere.png';
@@ -39,24 +39,26 @@ function AboutPage() {
     <PageShell
       index="03"
       eyebrow="About"
-      title="From ma to maa —"
-      accent="space, care, presence."
-      intro="ma.ai was built on a simple belief: intelligent systems should give people room, and be present exactly when needed."
+      title="About"
+      accent="us"
+      intro="Anyone can use AI. We make it exceptional."
     >
       <Section>
         <div className="grid lg:grid-cols-2 gap-16 items-center">
           <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.7 }}>
-            <h2 className="text-[28px] sm:text-[40px] md:text-[52px] font-bold leading-[1.1] mb-6">The ma.ai story</h2>
+            <h2 className="text-[28px] sm:text-[40px] md:text-[52px] font-bold leading-[1.1] mb-6">About us</h2>
             <p className="text-[var(--site-muted)] font-light leading-[1.7] text-[17px] mb-6">
-              We started as a small group of strategists and engineers frustrated by AI projects that demoed well and shipped badly.
-              So we built a studio around the missing half: adoption, craft and governance.
+              Anyone can use AI. We make it exceptional.
+            </p>
+            <p className="text-[var(--site-muted)] font-light leading-[1.7] text-[17px] mb-6">
+              At MA AI Creative, we blend AI with creativity, storytelling, strategy, and precision to create original content that stands out.
+            </p>
+            <p className="text-[var(--site-muted)] font-light leading-[1.7] text-[17px] mb-6">
+              Fast. Fresh. Built to make an impact.
             </p>
             <p className="text-[var(--site-muted)] font-light leading-[1.7] text-[17px] mb-10">
-              Today we partner with ambitious brands across five continents — designing, building and delivering AI experiences that hold up in production.
+              That’s what makes MA AI Creative one of India’s fastest Growing AI creative studios.
             </p>
-            <Link to="/careers" className="inline-flex items-center gap-3 px-7 py-3.5 rounded-full border border-[var(--site-border)] hover:bg-[var(--site-surface)] hover:text-black transition-all font-semibold text-[15px]">
-              Join the team <ArrowRight size={18} />
-            </Link>
           </motion.div>
           <motion.img
             src={storySphere}

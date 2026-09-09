@@ -75,150 +75,77 @@ const services: Service[] = [
   },
 ];
 
-interface RowProps {
-  service: Service;
-  index: number;
-  isOpen: boolean;
-  onToggle: () => void;
-  reduceMotion: boolean;
-}
-
-const ServiceRow = ({ service, index, isOpen, onToggle, reduceMotion }: RowProps) => {
-  const panelId = `service-panel-${service.id}`;
-
+const ServiceCard = ({ service, index }: { service: Service, index: number }) => {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 24 }}
+      initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-60px" }}
-      transition={{ delay: index * 0.05, duration: 0.6, ease: EASE }}
-      style={{ borderBottomColor: 'var(--services-border)' }}
-      className="border-b"
+      viewport={{ once: true }}
+      transition={{ delay: index * 0.1, duration: 0.6, ease: EASE }}
+      className="glass-card group relative flex flex-col justify-between overflow-hidden rounded-[24px] border p-6 sm:p-8 transition-all duration-500 hover:border-[#CCFF00] hover:shadow-2xl"
+      style={{
+        borderColor: 'var(--services-border)',
+        backgroundColor: 'var(--services-bg)',
+      }}
     >
-      <button
-        type="button"
-        onClick={onToggle}
-        aria-expanded={isOpen}
-        aria-controls={panelId}
-        className="group relative grid w-full grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-x-4 gap-y-3 py-7 text-left focus-visible:outline-none md:grid-cols-[56px_minmax(0,0.85fr)_minmax(0,1fr)_auto] md:gap-x-10 md:gap-y-0 md:py-9"
-      >
-        {/* Hover / open wash — bleeds into the container gutter, clipped by the section */}
-        <span
-          aria-hidden="true"
-          className={`pointer-events-none absolute inset-y-0 -inset-x-5 -z-10 bg-gradient-to-r to-transparent transition-opacity duration-500 md:-inset-x-8 ${
-            isOpen ? "opacity-100" : "opacity-0 group-hover:opacity-100"
-          }`}
-          style={{
-            backgroundImage: `linear-gradient(to right, var(--services-wash-from), var(--services-wash-via), transparent)`,
-          }}
-        />
-        {/* Accent bar revealed on hover / open */}
-        <span
-          aria-hidden="true"
-          className={`pointer-events-none absolute left-[-20px] top-1/2 w-[2px] -translate-y-1/2 bg-[#CCFF00] transition-all duration-500 md:left-[-32px] ${
-            isOpen ? "h-[55%]" : "h-0 group-hover:h-[55%]"
-          }`}
-        />
-        {/* Focus ring lives on a child so it traces the full row, gutter included */}
-        <span
-          aria-hidden="true"
-          className={`pointer-events-none absolute inset-y-0 -inset-x-3 -z-10 rounded-[14px] ring-1 ring-inset ring-[#CCFF00]/70 opacity-0 group-focus-visible:opacity-100`}
-        />
+      {/* Background glow on hover */}
+      <span
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 -z-10 bg-gradient-to-br from-[#CCFF00]/5 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+      />
 
-        <span
-          className={`col-start-1 row-start-1 font-bold tabular-nums tracking-[0.2em] text-[12px] transition-colors duration-300 md:text-[13px] ${
-            isOpen ? `text-[#CCFF00]` : `group-hover:text-[#CCFF00]`
-          }`}
-          style={!isOpen ? { color: 'var(--services-id-dim)' } : undefined}
-        >
-          {service.id}
-        </span>
+      <div>
+        <div className="mb-6 flex items-center justify-between">
+          <span
+            className="font-bold tabular-nums tracking-[0.2em] text-[14px] transition-colors duration-300 group-hover:text-[#CCFF00]"
+            style={{ color: 'var(--services-id-dim)' }}
+          >
+            {service.id}
+          </span>
+          <Link
+            to="/contact"
+            className="flex h-10 w-10 items-center justify-center rounded-full border transition-all duration-500 group-hover:border-[#CCFF00] group-hover:bg-[#CCFF00] group-hover:text-[#111111]"
+            style={{ borderColor: 'var(--services-border)', color: 'var(--services-text-muted)' }}
+          >
+            <ArrowRight size={16} className="-rotate-45 transition-transform duration-500 group-hover:rotate-0" />
+          </Link>
+        </div>
 
         <h3
-          className="col-start-2 row-start-1 text-[24px] font-bold leading-[1.08] tracking-[-0.03em] transition-transform duration-500 group-hover:translate-x-1 sm:text-[30px] md:text-[34px] lg:text-[38px]"
+          className="mb-4 text-[24px] font-bold leading-[1.1] tracking-[-0.03em] transition-colors duration-300 sm:text-[28px]"
           style={{ color: 'var(--services-text)' }}
         >
           {service.name}
         </h3>
 
         <p
-          className="col-start-2 row-start-2 max-w-[520px] text-[14px] font-normal leading-[1.6] transition-colors duration-300 md:col-start-3 md:row-start-1 md:text-[15px]"
+          className="mb-8 text-[16px] font-normal leading-[1.6] sm:text-[17px]"
           style={{ color: 'var(--services-text-muted)' }}
         >
           {service.desc}
         </p>
+      </div>
 
-        <span
-          aria-hidden="true"
-          className={`col-start-3 row-start-1 flex h-11 w-11 shrink-0 items-center justify-center rounded-full border transition-all duration-500 md:col-start-4 ${
-            isOpen
-              ? `border-[#CCFF00] bg-[#CCFF00] text-[#111111]`
-              : `group-hover:border-[#CCFF00] group-hover:bg-[#CCFF00] group-hover:text-[#111111]`
-          }`}
-          style={
-            !isOpen
-              ? { borderColor: 'var(--services-border)', color: 'var(--services-text-muted)' }
-              : undefined
-          }
-        >
-          <Plus
-            size={18}
-            className={`transition-transform duration-500 ${isOpen ? "rotate-45" : ""}`}
-          />
-        </span>
-      </button>
-
-      <AnimatePresence initial={false}>
-        {isOpen && (
-          <motion.div
-            id={panelId}
-            initial={reduceMotion ? { opacity: 0 } : { height: 0, opacity: 0 }}
-            animate={reduceMotion ? { opacity: 1 } : { height: "auto", opacity: 1 }}
-            exit={reduceMotion ? { opacity: 0 } : { height: 0, opacity: 0 }}
-            transition={{ duration: 0.45, ease: EASE }}
-            className="overflow-hidden"
+      <ul className="grid gap-3 border-t pt-6" style={{ borderColor: 'var(--services-border)' }}>
+        {service.detail.map((d) => (
+          <li
+            key={d}
+            className="flex items-start gap-3 text-[15px] leading-[1.5] sm:text-[16px]"
+            style={{ color: 'var(--services-text-secondary)' }}
           >
-            <div className="glass-card mb-8 rounded-[20px] p-6 md:mb-9 md:p-8">
-              <div className="grid gap-x-10 gap-y-7 md:grid-cols-[minmax(0,1fr)_auto] md:items-end">
-                <ul className="grid gap-3 sm:grid-cols-3 md:gap-6">
-                  {service.detail.map((d) => (
-                    <li
-                      key={d}
-                      className="flex items-start gap-3 text-[14px] leading-[1.5]"
-                      style={{ color: 'var(--services-text-secondary)' }}
-                    >
-                      <span
-                        aria-hidden="true"
-                        className={`mt-[7px] h-1.5 w-1.5 shrink-0 rounded-full bg-[#CCFF00]`}
-                      />
-                      {d}
-                    </li>
-                  ))}
-                </ul>
-                <Link
-                  to="/contact"
-                  className={`group/cta inline-flex w-fit shrink-0 items-center gap-3 rounded-full border px-6 py-3 text-[12px] font-bold uppercase tracking-[0.08em] transition-colors hover:border-[#CCFF00] hover:bg-[#CCFF00] hover:text-[#111111]`}
-                  style={{ borderColor: 'var(--services-border)', color: 'var(--services-text)' }}
-                >
-                  Discuss this{" "}
-                  <ArrowRight
-                    size={15}
-                    className="transition-transform group-hover/cta:translate-x-1"
-                  />
-                </Link>
-              </div>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+            <span
+              aria-hidden="true"
+              className="mt-[7px] h-1.5 w-1.5 shrink-0 rounded-full bg-[#CCFF00]"
+            />
+            {d}
+          </li>
+        ))}
+      </ul>
     </motion.div>
   );
 };
 
 export const ServicesSection = () => {
-  const [openId, setOpenId] = useState<string | null>(null);
-  const reduceMotion = useReducedMotion() ?? false;
-
   return (
     <section
       id="services"
@@ -289,15 +216,12 @@ export const ServicesSection = () => {
           </motion.p>
         </div>
 
-        <div style={{ borderTopWidth: '1px', borderTopStyle: 'solid', borderTopColor: 'var(--services-border)' }}>
+        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {services.map((service, i) => (
-            <ServiceRow
+            <ServiceCard
               key={service.id}
               service={service}
               index={i}
-              isOpen={openId === service.id}
-              onToggle={() => setOpenId((prev) => (prev === service.id ? null : service.id))}
-              reduceMotion={reduceMotion}
             />
           ))}
         </div>

@@ -25,8 +25,8 @@ function ContactPage() {
     <PageShell
       index="06"
       eyebrow="Contact"
-      title="You bring the idea."
-      accent="We bring it to life."
+      title={<>You bring the <span className="text-[#7C3AED]">Idea.</span></>}
+      accent={<>We bring it to <span className="text-[#7C3AED]">Life.</span></>}
       intro="Tell us what you are trying to build. We read every message and reply within two working days."
     >
       <Section>
@@ -67,9 +67,9 @@ function ContactPage() {
           </motion.form>
 
           <div className="space-y-4">
-            <ContactCard 
-              icon={Mail} 
-              label="Team Emails" 
+            <ContactCard
+              icon={Mail}
+              label="Team Emails"
               value={
                 <div className="flex flex-col gap-1 mt-1 text-[13.5px]">
                   <a href="mailto:meena.chabbria@maonline.ai" className="hover:text-[var(--site-muted)] transition-colors">meena.chabbria@maonline.ai</a>
@@ -78,7 +78,7 @@ function ContactPage() {
                   <a href="mailto:souvik.seal@maonline.ai" className="hover:text-[var(--site-muted)] transition-colors">souvik.seal@maonline.ai</a>
                   <a href="mailto:harsh.gulwani@maonline.ai" className="hover:text-[var(--site-muted)] transition-colors">harsh.gulwani@maonline.ai</a>
                 </div>
-              } 
+              }
             />
             <ContactCard icon={Phone} label="Phone" value="+91 99621 49035" href="tel:+919962149035" />
             <ContactCard icon={MapPin} label="Studio" value={'No. 45, Pulla Avenue,\nShenoy Nagar, Chennai,\nTamil Nadu, 600030'} />

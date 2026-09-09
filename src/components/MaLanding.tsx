@@ -25,7 +25,7 @@ import whyCube from '@/assets/why-cube.png';
 import teamOrbit from '@/assets/team-orbit.jpg';
 import teamOrbitWhite from '@/assets/team-orbit-white-theme.png';
 import teamVinay from '@/assets/1ebc6027-b395-4200-8c9d-b996c087f377.JPG.jpeg';
-import teamSouvik from '@/assets/ChatGPT Image Sep 2, 2026, 04_39_27 PM.png';
+import teamSouvik from '@/assets/Souvik seal - ceo.jpeg';
 import footerLogoImg from '@/assets/Ma_footer_logo_200x160.png';
 import ctaLogo3d from '@/assets/cta-logo3d.png';
 import showReelVideo from '@/assets/SHOW REEL HD .mp4';
@@ -38,6 +38,8 @@ import { useTheme } from '@/hooks/use-theme';
 const HeroSection = () => {
   const { scrollY } = useScroll();
   const [isMobile, setIsMobile] = useState(false);
+  const [videoReady, setVideoReady] = useState(false);
+  const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
     const handleResize = () => setIsMobile(window.innerWidth < 768);
@@ -46,31 +48,90 @@ const HeroSection = () => {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
+  // Ensure smooth playback: wait until video has enough data, then play
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    const handleCanPlay = () => {
+      // Set playback rate to 1 to ensure normal speed
+      video.playbackRate = 1;
+      video.play().then(() => {
+        setVideoReady(true);
+      }).catch(() => {
+        // Autoplay might be blocked, still show video
+        setVideoReady(true);
+      });
+    };
+
+    // If video is already ready (cached)
+    if (video.readyState >= 3) {
+      handleCanPlay();
+    } else {
+      video.addEventListener('canplaythrough', handleCanPlay);
+    }
+
+    return () => {
+      video.removeEventListener('canplaythrough', handleCanPlay);
+    };
+  }, []);
+
+  // Pause video when scrolled out of view for performance
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          video.play().catch(() => { });
+        } else {
+          video.pause();
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    observer.observe(video);
+    return () => observer.disconnect();
+  }, []);
+
   const contentOpacity = useTransform(scrollY, [0, 150], [1, 0]);
   const pointerEvents = useTransform(scrollY, (v) => (v > 50 ? 'none' : 'auto'));
 
   return (
     <section className="relative min-h-[100svh] bg-[#111111] flex flex-col overflow-hidden">
-      
-      {/* Background Video */}
-      <video 
-        autoPlay 
-        loop 
-        muted 
-        playsInline 
+
+      {/* Background Video — GPU-accelerated for smooth playback */}
+      <video
+        ref={videoRef}
+        autoPlay
+        loop
+        muted
+        playsInline
+        preload="auto"
+        disablePictureInPicture
         className="absolute inset-0 w-full h-full object-cover z-0"
-        style={{ objectPosition: 'center' }}
+        style={{
+          objectPosition: 'center',
+          willChange: 'transform',
+          transform: 'translateZ(0)',
+          backfaceVisibility: 'hidden',
+          WebkitBackfaceVisibility: 'hidden',
+          opacity: videoReady ? 1 : 0,
+          transition: 'opacity 0.6s ease-in-out',
+        }}
         suppressHydrationWarning
       >
         <source src={showReelVideo} type="video/mp4" suppressHydrationWarning />
       </video>
-      
+
       {/* Dark gradient overlay for text legibility */}
       <div className="absolute inset-0 bg-black/40 z-0 pointer-events-none"></div>
 
       <motion.div style={{ opacity: contentOpacity }} className="relative z-10 flex-grow flex flex-col justify-center px-6 md:px-16 lg:px-24 pt-24 md:pt-0">
         <div className="max-w-[700px]">
-          
+
           <h1 className="text-[36px] sm:text-[50px] md:text-[64px] font-medium text-white leading-[1.1] mb-6 drop-shadow-md tracking-tight">
             We build worlds<br />that move you.
           </h1>
@@ -78,7 +139,7 @@ const HeroSection = () => {
           <p className="text-white/90 text-[14px] md:text-[16px] leading-[1.6] max-w-[500px] mb-8 font-light drop-shadow-md">
             We partner with ambitious brands to create AI-powered solutions that drive impact, automate complexity, and shape the future.
           </p>
-          
+
           <Link to="/work" className="inline-flex px-8 py-3.5 bg-white text-black font-semibold text-[12px] tracking-[0.1em] uppercase hover:bg-[#CCFF00] hover:text-black transition-colors duration-300">
             Explore our work
           </Link>
@@ -105,7 +166,7 @@ const HeroSection = () => {
           Instagram
         </a>
       </motion.div>
-      
+
     </section>
   );
 };
@@ -115,7 +176,7 @@ const StorySection = () => {
     <section id="about" className="py-16 md:py-24 relative overflow-hidden border-t border-[var(--site-border)] transition-colors duration-300" style={{ backgroundColor: 'var(--site-bg)' }}>
 
       <div className="max-w-[1400px] mx-auto px-5 md:px-12 relative z-10">
-        
+
         {/* Top label */}
         <div className="flex flex-col items-start mb-6 md:mb-8 relative z-10 text-left">
           <SectionEyebrow>02 / The ma.ai story</SectionEyebrow>
@@ -123,83 +184,115 @@ const StorySection = () => {
 
         <div className="grid lg:grid-cols-2 gap-10 lg:gap-12 items-center">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={staggerContainer} className="relative z-20">
-            
-            <motion.h2 variants={fadeInUp} className="text-[38px] sm:text-[64px] md:text-[80px] lg:text-[96px] font-bold tracking-[-0.04em] leading-[0.9] mb-8 whitespace-normal lg:whitespace-nowrap" style={{ color: 'var(--site-fg)' }}>
-              From <span className="text-[#7C3AED]">ma</span> <span className="font-normal text-[0.6em]" style={{ color: 'var(--site-muted)' }}>(間)</span> to <span className="text-[#7C3AED]">maa</span> <span className="font-normal text-[0.6em]" style={{ color: 'var(--site-muted)' }}>(माँ)</span>
+
+            <motion.h2 variants={fadeInUp} className="text-[32px] sm:text-[44px] md:text-[52px] lg:text-[60px] font-bold tracking-[-0.04em] leading-[1.1] mb-8" style={{ color: 'var(--site-fg)' }}>
+              You bring the Idea.<br />We bring it to Life.
             </motion.h2>
 
-            <motion.div variants={fadeInUp} className="flex items-center gap-6 text-[11px] tracking-[0.25em] uppercase mb-16 font-bold" style={{ color: 'var(--site-fg)' }}>
-              <span>Space</span>
-              <span className="w-1.5 h-1.5 rounded-full bg-[#CCFF00]"></span>
-              <span>Care</span>
-              <span className="w-1.5 h-1.5 rounded-full bg-[#CCFF00]"></span>
-              <span>Presence</span>
-            </motion.div>
+            <motion.p variants={fadeInUp} className="text-[16px] sm:text-[18px] leading-[1.7] font-normal mb-8 max-w-[520px]" style={{ color: 'var(--site-muted)' }}>
+              At MA AI Creative, we blend AI with creativity, storytelling, strategy, and precision to create original content that stands out.
+            </motion.p>
 
-            <motion.div variants={fadeInUp} className="relative pl-5 sm:pl-8 border-l-[3px] border-[#CCFF00] mb-16">
-              <p className="text-[20px] sm:text-[26px] leading-[1.4] font-light" style={{ color: 'var(--site-fg)' }}>
-                AI that gives <span className="font-bold">room.</span><br />
-                <span className="font-bold">Present</span> when needed.
+            <motion.div variants={fadeInUp} className="relative pl-5 sm:pl-8 border-l-[3px] border-[#7C3AED] mb-10">
+              <p className="text-[20px] sm:text-[24px] leading-[1.4] font-semibold" style={{ color: 'var(--site-fg)' }}>
+                Fast. Fresh. Built to make an impact.
               </p>
             </motion.div>
 
-            <motion.div variants={fadeInUp} className="flex items-center gap-3 font-bold text-[13px] tracking-[0.05em] uppercase transition-colors duration-300" style={{ color: 'var(--site-fg)' }}>
-              <div className="w-4 h-4 rounded-full border-[3px] border-[#CCFF00] flex items-center justify-center">
-                <div className="w-1.5 h-1.5 bg-[#CCFF00] rounded-full"></div>
-              </div>
-              Quietly working in the background
-            </motion.div>
+            <motion.p variants={fadeInUp} className="text-[15px] sm:text-[16px] leading-[1.6] font-normal max-w-[480px] mb-8" style={{ color: 'var(--site-muted)' }}>
+              That's what makes MA AI Creative one of India's <span className="font-bold" style={{ color: 'var(--site-fg)' }}>fastest growing AI creative studios.</span>
+            </motion.p>
+
           </motion.div>
 
           {/* 3D Sphere - preserved */}
           <div className="relative h-[420px] sm:h-[560px] lg:h-[700px] flex items-center justify-center lg:justify-end lg:pr-10">
-
-            {/* Floating UI Tags - preserved */}
-            <motion.div animate={{ y: [-10, 10, -10] }} transition={{ repeat: Infinity, duration: 5, ease: "easeInOut" }} className="absolute top-[2%] left-0 z-30 scale-[0.8] origin-left sm:scale-100">
-              <div className="flex items-center gap-2 text-[16px] font-bold transition-colors duration-300 drop-shadow-sm" style={{ color: 'var(--site-fg)' }}>
-                <Activity size={24} className="text-[#CCFF00]" /> Understands context
-              </div>
-            </motion.div>
-
-            <motion.div animate={{ y: [10, -10, 10] }} transition={{ repeat: Infinity, duration: 6, ease: "easeInOut" }} className="hidden sm:block absolute top-[5%] right-[5%] z-30">
-              <div className="flex items-center gap-2 text-[16px] font-bold transition-colors duration-300 drop-shadow-sm" style={{ color: 'var(--site-fg)' }}>
-                <Sparkles size={24} className="text-[#CCFF00]" /> Adapts intelligently
-              </div>
-            </motion.div>
-
-            <motion.div animate={{ y: [-8, 8, -8] }} transition={{ repeat: Infinity, duration: 5.5, ease: "easeInOut" }} className="absolute bottom-[4%] left-0 z-30 scale-[0.8] origin-left sm:scale-100 sm:left-[20%]">
-              <div className="flex items-center gap-2 text-[16px] font-bold transition-colors duration-300 drop-shadow-sm" style={{ color: 'var(--site-fg)' }}>
-                <Users size={24} className="text-[#CCFF00]" /> Works with you, not over you
-              </div>
-            </motion.div>
 
             <motion.div
               animate={{ y: [-14, 14, -14] }}
               transition={{ repeat: Infinity, duration: 8, ease: "easeInOut" }}
               className="relative w-[300px] sm:w-[420px] lg:w-[520px] max-w-full"
             >
-              <div className="absolute inset-[12%] rounded-full bg-[#CCFF00]/20 blur-[90px]"></div>
+              <div className="absolute inset-[12%] rounded-full bg-[#7C3AED]/20 blur-[90px]"></div>
               <img src={storySphere} alt="ma.ai intelligence sphere" loading="lazy" className="relative w-full h-auto drop-shadow-[0_40px_80px_rgba(0,0,0,0.15)]" />
               <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
-                <img src={footerLogoImg} alt="MA Logo" className="w-[100px] sm:w-[140px] h-auto mix-blend-multiply" loading="lazy" />
+                <img src={footerLogoImg} alt="MA Logo" className="w-[100px] sm:w-[140px] h-auto drop-shadow-2xl" loading="lazy" />
               </div>
             </motion.div>
 
-            {/* Right side floating characters - preserved */}
-            <div className="hidden lg:flex absolute right-[-20px] top-[20%] flex flex-col gap-6 text-xl font-light items-center" style={{ color: 'var(--site-fg)' }}>
-              <span>間</span>
-              <span className="w-1.5 h-1.5 rounded-full bg-[#CCFF00]"></span>
-              <span className="w-1 h-1 rounded-full" style={{ backgroundColor: 'var(--site-muted)' }}></span>
-              <div className="w-6 h-6 rounded-full bg-[#CCFF00]/20 flex items-center justify-center border border-[#CCFF00]">
-                <div className="w-2 h-2 rounded-full bg-[#CCFF00]"></div>
-              </div>
-              <span className="w-1 h-1 rounded-full" style={{ backgroundColor: 'var(--site-muted)' }}></span>
-              <span className="w-1.5 h-1.5 rounded-full bg-[#CCFF00]"></span>
-              <span>माँ</span>
-            </div>
-
           </div>
         </div>
+      </div>
+    </section>
+  );
+};
+
+const placeholderBrands = [
+  'Brand One', 'Brand Two', 'Brand Three', 'Brand Four',
+  'Brand Five', 'Brand Six', 'Brand Seven', 'Brand Eight',
+  'Brand Nine', 'Brand Ten', 'Brand Eleven', 'Brand Twelve',
+];
+
+const BrandsSection = () => {
+  return (
+    <section id="brands" className="py-16 md:py-24 relative overflow-hidden border-t border-[var(--site-border)] transition-colors duration-300" style={{ backgroundColor: 'var(--site-bg)' }}>
+      <div className="max-w-[1400px] mx-auto px-5 md:px-12 relative z-10">
+
+        <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={staggerContainer} className="mb-12 md:mb-16">
+          <SectionEyebrow>02.5 / Partners</SectionEyebrow>
+
+          <motion.h2 variants={fadeInUp} className="text-[36px] sm:text-[48px] md:text-[64px] font-bold tracking-[-0.04em] leading-[0.9] mb-4" style={{ color: 'var(--site-fg)' }}>
+            Brands we've<br />worked with
+          </motion.h2>
+          <motion.p variants={fadeInUp} className="text-[16px] md:text-[18px] font-normal leading-[1.5] max-w-[450px]" style={{ color: 'var(--site-muted)' }}>
+            Trusted by ambitious brands across industries to deliver AI-powered creative that moves the needle.
+          </motion.p>
+        </motion.div>
+
+        {/* Scrolling marquee — Row 1 */}
+        <div className="relative overflow-hidden mb-6">
+          <div className="absolute left-0 top-0 bottom-0 w-24 z-10 pointer-events-none" style={{ background: 'linear-gradient(to right, var(--site-bg), transparent)' }} />
+          <div className="absolute right-0 top-0 bottom-0 w-24 z-10 pointer-events-none" style={{ background: 'linear-gradient(to left, var(--site-bg), transparent)' }} />
+          <motion.div
+            className="flex gap-6"
+            animate={{ x: ['0%', '-50%'] }}
+            transition={{ repeat: Infinity, duration: 30, ease: 'linear' }}
+          >
+            {[...placeholderBrands, ...placeholderBrands].map((brand, i) => (
+              <div
+                key={`row1-${i}`}
+                className="flex-shrink-0 h-[80px] px-10 rounded-[16px] border border-[var(--site-border)] flex items-center justify-center hover:border-[#7C3AED]/50 hover:bg-[#7C3AED]/5 transition-all duration-300 group"
+              >
+                <span className="text-[18px] sm:text-[20px] font-semibold tracking-[-0.01em] whitespace-nowrap transition-colors duration-300 group-hover:text-[#7C3AED]" style={{ color: 'var(--site-muted)' }}>
+                  {brand}
+                </span>
+              </div>
+            ))}
+          </motion.div>
+        </div>
+
+        {/* Scrolling marquee — Row 2 (reverse direction) */}
+        <div className="relative overflow-hidden">
+          <div className="absolute left-0 top-0 bottom-0 w-24 z-10 pointer-events-none" style={{ background: 'linear-gradient(to right, var(--site-bg), transparent)' }} />
+          <div className="absolute right-0 top-0 bottom-0 w-24 z-10 pointer-events-none" style={{ background: 'linear-gradient(to left, var(--site-bg), transparent)' }} />
+          <motion.div
+            className="flex gap-6"
+            animate={{ x: ['-50%', '0%'] }}
+            transition={{ repeat: Infinity, duration: 30, ease: 'linear' }}
+          >
+            {[...placeholderBrands.slice().reverse(), ...placeholderBrands.slice().reverse()].map((brand, i) => (
+              <div
+                key={`row2-${i}`}
+                className="flex-shrink-0 h-[80px] px-10 rounded-[16px] border border-[var(--site-border)] flex items-center justify-center hover:border-[#7C3AED]/50 hover:bg-[#7C3AED]/5 transition-all duration-300 group"
+              >
+                <span className="text-[18px] sm:text-[20px] font-semibold tracking-[-0.01em] whitespace-nowrap transition-colors duration-300 group-hover:text-[#7C3AED]" style={{ color: 'var(--site-muted)' }}>
+                  {brand}
+                </span>
+              </div>
+            ))}
+          </motion.div>
+        </div>
+
       </div>
     </section>
   );
@@ -257,8 +350,8 @@ function HorizontalVideoCard({ p, index, onPlayFullscreen }: { p: typeof worksDa
     setIsHovered(true);
     if (videoRef.current) {
       videoRef.current.currentTime = 0;
-      videoRef.current.play().catch(() => {});
-      
+      videoRef.current.play().catch(() => { });
+
       timerRef.current = setTimeout(() => {
         if (videoRef.current) {
           videoRef.current.pause();
@@ -298,7 +391,7 @@ function HorizontalVideoCard({ p, index, onPlayFullscreen }: { p: typeof worksDa
           loop={false}
           className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
         />
-        
+
         <div className={`absolute top-4 right-4 transition-opacity duration-300 z-10 ${isHovered ? 'opacity-100' : 'opacity-0'}`}>
           <button
             onClick={(e) => {
@@ -324,7 +417,7 @@ function HorizontalVideoCard({ p, index, onPlayFullscreen }: { p: typeof worksDa
         </p>
         <h3 className="text-[22px] md:text-[26px] font-bold text-black dark:text-white tracking-tight mb-3">{p.title}</h3>
         <p className="text-[14px] text-gray-500 mb-6 flex-grow leading-relaxed">{p.desc}</p>
-        
+
         <div className="flex items-center text-[12px] font-bold text-black dark:text-white tracking-widest uppercase mt-auto">
           EXPLORE SYSTEM <ArrowRight size={16} className="ml-2 group-hover:translate-x-1 transition-transform" />
         </div>
@@ -358,12 +451,12 @@ const WorksSection = () => {
         <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-6 mb-10 md:mb-14">
           <div className="flex flex-col items-start text-left">
             <SectionEyebrow>03 / Works</SectionEyebrow>
-            
+
             <motion.h2 initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeInUp} className="text-[48px] sm:text-[64px] md:text-[80px] lg:text-[96px] font-bold mb-8 tracking-[-0.04em] leading-[0.9] max-w-[1000px]" style={{ color: 'var(--site-fg)' }}>
-              Where ideas<br/>come alive.
+              Where ideas<br />come alive.
             </motion.h2>
           </div>
-          
+
           <motion.p initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeInUp} className="text-[16px] md:text-[18px] font-normal leading-[1.5] max-w-[350px] md:mt-20" style={{ color: 'var(--site-muted)' }}>
             Built for attention.<br />Designed for velocity.
           </motion.p>
@@ -511,11 +604,7 @@ const WhySection = () => {
           {/* Mockup matching 3D Glass Cube */}
           <motion.div initial={{ opacity: 0, scale: 0.9 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{ duration: 0.8 }} className="hidden lg:flex relative w-[500px] h-[450px] justify-center items-center">
 
-            <div className="absolute inset-0 flex items-center justify-center opacity-50">
-              <div className="w-full h-[1.5px] bg-gradient-to-r from-transparent via-[#CCFF00] to-transparent shadow-[0_0_10px_#CCFF00]"></div>
-              <div className="w-full h-[1px] bg-gradient-to-r from-transparent via-[#CCFF00] to-transparent absolute rotate-[15deg]"></div>
-              <div className="w-[80%] h-[1px] bg-gradient-to-r from-transparent via-[#CCFF00] to-transparent absolute -rotate-[15deg]"></div>
-            </div>
+
 
             <motion.div
               animate={{ y: [-10, 10, -10] }}
@@ -523,7 +612,7 @@ const WhySection = () => {
               className="relative z-10 w-[420px]"
             >
               <div className="absolute inset-[15%] bg-[#6D28D9]/40 blur-[80px] rounded-full"></div>
-              <img src={footerLogoImg} alt="ma.ai intelligence core" loading="lazy" className="relative w-[120px] md:w-[160px] h-auto mx-auto mix-blend-multiply dark:mix-blend-normal dark:invert" />
+              <img src={footerLogoImg} alt="ma.ai intelligence core" loading="lazy" className="relative w-[160px] md:w-[200px] h-auto mx-auto drop-shadow-2xl" />
 
             </motion.div>
 
@@ -576,7 +665,7 @@ const WhySection = () => {
 
 const TeamSection = () => {
   const { theme } = useTheme();
-  
+
   const team = [
     {
       name: 'Meena Chabbria',
@@ -715,6 +804,7 @@ export default function MaLanding() {
         <main>
           <HeroSection />
           <StorySection />
+          <BrandsSection />
           <WorksSection />
           <WhySection />
           <TeamSection />

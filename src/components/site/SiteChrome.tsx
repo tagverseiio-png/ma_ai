@@ -83,6 +83,7 @@ const navLinks = [
   { label: 'Home', to: '/' },
   { label: 'Services', to: '/#services' },
   { label: 'Work', to: '/#work' },
+  { label: 'Brands', to: '/#brands' },
   { label: 'About', to: '/#about' },
   { label: 'Insights', to: '/insights' },
   { label: 'Careers', to: '/careers' },
@@ -91,23 +92,30 @@ const navLinks = [
 
 const ThemeToggle = () => {
   const { theme, toggleTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   return (
     <button
       type="button"
       onClick={toggleTheme}
-      aria-label={`Switch to ${theme === 'light' ? 'dark' : 'light'} mode`}
+      aria-label={mounted ? `Switch to ${theme === 'light' ? 'dark' : 'light'} mode` : 'Toggle theme'}
       className="relative w-11 h-11 rounded-full border border-[var(--site-border)] flex items-center justify-center text-[var(--site-fg)] hover:bg-[#CCFF00] hover:text-[#111111] hover:border-[#CCFF00] transition-all duration-300 overflow-hidden"
     >
-      <motion.div
-        key={theme}
-        initial={{ y: theme === 'dark' ? -20 : 20, opacity: 0, rotate: -90 }}
-        animate={{ y: 0, opacity: 1, rotate: 0 }}
-        exit={{ y: theme === 'dark' ? 20 : -20, opacity: 0, rotate: 90 }}
-        transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-      >
-        {theme === 'light' ? <Moon size={18} /> : <Sun size={18} />}
-      </motion.div>
+      {mounted && (
+        <motion.div
+          key={theme}
+          initial={{ y: theme === 'dark' ? -20 : 20, opacity: 0, rotate: -90 }}
+          animate={{ y: 0, opacity: 1, rotate: 0 }}
+          exit={{ y: theme === 'dark' ? 20 : -20, opacity: 0, rotate: 90 }}
+          transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+        >
+          {theme === 'light' ? <Moon size={18} /> : <Sun size={18} />}
+        </motion.div>
+      )}
     </button>
   );
 };
@@ -293,7 +301,7 @@ export const SiteFooter = () => {
         </div>
 
         {/* Restored Columns Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-6 gap-x-6 md:gap-x-8 gap-y-10 md:gap-y-16 mb-16 md:mb-20">
+        <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-5 gap-x-6 md:gap-x-8 gap-y-10 md:gap-y-16 mb-16 md:mb-20">
 
           <div className="col-span-2 lg:col-span-2 lg:pr-12">
             <Link to="/" className="flex items-center gap-4 mb-6">
@@ -336,32 +344,6 @@ export const SiteFooter = () => {
             </ul>
           </div>
 
-          <div className="col-span-2 lg:col-span-1">
-            <div className="mb-10">
-              <h4 className="font-bold mb-6 md:mb-8 text-[12px] tracking-widest uppercase border-b-[2px] inline-block pb-2" style={{ color: 'var(--site-fg)', borderColor: 'var(--site-fg)' }}>Get in touch</h4>
-              <ul className="space-y-6 text-[14px]" style={{ color: 'var(--site-muted)' }}>
-                <li className="flex items-start gap-4">
-                  <div className="w-10 h-10 rounded-[10px] border flex items-center justify-center shrink-0 mt-1 shadow-sm transition-colors duration-300" style={{ backgroundColor: 'var(--site-surface)', borderColor: 'var(--site-border)', color: 'var(--site-fg)' }}><Mail size={16} /></div>
-                  <div className="flex flex-col gap-2 font-medium text-[12px] pt-1">
-                    <a href="mailto:meena.chabbria@maonline.ai" className="hover:opacity-80 transition-opacity">meena.chabbria@maonline.ai</a>
-                    <a href="mailto:prarthana.chabbria@maonline.ai" className="hover:opacity-80 transition-opacity">prarthana.chabbria@maonline.ai</a>
-                    <a href="mailto:vinay.sakhrani@maonline.ai" className="hover:opacity-80 transition-opacity">vinay.sakhrani@maonline.ai</a>
-                    <a href="mailto:souvik.seal@maonline.ai" className="hover:opacity-80 transition-opacity">souvik.seal@maonline.ai</a>
-                    <a href="mailto:harsh.gulwani@maonline.ai" className="hover:opacity-80 transition-opacity">harsh.gulwani@maonline.ai</a>
-                  </div>
-                </li>
-                <li className="flex items-center gap-4">
-                  <div className="w-10 h-10 rounded-[10px] border flex items-center justify-center shrink-0 shadow-sm transition-colors duration-300" style={{ backgroundColor: 'var(--site-surface)', borderColor: 'var(--site-border)', color: 'var(--site-fg)' }}><Phone size={16} /></div>
-                  <span className="font-medium text-[13px]">+91 99621 49035</span>
-                </li>
-                <li className="flex items-start gap-4">
-                  <div className="w-10 h-10 rounded-[10px] border flex items-center justify-center shrink-0 mt-1 shadow-sm transition-colors duration-300" style={{ backgroundColor: 'var(--site-surface)', borderColor: 'var(--site-border)', color: 'var(--site-fg)' }}><MapPin size={16} /></div>
-                  <span className="leading-[1.6] font-medium text-[13px]">No. 45, Pulla Avenue,<br />Shenoy Nagar, Chennai,<br />Tamil Nadu, 600030</span>
-                </li>
-              </ul>
-            </div>
-          </div>
-
         </div>
 
         {/* Restored Connect & Newsletter row */}
@@ -369,8 +351,8 @@ export const SiteFooter = () => {
           <div className="max-w-[300px] flex flex-col">
             <h4 className="font-bold mb-6 text-[12px] tracking-widest uppercase border-b-[2px] inline-block pb-2 self-start" style={{ color: 'var(--site-fg)', borderColor: 'var(--site-fg)' }}>Connect</h4>
             <div className="flex gap-4 mt-auto">
-              <a href="https://www.linkedin.com/" target="_blank" rel="noreferrer noopener" className="w-12 h-12 rounded-full border flex items-center justify-center hover:bg-[#CCFF00] hover:border-[#CCFF00] transition-colors" style={{ backgroundColor: 'var(--site-surface)', borderColor: 'var(--site-border)', color: 'var(--site-fg)' }}><Instagram size={20} /></a>
-              <a href="https://www.linkedin.com/" target="_blank" rel="noreferrer noopener" className="w-12 h-12 rounded-full border flex items-center justify-center hover:bg-[#CCFF00] hover:border-[#CCFF00] transition-colors" style={{ backgroundColor: 'var(--site-surface)', borderColor: 'var(--site-border)', color: 'var(--site-fg)' }}><Linkedin size={20} /></a>
+              <a href="https://www.instagram.com/ma.ai.creative" target="_blank" rel="noreferrer noopener" className="w-12 h-12 rounded-full border flex items-center justify-center hover:bg-[#CCFF00] hover:border-[#CCFF00] transition-colors" style={{ backgroundColor: 'var(--site-surface)', borderColor: 'var(--site-border)', color: 'var(--site-fg)' }}><Instagram size={20} /></a>
+              <a href="https://www.linkedin.com/company/ma-ai-in/home/" target="_blank" rel="noreferrer noopener" className="w-12 h-12 rounded-full border flex items-center justify-center hover:bg-[#CCFF00] hover:border-[#CCFF00] transition-colors" style={{ backgroundColor: 'var(--site-surface)', borderColor: 'var(--site-border)', color: 'var(--site-fg)' }}><Linkedin size={20} /></a>
               <a href="https://www.linkedin.com/" target="_blank" rel="noreferrer noopener" className="w-12 h-12 rounded-full border flex items-center justify-center hover:bg-[#CCFF00] hover:border-[#CCFF00] transition-colors font-bold text-[20px]" style={{ backgroundColor: 'var(--site-surface)', borderColor: 'var(--site-border)', color: 'var(--site-fg)' }}>X</a>
             </div>
           </div>
