@@ -50,7 +50,7 @@ const HeroSection = () => {
   const pointerEvents = useTransform(scrollY, (v) => (v > 50 ? 'none' : 'auto'));
 
   return (
-    <section className="relative min-h-screen bg-[#111111] flex flex-col overflow-hidden">
+    <section className="relative min-h-[100svh] bg-[#111111] flex flex-col overflow-hidden">
       
       {/* Background Video */}
       <video 
@@ -68,10 +68,10 @@ const HeroSection = () => {
       {/* Dark gradient overlay for text legibility */}
       <div className="absolute inset-0 bg-black/40 z-0 pointer-events-none"></div>
 
-      <motion.div style={{ opacity: contentOpacity }} className="relative z-10 flex-grow flex flex-col justify-center px-6 md:px-16 lg:px-24">
+      <motion.div style={{ opacity: contentOpacity }} className="relative z-10 flex-grow flex flex-col justify-center px-6 md:px-16 lg:px-24 pt-24 md:pt-0">
         <div className="max-w-[700px]">
           
-          <h1 className="text-[40px] sm:text-[50px] md:text-[64px] font-medium text-white leading-[1.1] mb-6 drop-shadow-md tracking-tight">
+          <h1 className="text-[36px] sm:text-[50px] md:text-[64px] font-medium text-white leading-[1.1] mb-6 drop-shadow-md tracking-tight">
             We build worlds<br />that move you.
           </h1>
 
@@ -124,7 +124,7 @@ const StorySection = () => {
         <div className="grid lg:grid-cols-2 gap-10 lg:gap-12 items-center">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={staggerContainer} className="relative z-20">
             
-            <motion.h2 variants={fadeInUp} className="text-[48px] sm:text-[64px] md:text-[80px] lg:text-[96px] font-bold tracking-[-0.04em] leading-[0.9] mb-8 whitespace-nowrap" style={{ color: 'var(--site-fg)' }}>
+            <motion.h2 variants={fadeInUp} className="text-[38px] sm:text-[64px] md:text-[80px] lg:text-[96px] font-bold tracking-[-0.04em] leading-[0.9] mb-8 whitespace-normal lg:whitespace-nowrap" style={{ color: 'var(--site-fg)' }}>
               From <span className="text-[#7C3AED]">ma</span> <span className="font-normal text-[0.6em]" style={{ color: 'var(--site-muted)' }}>(間)</span> to <span className="text-[#7C3AED]">maa</span> <span className="font-normal text-[0.6em]" style={{ color: 'var(--site-muted)' }}>(माँ)</span>
             </motion.h2>
 
