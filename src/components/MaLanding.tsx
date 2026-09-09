@@ -186,7 +186,7 @@ const StorySection = () => {
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={staggerContainer} className="relative z-20">
 
             <motion.h2 variants={fadeInUp} className="text-[32px] sm:text-[44px] md:text-[52px] lg:text-[60px] font-bold tracking-[-0.04em] leading-[1.1] mb-8" style={{ color: 'var(--site-fg)' }}>
-              You bring the Idea.<br />We bring it to Life.
+              Anyone can use AI.<br />We make it <span className="text-[#7C3AED]">Exceptional.</span>
             </motion.h2>
 
             <motion.p variants={fadeInUp} className="text-[16px] sm:text-[18px] leading-[1.7] font-normal mb-8 max-w-[520px]" style={{ color: 'var(--site-muted)' }}>
