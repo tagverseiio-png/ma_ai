@@ -19,8 +19,8 @@ export const PageShell = ({ index, eyebrow, title, accent, intro, children }: Pa
         <SiteNav />
         <main>
           <section className="relative pt-48 pb-24 overflow-hidden">
-            <div className="absolute top-[-30%] right-[-10%] w-[700px] h-[700px] bg-[#CCFF00]/20 blur-[160px] rounded-full pointer-events-none" />
-            <div className="absolute bottom-[-40%] left-[-15%] w-[600px] h-[600px] bg-[#CCFF00]/10 blur-[160px] rounded-full pointer-events-none" />
+            <div className="absolute top-[-30%] right-[-10%] w-[700px] h-[700px] bg-[#8B5CF6]/20 blur-[160px] rounded-full pointer-events-none" />
+            <div className="absolute bottom-[-40%] left-[-15%] w-[600px] h-[600px] bg-[#8B5CF6]/10 blur-[160px] rounded-full pointer-events-none" />
             <div className="max-w-[1400px] mx-auto px-5 md:px-12 relative z-10">
               <motion.div initial="hidden" animate="visible" variants={fadeInUp}>
                 <div className="-ml-3">

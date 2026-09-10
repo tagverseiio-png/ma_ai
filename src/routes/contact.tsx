@@ -52,12 +52,12 @@ function ContactPage() {
                 required
                 rows={5}
                 placeholder="A short brief — the problem, who it is for, and where you are today."
-                className="w-full rounded-2xl bg-[var(--site-surface)]/5 border border-[var(--site-border)] px-5 py-4 text-[15px] text-[var(--site-fg)] placeholder:text-[var(--site-muted)] focus:outline-none focus:border-[#CCFF00] transition-colors"
+                className="w-full rounded-2xl bg-[var(--site-surface)]/5 border border-[var(--site-border)] px-5 py-4 text-[15px] text-[var(--site-fg)] placeholder:text-[var(--site-muted)] focus:outline-none focus:border-[#8B5CF6] transition-colors"
               />
             </div>
             <button
               type="submit"
-              className="mt-8 inline-flex items-center gap-3 px-8 py-4 rounded-full bg-[#CCFF00] font-semibold text-[15px] hover:bg-[#CCFF00] hover:text-[var(--site-fg)] transition-colors shadow-[0_0_30px_rgba(79,70,229,0.35)]"
+              className="mt-8 inline-flex items-center gap-3 px-8 py-4 rounded-full bg-[#8B5CF6] font-semibold text-[15px] hover:bg-[#8B5CF6] hover:text-[var(--site-fg)] transition-colors shadow-[0_0_30px_rgba(79,70,229,0.35)]"
             >
               {sent ? (<>Message received <Check size={18} /></>) : (<>Send the brief <ArrowRight size={18} /></>)}
             </button>
@@ -102,7 +102,7 @@ function Field({ label, id, type = 'text', placeholder, required = true }: { lab
         type={type}
         required={required}
         placeholder={placeholder}
-        className="w-full rounded-2xl bg-[var(--site-surface)]/5 border border-[var(--site-border)] px-5 py-3.5 text-[15px] text-[var(--site-fg)] placeholder:text-[var(--site-muted)] focus:outline-none focus:border-[#CCFF00] transition-colors"
+        className="w-full rounded-2xl bg-[var(--site-surface)]/5 border border-[var(--site-border)] px-5 py-3.5 text-[15px] text-[var(--site-fg)] placeholder:text-[var(--site-muted)] focus:outline-none focus:border-[#8B5CF6] transition-colors"
       />
     </div>
   );

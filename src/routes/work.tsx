@@ -97,7 +97,7 @@ function VideoCard({ p, index, onPlayFullscreen }: { p: typeof projects[0], inde
       transition={{ delay: index * 0.08, duration: 0.6, ease: "easeOut" }}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
-      className="group relative rounded-[24px] overflow-hidden border border-[var(--site-border)] hover:border-[#CCFF00]/50 transition-colors cursor-pointer"
+      className="group relative rounded-[24px] overflow-hidden border border-[var(--site-border)] hover:border-[#8B5CF6]/50 transition-colors cursor-pointer"
       onClick={() => onPlayFullscreen(p.video)}
     >
       <div className="aspect-[4/5] overflow-hidden bg-[#05050A]">
@@ -120,7 +120,7 @@ function VideoCard({ p, index, onPlayFullscreen }: { p: typeof projects[0], inde
             e.stopPropagation();
             setIsMuted(!isMuted);
           }}
-          className="w-10 h-10 rounded-full bg-black/50 backdrop-blur-md flex items-center justify-center text-[#CCFF00] hover:bg-black/70 transition-colors"
+          className="w-10 h-10 rounded-full bg-black/50 backdrop-blur-md flex items-center justify-center text-[#8B5CF6] hover:bg-black/70 transition-colors"
         >
           {isMuted ? <VolumeX size={18} /> : <Volume2 size={18} />}
         </button>
@@ -184,7 +184,7 @@ function WorkPage() {
 
           <div className="rounded-[24px] border border-dashed border-[var(--site-border)] p-12 flex flex-col justify-center items-center gap-6 text-center bg-[var(--site-bg)]/50 mt-12">
             <h2 className="text-[32px] font-semibold leading-tight text-[var(--site-fg)]">Your story could be next.</h2>
-            <Link to="/contact" className="inline-flex items-center gap-3 px-8 py-4 rounded-full bg-[#111111] text-[#CCFF00] font-semibold text-[15px] hover:bg-[#CCFF00] hover:text-[var(--site-fg)] transition-colors">
+            <Link to="/contact" className="inline-flex items-center gap-3 px-8 py-4 rounded-full bg-[#111111] text-[#8B5CF6] font-semibold text-[15px] hover:bg-[#8B5CF6] hover:text-[var(--site-fg)] transition-colors">
               Brief us <ArrowRight size={18} />
             </Link>
           </div>

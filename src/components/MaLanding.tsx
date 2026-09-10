@@ -140,7 +140,7 @@ const HeroSection = () => {
             We partner with ambitious brands to create AI-powered solutions that drive impact, automate complexity, and shape the future.
           </p>
 
-          <Link to="/work" className="inline-flex px-8 py-3.5 bg-white text-black font-semibold text-[12px] tracking-[0.1em] uppercase hover:bg-[#CCFF00] hover:text-black transition-colors duration-300">
+          <Link to="/work" className="inline-flex px-8 py-3.5 bg-white text-black font-semibold text-[12px] tracking-[0.1em] uppercase hover:bg-[#8B5CF6] hover:text-black transition-colors duration-300">
             Explore our work
           </Link>
 
@@ -149,7 +149,7 @@ const HeroSection = () => {
 
       {/* Floating Right Button */}
       <motion.div style={{ opacity: contentOpacity, pointerEvents }} className="absolute right-6 md:right-16 top-1/2 -translate-y-1/2 z-20 hidden md:block">
-        <Link to="/services" className="px-6 py-3 rounded-[30px] bg-white text-black text-[12px] font-bold tracking-[0.08em] uppercase hover:bg-[#CCFF00] transition-colors shadow-lg">
+        <Link to="/services" className="px-6 py-3 rounded-[30px] bg-white text-black text-[12px] font-bold tracking-[0.08em] uppercase hover:bg-[#8B5CF6] transition-colors shadow-lg">
           What we do
         </Link>
       </motion.div>
@@ -398,7 +398,7 @@ function HorizontalVideoCard({ p, index, onPlayFullscreen }: { p: typeof worksDa
               e.stopPropagation();
               setIsMuted(!isMuted);
             }}
-            className="w-10 h-10 rounded-full bg-black/50 backdrop-blur-md flex items-center justify-center text-[#CCFF00] hover:bg-black/70 transition-colors"
+            className="w-10 h-10 rounded-full bg-black/50 backdrop-blur-md flex items-center justify-center text-[#8B5CF6] hover:bg-black/70 transition-colors"
           >
             {isMuted ? <VolumeX size={18} /> : <Volume2 size={18} />}
           </button>
@@ -406,7 +406,7 @@ function HorizontalVideoCard({ p, index, onPlayFullscreen }: { p: typeof worksDa
 
         <div className={`absolute top-4 right-4 transition-opacity duration-300 pointer-events-none ${!isHovered ? 'opacity-100' : 'opacity-0'}`}>
           <div className="w-10 h-10 rounded-full bg-black flex items-center justify-center">
-            <Play size={16} className="text-[#CCFF00] fill-[#CCFF00] ml-1" />
+            <Play size={16} className="text-[#8B5CF6] fill-[#8B5CF6] ml-1" />
           </div>
         </div>
       </div>
@@ -483,7 +483,7 @@ const WorksSection = () => {
                 key={cat.name}
                 aria-pressed={selected}
                 onClick={() => setCategory(cat.match)}
-                className={`group h-[42px] px-[13px] rounded-full border ${selected ? 'border-[#CCFF00] bg-[#CCFF00] text-[#111111]' : 'border-[var(--site-border)] text-[var(--site-fg)] bg-white dark:bg-transparent'} text-[11px] font-bold tracking-widest hover:bg-[#CCFF00] hover:border-[#CCFF00] hover:text-[#111111] transition-all duration-300 flex items-center uppercase overflow-hidden`}
+                className={`group h-[42px] px-[13px] rounded-full border ${selected ? 'border-[#8B5CF6] bg-[#8B5CF6] text-[#111111]' : 'border-[var(--site-border)] text-[var(--site-fg)] bg-white dark:bg-transparent'} text-[11px] font-bold tracking-widest hover:bg-[#8B5CF6] hover:border-[#8B5CF6] hover:text-[#111111] transition-all duration-300 flex items-center uppercase overflow-hidden`}
               >
                 <div className="shrink-0 flex items-center justify-center">{cat.icon}</div>
                 <span className={`transition-all duration-300 whitespace-nowrap overflow-hidden inline-block flex items-center ${selected ? 'max-w-[200px] opacity-100 ml-2' : 'max-w-[200px] opacity-100 ml-2 md:max-w-0 md:opacity-0 md:ml-0 group-hover:max-w-[200px] group-hover:opacity-100 group-hover:ml-2'}`}>
@@ -502,7 +502,7 @@ const WorksSection = () => {
           </p>
           <Link
             to="/work"
-            className="group px-8 py-3.5 rounded-[40px] border-[1.5px] border-[var(--site-fg)] bg-transparent text-[var(--site-fg)] font-bold hover:bg-[#111111] hover:text-[#CCFF00] hover:border-[#111111] transition-all inline-flex items-center gap-3 tracking-[0.08em] text-[13px] uppercase"
+            className="group px-8 py-3.5 rounded-[40px] border-[1.5px] border-[var(--site-fg)] bg-transparent text-[var(--site-fg)] font-bold hover:bg-[#111111] hover:text-[#8B5CF6] hover:border-[#111111] transition-all inline-flex items-center gap-3 tracking-[0.08em] text-[13px] uppercase"
           >
             Explore our works
             <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
@@ -557,14 +557,14 @@ const WhySection = () => {
       icon: <Users size={48} className="drop-shadow-[0_5px_10px_rgba(0,0,0,0.5)]" style={{ color: 'var(--site-fg)' }} />,
       title: 'Human-centred.',
       desc: 'Technology starts with people. Adoption is designed, not assumed.',
-      baseColor: 'from-[#3B82F6] to-[#CCFF00]'
+      baseColor: 'from-[#3B82F6] to-[#8B5CF6]'
     },
     {
       id: '02',
       icon: <Target size={48} className="drop-shadow-[0_5px_10px_rgba(0,0,0,0.5)]" style={{ color: 'var(--site-fg)' }} />,
       title: 'Outcome-first.',
       desc: 'We start with the end in mind and build what drives measurable impact.',
-      baseColor: 'from-[#CCFF00] to-[#CCFF00]'
+      baseColor: 'from-[#8B5CF6] to-[#8B5CF6]'
     },
     {
       id: '03',
@@ -578,7 +578,7 @@ const WhySection = () => {
       icon: <ShieldCheck size={48} className="drop-shadow-[0_5px_10px_rgba(0,0,0,0.5)]" style={{ color: 'var(--site-fg)' }} />,
       title: 'Responsibly delivered.',
       desc: 'Ethical by design. Secure by default. Governance built in.',
-      baseColor: 'from-[#CCFF00] to-[#CCFF00]'
+      baseColor: 'from-[#8B5CF6] to-[#8B5CF6]'
     }
   ];
 
@@ -714,7 +714,7 @@ const TeamSection = () => {
           <SectionEyebrow>05 / The team</SectionEyebrow>
           <h2 className="text-[48px] sm:text-[64px] md:text-[80px] lg:text-[96px] font-bold tracking-[-0.04em] leading-[0.9]" style={{ color: 'var(--site-fg)' }}>The minds</h2>
           <h2 className="text-[48px] sm:text-[64px] md:text-[80px] lg:text-[96px] font-bold mb-8 tracking-[-0.04em] leading-[0.9]" style={{ color: 'var(--site-fg)' }}>behind ma.ai</h2>
-          <div className="h-[2px] w-20 bg-[#CCFF00]/40 mb-6"></div>
+          <div className="h-[2px] w-20 bg-[#8B5CF6]/40 mb-6"></div>
           <p className="text-[18px] max-w-[450px] font-normal leading-[1.5]" style={{ color: 'var(--site-muted)' }}>
             A team of strategists, creators and engineers building AI with purpose.
           </p>
@@ -766,14 +766,14 @@ const TeamSection = () => {
           style={{ color: 'var(--site-fg)' }}
         >
           {/* subtle left glow */}
-          <div className="absolute left-0 top-0 w-[30%] h-full bg-gradient-to-r from-[#CCFF00]/5 to-transparent pointer-events-none"></div>
+          <div className="absolute left-0 top-0 w-[30%] h-full bg-gradient-to-r from-[#8B5CF6]/5 to-transparent pointer-events-none"></div>
 
           <div className="flex items-center gap-4 sm:gap-8 mb-6 md:mb-0 relative z-10">
             {/* The circular icon with dashed rings */}
             <div className="w-[72px] h-[72px] flex items-center justify-center relative">
               <div className="absolute inset-0 border border-[var(--site-border)] rounded-full border-dashed"></div>
               <div className="absolute inset-2 border border-[var(--site-border)] rounded-full"></div>
-              <div className="absolute inset-3 border border-[#CCFF00]/20 rounded-full flex items-center justify-center" style={{ backgroundColor: 'var(--site-bg)' }}>
+              <div className="absolute inset-3 border border-[#8B5CF6]/20 rounded-full flex items-center justify-center" style={{ backgroundColor: 'var(--site-bg)' }}>
                 <Users size={24} style={{ color: 'var(--site-fg)' }} />
               </div>
             </div>

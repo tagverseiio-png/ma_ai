@@ -44,7 +44,7 @@ function InsightsPage() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.07, duration: 0.6 }}
-              className="glass-card rounded-[24px] p-8 flex flex-col hover:border-[#CCFF00]/40 transition-colors group"
+              className="glass-card rounded-[24px] p-8 flex flex-col hover:border-[#8B5CF6]/40 transition-colors group"
             >
               <div className="flex items-center gap-3 text-[11px] uppercase tracking-[0.18em] text-gray-700 mb-6">
                 <span className="text-[var(--site-fg)]">{p.tag}</span>
@@ -66,7 +66,7 @@ function InsightsPage() {
             <h2 className="text-[26px] font-semibold mb-2">Want these in your inbox?</h2>
             <p className="text-[var(--site-muted)] font-light">One considered email a month. No noise.</p>
           </div>
-          <Link to="/contact" className="inline-flex items-center gap-3 px-7 py-3.5 rounded-full bg-[#CCFF00] font-semibold text-[15px] hover:bg-[#CCFF00] hover:text-[var(--site-fg)] transition-colors">
+          <Link to="/contact" className="inline-flex items-center gap-3 px-7 py-3.5 rounded-full bg-[#8B5CF6] font-semibold text-[15px] hover:bg-[#8B5CF6] hover:text-[var(--site-fg)] transition-colors">
             Subscribe <ArrowRight size={18} />
           </Link>
         </div>

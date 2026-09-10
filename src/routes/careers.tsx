@@ -50,7 +50,7 @@ function CareersPage() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.06 }}
-              className="group rounded-[20px] border border-[var(--site-border)] hover:border-[#CCFF00]/50 transition-colors p-6 md:p-8 flex flex-col md:flex-row md:items-center justify-between gap-6"
+              className="group rounded-[20px] border border-[var(--site-border)] hover:border-[#8B5CF6]/50 transition-colors p-6 md:p-8 flex flex-col md:flex-row md:items-center justify-between gap-6"
             >
               <div>
                 <h3 className="text-[22px] font-semibold mb-2">{r.title}</h3>

@@ -44,7 +44,7 @@ function ServicesPage() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.08, duration: 0.6 }}
-              className="glass-card rounded-[24px] p-8 hover:border-[#CCFF00]/40 transition-colors group"
+              className="glass-card rounded-[24px] p-8 hover:border-[#8B5CF6]/40 transition-colors group"
             >
               <div className="w-14 h-14 rounded-2xl text-[var(--site-fg)] flex items-center justify-center mb-8 shadow-[0_10px_30px_rgba(79,70,229,0.35)]">
                 <s.icon size={24} className="text-[var(--site-fg)]" />
@@ -54,7 +54,7 @@ function ServicesPage() {
               <ul className="space-y-2 text-[14px] text-[var(--site-muted)]">
                 {s.points.map((p) => (
                   <li key={p} className="flex items-center gap-3">
-                    <span className="w-1.5 h-1.5 rounded-full bg-[#CCFF00]" />
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#8B5CF6]" />
                     {p}
                   </li>
                 ))}

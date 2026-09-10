@@ -4,7 +4,7 @@ import { Link } from "@tanstack/react-router";
 import { ArrowRight, Plus } from "lucide-react";
 import { fadeInUp } from "@/components/site/SiteChrome";
 
-// Accent is the site-wide #CCFF00 used across the hero, story and works sections.
+// Accent is the site-wide #8B5CF6 used across the hero, story and works sections.
 // Tailwind resolves arbitrary colours at build time from the literal class string,
 // so the hex is written inline rather than interpolated from a constant.
 
@@ -82,7 +82,7 @@ const ServiceCard = ({ service, index }: { service: Service, index: number }) =>
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ delay: index * 0.1, duration: 0.6, ease: EASE }}
-      className="glass-card group relative flex flex-col justify-between overflow-hidden rounded-[24px] border p-6 sm:p-8 transition-all duration-500 hover:border-[#CCFF00] hover:shadow-2xl"
+      className="glass-card group relative flex flex-col justify-between overflow-hidden rounded-[24px] border p-6 sm:p-8 transition-all duration-500 hover:border-[#8B5CF6] hover:shadow-2xl"
       style={{
         borderColor: 'var(--services-border)',
         backgroundColor: 'var(--services-bg)',
@@ -91,20 +91,20 @@ const ServiceCard = ({ service, index }: { service: Service, index: number }) =>
       {/* Background glow on hover */}
       <span
         aria-hidden="true"
-        className="pointer-events-none absolute inset-0 -z-10 bg-gradient-to-br from-[#CCFF00]/5 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+        className="pointer-events-none absolute inset-0 -z-10 bg-gradient-to-br from-[#8B5CF6]/5 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100"
       />
 
       <div>
         <div className="mb-6 flex items-center justify-between">
           <span
-            className="font-bold tabular-nums tracking-[0.2em] text-[14px] transition-colors duration-300 group-hover:text-[#CCFF00]"
+            className="font-bold tabular-nums tracking-[0.2em] text-[14px] transition-colors duration-300 group-hover:text-[#8B5CF6]"
             style={{ color: 'var(--services-id-dim)' }}
           >
             {service.id}
           </span>
           <Link
             to="/contact"
-            className="flex h-10 w-10 items-center justify-center rounded-full border transition-all duration-500 group-hover:border-[#CCFF00] group-hover:bg-[#CCFF00] group-hover:text-[#111111]"
+            className="flex h-10 w-10 items-center justify-center rounded-full border transition-all duration-500 group-hover:border-[#8B5CF6] group-hover:bg-[#8B5CF6] group-hover:text-[#111111]"
             style={{ borderColor: 'var(--services-border)', color: 'var(--services-text-muted)' }}
           >
             <ArrowRight size={16} className="-rotate-45 transition-transform duration-500 group-hover:rotate-0" />
@@ -135,7 +135,7 @@ const ServiceCard = ({ service, index }: { service: Service, index: number }) =>
           >
             <span
               aria-hidden="true"
-              className="mt-[7px] h-1.5 w-1.5 shrink-0 rounded-full bg-[#CCFF00]"
+              className="mt-[7px] h-1.5 w-1.5 shrink-0 rounded-full bg-[#8B5CF6]"
             />
             {d}
           </li>
@@ -179,7 +179,7 @@ export const ServicesSection = () => {
               variants={fadeInUp}
               className="mb-10 flex items-center gap-3"
             >
-              <div aria-hidden="true" className="h-2.5 w-2.5 rounded-full bg-[#CCFF00]" />
+              <div aria-hidden="true" className="h-2.5 w-2.5 rounded-full bg-[#8B5CF6]" />
               <span
                 className="text-[12px] font-bold uppercase tracking-[0.1em] md:text-[13px]"
                 style={{ color: 'var(--services-text)' }}
@@ -236,7 +236,7 @@ export const ServicesSection = () => {
           </p>
           <Link
             to="/services"
-            className="group inline-flex items-center gap-3 rounded-[40px] border-[1.5px] px-8 py-3.5 text-[13px] font-bold uppercase tracking-[0.08em] transition-colors hover:border-[#CCFF00] hover:bg-[#CCFF00] hover:text-[#111111]"
+            className="group inline-flex items-center gap-3 rounded-[40px] border-[1.5px] px-8 py-3.5 text-[13px] font-bold uppercase tracking-[0.08em] transition-colors hover:border-[#8B5CF6] hover:bg-[#8B5CF6] hover:text-[#111111]"
             style={{ borderColor: 'var(--services-border)', color: 'var(--services-text)' }}
           >
             All capabilities

@@ -47,9 +47,9 @@ export const Logo = ({ className = "w-8 h-8", light = false }) => (
 export const SectionEyebrow = ({ children }: { children: React.ReactNode }) => (
   <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeInUp} className="flex items-center gap-4 mb-8 md:mb-10">
     <div className="relative flex items-center justify-center shrink-0 w-6 h-6">
-      <div className="absolute inset-0 border-[1.5px] border-[#CCFF00]/40 rounded-full animate-[spin_4s_linear_infinite] border-dashed"></div>
-      <div className="absolute w-3.5 h-3.5 bg-[#CCFF00]/30 rounded-full animate-pulse"></div>
-      <div className="w-2 h-2 rounded-full bg-[#CCFF00] relative z-10 shadow-[0_0_10px_#CCFF00]"></div>
+      <div className="absolute inset-0 border-[1.5px] border-[#8B5CF6]/40 rounded-full animate-[spin_4s_linear_infinite] border-dashed"></div>
+      <div className="absolute w-3.5 h-3.5 bg-[#8B5CF6]/30 rounded-full animate-pulse"></div>
+      <div className="w-2 h-2 rounded-full bg-[#8B5CF6] relative z-10 shadow-[0_0_10px_#8B5CF6]"></div>
     </div>
     <span className="text-[14px] md:text-[15px] tracking-[0.2em] md:tracking-[0.25em] uppercase font-bold text-[var(--site-fg)]">
       {children}
@@ -103,7 +103,7 @@ const ThemeToggle = () => {
       type="button"
       onClick={toggleTheme}
       aria-label={mounted ? `Switch to ${theme === 'light' ? 'dark' : 'light'} mode` : 'Toggle theme'}
-      className="relative w-11 h-11 rounded-full border border-[var(--site-border)] flex items-center justify-center text-[var(--site-fg)] hover:bg-[#CCFF00] hover:text-[#111111] hover:border-[#CCFF00] transition-all duration-300 overflow-hidden"
+      className="relative w-11 h-11 rounded-full border border-[var(--site-border)] flex items-center justify-center text-[var(--site-fg)] hover:bg-[#8B5CF6] hover:text-[#111111] hover:border-[#8B5CF6] transition-all duration-300 overflow-hidden"
     >
       {mounted && (
         <motion.div
@@ -160,7 +160,7 @@ export const SiteNav = () => {
             <ThemeToggle />
             <Link
               to="/contact"
-              className="ml-2 px-6 py-2.5 rounded-[40px] border-[1.5px] border-[var(--site-fg)] text-[var(--site-fg)] font-bold hover:bg-[#111111] hover:text-[#CCFF00] hover:border-[#111111] transition-all flex items-center gap-2"
+              className="ml-2 px-6 py-2.5 rounded-[40px] border-[1.5px] border-[var(--site-fg)] text-[var(--site-fg)] font-bold hover:bg-[#111111] hover:text-[#8B5CF6] hover:border-[#111111] transition-all flex items-center gap-2"
             >
               Let's talk <ArrowRight size={16} />
             </Link>
@@ -202,7 +202,7 @@ export const SiteNav = () => {
           <Link
             to="/contact"
             onClick={() => setOpen(false)}
-            className="mt-8 flex items-center justify-center gap-3 px-6 py-4 rounded-full bg-[#111111] text-[#CCFF00] text-[13px] tracking-[0.08em] uppercase font-semibold"
+            className="mt-8 flex items-center justify-center gap-3 px-6 py-4 rounded-full bg-[#111111] text-[#8B5CF6] text-[13px] tracking-[0.08em] uppercase font-semibold"
           >
             Let's talk <ArrowRight size={14} />
           </Link>
@@ -233,7 +233,7 @@ const NewsletterForm = () => {
         className="w-full border rounded-lg px-4 py-3 text-[14px] focus:outline-none shadow-sm transition-colors duration-300"
         style={{ backgroundColor: 'var(--site-input-bg)', borderColor: 'var(--site-input-border)', color: 'var(--site-fg)' }}
       />
-      <button type="submit" aria-label="Subscribe" className="absolute right-1 top-1 bottom-1 bg-[#111111] text-[#CCFF00] px-5 rounded-md hover:bg-[#CCFF00] hover:text-[#111111] transition-colors flex items-center justify-center shadow-md">
+      <button type="submit" aria-label="Subscribe" className="absolute right-1 top-1 bottom-1 bg-[#111111] text-[#8B5CF6] px-5 rounded-md hover:bg-[#8B5CF6] hover:text-[#111111] transition-colors flex items-center justify-center shadow-md">
         <ArrowRight size={18} />
       </button>
       {sent && (
@@ -286,7 +286,7 @@ export const SiteFooter = () => {
           </a>
 
           <Link to="/contact" className="group px-8 py-4 rounded-[40px] bg-[#111111] text-white hover:opacity-90 transition-opacity text-[13px] tracking-[0.08em] uppercase font-bold flex items-center justify-center gap-3">
-            MAKE IT MOVE <ArrowRight size={15} className="text-[#CCFF00] group-hover:translate-x-1 transition-transform" />
+            MAKE IT MOVE <ArrowRight size={15} className="text-[#8B5CF6] group-hover:translate-x-1 transition-transform" />
           </Link>
         </div>
 
@@ -351,9 +351,9 @@ export const SiteFooter = () => {
           <div className="max-w-[300px] flex flex-col">
             <h4 className="font-bold mb-6 text-[12px] tracking-widest uppercase border-b-[2px] inline-block pb-2 self-start" style={{ color: 'var(--site-fg)', borderColor: 'var(--site-fg)' }}>Connect</h4>
             <div className="flex gap-4 mt-auto">
-              <a href="https://www.instagram.com/ma.ai.creative" target="_blank" rel="noreferrer noopener" className="w-12 h-12 rounded-full border flex items-center justify-center hover:bg-[#CCFF00] hover:border-[#CCFF00] transition-colors" style={{ backgroundColor: 'var(--site-surface)', borderColor: 'var(--site-border)', color: 'var(--site-fg)' }}><Instagram size={20} /></a>
-              <a href="https://www.linkedin.com/company/ma-ai-in/home/" target="_blank" rel="noreferrer noopener" className="w-12 h-12 rounded-full border flex items-center justify-center hover:bg-[#CCFF00] hover:border-[#CCFF00] transition-colors" style={{ backgroundColor: 'var(--site-surface)', borderColor: 'var(--site-border)', color: 'var(--site-fg)' }}><Linkedin size={20} /></a>
-              <a href="https://www.linkedin.com/" target="_blank" rel="noreferrer noopener" className="w-12 h-12 rounded-full border flex items-center justify-center hover:bg-[#CCFF00] hover:border-[#CCFF00] transition-colors font-bold text-[20px]" style={{ backgroundColor: 'var(--site-surface)', borderColor: 'var(--site-border)', color: 'var(--site-fg)' }}>X</a>
+              <a href="https://www.instagram.com/ma.ai.creative" target="_blank" rel="noreferrer noopener" className="w-12 h-12 rounded-full border flex items-center justify-center hover:bg-[#8B5CF6] hover:border-[#8B5CF6] transition-colors" style={{ backgroundColor: 'var(--site-surface)', borderColor: 'var(--site-border)', color: 'var(--site-fg)' }}><Instagram size={20} /></a>
+              <a href="https://www.linkedin.com/company/ma-ai-in/home/" target="_blank" rel="noreferrer noopener" className="w-12 h-12 rounded-full border flex items-center justify-center hover:bg-[#8B5CF6] hover:border-[#8B5CF6] transition-colors" style={{ backgroundColor: 'var(--site-surface)', borderColor: 'var(--site-border)', color: 'var(--site-fg)' }}><Linkedin size={20} /></a>
+              <a href="https://www.linkedin.com/" target="_blank" rel="noreferrer noopener" className="w-12 h-12 rounded-full border flex items-center justify-center hover:bg-[#8B5CF6] hover:border-[#8B5CF6] transition-colors font-bold text-[20px]" style={{ backgroundColor: 'var(--site-surface)', borderColor: 'var(--site-border)', color: 'var(--site-fg)' }}>X</a>
             </div>
           </div>
 
@@ -361,7 +361,7 @@ export const SiteFooter = () => {
       </div>
 
       {/* The Bottom Banner */}
-      <div className="w-full bg-[#CCFF00] py-6 px-5 md:px-12 flex flex-col md:flex-row justify-between items-center gap-4">
+      <div className="w-full bg-[#8B5CF6] py-6 px-5 md:px-12 flex flex-col md:flex-row justify-between items-center gap-4">
         <div className="flex gap-4 items-center">
           <span className="text-[#111111] text-[12px] md:text-[13px] tracking-[0.1em] uppercase font-bold">ma.ai / 2026</span>
           <span className="text-[#111111] text-[12px] tracking-widest hidden md:inline">|</span>

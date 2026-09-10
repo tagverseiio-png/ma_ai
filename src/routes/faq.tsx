@@ -81,7 +81,7 @@ function FaqPage() {
                 <span className="text-lg md:text-xl font-semibold text-[var(--site-fg)] group-hover:text-[var(--site-fg)] transition-colors">
                   {faq.question}
                 </span>
-                <span className="shrink-0 w-8 h-8 rounded-full border border-[var(--site-border)] flex items-center justify-center text-[var(--site-fg)] group-hover:border-[#CCFF00] group-hover:text-[var(--site-fg)] transition-colors mt-1">
+                <span className="shrink-0 w-8 h-8 rounded-full border border-[var(--site-border)] flex items-center justify-center text-[var(--site-fg)] group-hover:border-[#8B5CF6] group-hover:text-[var(--site-fg)] transition-colors mt-1">
                   {openIndex === index ? <Minus size={16} /> : <Plus size={16} />}
                 </span>
               </button>
