@@ -25,13 +25,44 @@ import whyCube from '@/assets/why-cube.png';
 import teamOrbit from '@/assets/team-orbit.jpg';
 import teamOrbitWhite from '@/assets/team-orbit-white-theme.png';
 import teamVinay from '@/assets/1ebc6027-b395-4200-8c9d-b996c087f377.JPG.jpeg';
-import teamSouvik from '@/assets/Souvik seal - ceo.jpeg';
+import teamSouvik from '@/assets/ai_creators/Ajith ( ai creator ).jpeg';
 import footerLogoImg from '@/assets/Ma_footer_logo_200x160.png';
 import ctaLogo3d from '@/assets/cta-logo3d.png';
 import showReelVideo from '@/assets/SHOW REEL HD .mp4';
 import { SiteNav, SiteFooter, Logo, fontStyles, fadeInUp, staggerContainer } from '@/components/site/SiteChrome';
 import { ServicesSection } from '@/components/site/ServicesSection';
 import { useTheme } from '@/hooks/use-theme';
+
+const AmbientOrb = () => {
+  const { scrollY } = useScroll();
+  const opacity = useTransform(scrollY, [200, 600], [0, 1]);
+
+  return (
+    <motion.div style={{ opacity }} className="fixed inset-0 pointer-events-none z-[1]">
+      <motion.div
+        animate={{
+          x: ["0%", "150%", "50%", "200%", "0%"],
+          y: ["0%", "100%", "200%", "50%", "0%"],
+          scale: [1, 1.3, 0.8, 1.2, 1],
+          rotate: [0, 90, 180, 270, 360]
+        }}
+        transition={{ duration: 20, repeat: Infinity, ease: "easeInOut" }}
+        className="absolute top-[-10%] left-[-10%] w-[300px] sm:w-[500px] h-[300px] sm:h-[500px] bg-[#8B5CF6]/12 dark:bg-[#8B5CF6]/15 blur-[100px] sm:blur-[140px] rounded-[40%_60%_70%_30%] pointer-events-none"
+      />
+    </motion.div>
+  );
+};
+
+import brandArckz from '@/assets/brands/ARKCKZ.png';
+import brandBaggrys from "@/assets/brands/Bagrry's.png";
+import brandHadaza from '@/assets/brands/Hadaza.png';
+import brandMilkyMist from '@/assets/brands/Milky_mist.png';
+import brandRareRabbit from '@/assets/brands/Rare_rabbit.png';
+import brandAlluCinemas from '@/assets/brands/allu_cinemas.png';
+import brandChallani from '@/assets/brands/challani.png';
+import brandNextface from '@/assets/brands/nextface.png';
+import brandSpinSalon from '@/assets/brands/spin_salon.png';
+import brandSterling from '@/assets/brands/sterling.png';
 
 
 
@@ -174,16 +205,14 @@ const HeroSection = () => {
 const StorySection = () => {
   return (
     <section id="about" className="py-16 md:py-24 relative overflow-hidden border-t border-[var(--site-border)] transition-colors duration-300" style={{ backgroundColor: 'var(--site-bg)' }}>
-
       <div className="max-w-[1400px] mx-auto px-5 md:px-12 relative z-10">
-
-        {/* Top label */}
-        <div className="flex flex-col items-start mb-6 md:mb-8 relative z-10 text-left">
-          <SectionEyebrow>02 / The ma.ai story</SectionEyebrow>
-        </div>
 
         <div className="grid lg:grid-cols-2 gap-10 lg:gap-12 items-center">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={staggerContainer} className="relative z-20">
+
+            <div className="flex flex-col items-start mb-6 md:mb-8 relative z-10 text-left">
+              <SectionEyebrow>02 / About Us</SectionEyebrow>
+            </div>
 
             <motion.h2 variants={fadeInUp} className="text-[32px] sm:text-[44px] md:text-[52px] lg:text-[60px] font-bold tracking-[-0.04em] leading-[1.1] mb-8" style={{ color: 'var(--site-fg)' }}>
               Anyone can use AI.<br />We make it <span className="text-[#7C3AED]">Exceptional.</span>
@@ -227,70 +256,188 @@ const StorySection = () => {
   );
 };
 
-const placeholderBrands = [
-  'Brand One', 'Brand Two', 'Brand Three', 'Brand Four',
-  'Brand Five', 'Brand Six', 'Brand Seven', 'Brand Eight',
-  'Brand Nine', 'Brand Ten', 'Brand Eleven', 'Brand Twelve',
+type BrandCategory = 'Luxe & Lifestyle' | 'Culinary Collection' | 'Entertainment Hub' | 'Wellness Collective';
+
+const brandsData: { name: string; category: BrandCategory; logo: string; whiteBgInDark?: boolean }[] = [
+  { name: 'Sterling', category: 'Luxe & Lifestyle', logo: brandSterling },
+  { name: 'Milky Mist', category: 'Culinary Collection', logo: brandMilkyMist, whiteBgInDark: true },
+  { name: 'Nextface', category: 'Wellness Collective', logo: brandNextface },
+  { name: 'Arckz', category: 'Luxe & Lifestyle', logo: brandArckz },
+  { name: 'Allu Cinemas', category: 'Entertainment Hub', logo: brandAlluCinemas },
+  { name: 'Challani Jewellery Mart', category: 'Luxe & Lifestyle', logo: brandChallani },
+  { name: 'Spin Salon', category: 'Wellness Collective', logo: brandSpinSalon },
+  { name: 'Rare Rabbit', category: 'Luxe & Lifestyle', logo: brandRareRabbit },
+  { name: 'Baggrys', category: 'Culinary Collection', logo: brandBaggrys },
+  { name: 'Hadaza Grooming Studio', category: 'Wellness Collective', logo: brandHadaza },
 ];
 
+const getBrandIcon = (category: BrandCategory) => {
+  switch (category) {
+    case 'Luxe & Lifestyle': return <Heart size={16} />;
+    case 'Culinary Collection': return <Box size={16} />;
+    case 'Entertainment Hub': return <Film size={16} />;
+    case 'Wellness Collective': return <Activity size={16} />;
+    default: return <Sparkles size={16} />;
+  }
+};
+
 const BrandsSection = () => {
+  const [selectedCategory, setSelectedCategory] = useState<BrandCategory | 'All Partners' | null>('All Partners');
+  const [hoveredCategory, setHoveredCategory] = useState<BrandCategory | 'All Partners' | null>(null);
+
+  const activeCategory = hoveredCategory !== null ? hoveredCategory : (selectedCategory !== 'All Partners' ? selectedCategory : null);
+  const isHovering = activeCategory !== null && activeCategory !== 'All Partners';
+
+  const filterCategories = ['All Partners', 'Luxe & Lifestyle', 'Culinary Collection', 'Entertainment Hub', 'Wellness Collective'] as const;
+
+  // Split brands into two rows for the marquee
+  const row1Brands = brandsData.slice(0, 5);
+  const row2Brands = brandsData.slice(5, 10);
+
+  const renderBrand = (brand: typeof brandsData[0], index: number) => {
+    const isHighlighted = isHovering && activeCategory === brand.category;
+    const isDimmed = isHovering && activeCategory !== brand.category;
+
+    const isChallani = brand.name === 'Challani Jewellery Mart';
+    const isMilkyMist = brand.name === 'Milky Mist';
+    const isRareRabbit = brand.name === 'Rare Rabbit';
+
+    return (
+      <div
+        key={`${brand.name}-${index}`}
+        className={`flex-shrink-0 h-[100px] sm:h-[130px] px-8 sm:px-12 rounded-[16px] flex items-center justify-center transition-all duration-500 ease-out cursor-default ${isHighlighted
+            ? 'scale-110 z-10 -translate-y-2'
+            : isDimmed
+              ? 'opacity-20 scale-95 blur-[2px] border border-transparent'
+              : 'hover:bg-black/5 dark:hover:bg-white/5 opacity-100 border border-transparent'
+          }`}
+      >
+        <div className={`flex items-center justify-center transition-all duration-500 ${isChallani ? 'overflow-hidden h-[65px] sm:h-[75px] w-[160px] sm:w-[190px]' : ''} ${brand.whiteBgInDark
+            ? isMilkyMist
+              ? 'dark:bg-white/90 dark:py-3 dark:px-6 rounded-none'
+              : 'dark:bg-white/90 dark:p-3 dark:rounded-xl'
+            : ''
+          }`}>
+          <img
+            src={brand.logo}
+            alt={brand.name}
+            className={`transition-all duration-500 ${!brand.whiteBgInDark && 'dark:drop-shadow-[0_0_12px_rgba(255,255,255,0.4)]'} ${isDimmed ? 'grayscale' : ''} ${isChallani ? 'object-cover w-full h-full' : 'max-h-[85px] max-w-[250px] object-contain'
+              } ${isRareRabbit ? 'scale-[1.3]' : ''} ${isMilkyMist ? 'scale-[1.7]' : ''}`}
+          />
+        </div>
+      </div>
+    );
+  };
+
   return (
     <section id="brands" className="py-16 md:py-24 relative overflow-hidden border-t border-[var(--site-border)] transition-colors duration-300" style={{ backgroundColor: 'var(--site-bg)' }}>
+      <style>{`
+        @keyframes scrollLeft {
+          0% { transform: translateX(0); }
+          100% { transform: translateX(-25%); }
+        }
+        @keyframes scrollRight {
+          0% { transform: translateX(-25%); }
+          100% { transform: translateX(0); }
+        }
+        .marquee-left {
+          animation: scrollLeft 40s linear infinite;
+        }
+        .marquee-right {
+          animation: scrollRight 40s linear infinite;
+        }
+        .marquee-paused {
+          animation-play-state: paused;
+        }
+      `}</style>
       <div className="max-w-[1400px] mx-auto px-5 md:px-12 relative z-10">
 
-        <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={staggerContainer} className="mb-12 md:mb-16">
-          <SectionEyebrow>02.5 / Partners</SectionEyebrow>
+        <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={staggerContainer} className="mb-12 md:mb-16 relative">
+          <div className="relative z-10">
+            <SectionEyebrow>02.5 / Partners</SectionEyebrow>
 
-          <motion.h2 variants={fadeInUp} className="text-[36px] sm:text-[48px] md:text-[64px] font-bold tracking-[-0.04em] leading-[0.9] mb-4" style={{ color: 'var(--site-fg)' }}>
-            Brands we've<br />worked with
-          </motion.h2>
-          <motion.p variants={fadeInUp} className="text-[16px] md:text-[18px] font-normal leading-[1.5] max-w-[450px]" style={{ color: 'var(--site-muted)' }}>
-            Trusted by ambitious brands across industries to deliver AI-powered creative that moves the needle.
-          </motion.p>
+            <motion.h2 variants={fadeInUp} className="text-[36px] sm:text-[48px] md:text-[64px] font-bold tracking-[-0.04em] leading-[0.9] mb-4" style={{ color: 'var(--site-fg)' }}>
+              <span className="text-[#8B5CF6]">Brands</span> we've<br />worked with
+            </motion.h2>
+            <motion.p variants={fadeInUp} className="text-[16px] md:text-[18px] font-normal leading-[1.5] max-w-[450px]" style={{ color: 'var(--site-muted)' }}>
+              Trusted by ambitious brands across industries to deliver AI-powered creative that moves the needle.
+            </motion.p>
+          </div>
+          
+          <motion.div variants={fadeInUp} className="flex flex-wrap items-center gap-3 sm:gap-4 mt-8 sm:mt-12 relative z-10">
+            <span className="text-[11px] sm:text-[12px] font-bold text-[var(--site-muted)] tracking-widest uppercase mr-2">FILTER INDUSTRY:</span>
+            {filterCategories.map(cat => {
+              const isSelected = selectedCategory === cat;
+              const isHovered = hoveredCategory === cat;
+              const isActive = isHovered || (hoveredCategory === null && isSelected);
+
+              return (
+                <button
+                  key={cat}
+                  onClick={() => setSelectedCategory(cat)}
+                  onMouseEnter={() => setHoveredCategory(cat as any)}
+                  onMouseLeave={() => setHoveredCategory(null)}
+                  className={`px-4 sm:px-5 py-2 rounded-full text-[12px] sm:text-[13px] font-semibold transition-all duration-300 ${isActive
+                      ? 'bg-[#8B5CF6] text-white shadow-[0_0_20px_rgba(139,92,246,0.4)] scale-105'
+                      : 'bg-white/5 border border-[var(--site-border)] text-[var(--site-fg)] hover:border-[#8B5CF6]/50'
+                    }`}
+                >
+                  {cat}
+                </button>
+              )
+            })}
+          </motion.div>
         </motion.div>
 
-        {/* Scrolling marquee — Row 1 */}
-        <div className="relative overflow-hidden mb-6">
-          <div className="absolute left-0 top-0 bottom-0 w-24 z-10 pointer-events-none" style={{ background: 'linear-gradient(to right, var(--site-bg), transparent)' }} />
-          <div className="absolute right-0 top-0 bottom-0 w-24 z-10 pointer-events-none" style={{ background: 'linear-gradient(to left, var(--site-bg), transparent)' }} />
-          <motion.div
-            className="flex gap-6"
-            animate={{ x: ['0%', '-50%'] }}
-            transition={{ repeat: Infinity, duration: 30, ease: 'linear' }}
-          >
-            {[...placeholderBrands, ...placeholderBrands].map((brand, i) => (
-              <div
-                key={`row1-${i}`}
-                className="flex-shrink-0 h-[80px] px-10 rounded-[16px] border border-[var(--site-border)] flex items-center justify-center hover:border-[#7C3AED]/50 hover:bg-[#7C3AED]/5 transition-all duration-300 group"
-              >
-                <span className="text-[18px] sm:text-[20px] font-semibold tracking-[-0.01em] whitespace-nowrap transition-colors duration-300 group-hover:text-[#7C3AED]" style={{ color: 'var(--site-muted)' }}>
-                  {brand}
-                </span>
+        {/* Proven Scale stats - Temporarily hidden */}
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={staggerContainer}
+          className="hidden grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 mb-12 md:mb-16"
+        >
+          {[
+            { value: '120+', label: 'AI Films Delivered' },
+            { value: '14', label: 'Markets Served' },
+            { value: '40+', label: 'Languages Supported' },
+            { value: '6', label: 'Creative Verticals' },
+          ].map((stat) => (
+            <motion.div
+              key={stat.label}
+              variants={fadeInUp}
+              className="rounded-[16px] border border-[var(--site-border)] px-6 py-6 md:py-8 text-center hover:border-[#7C3AED]/50 transition-colors duration-300"
+              style={{ backgroundColor: 'var(--site-bg)' }}
+            >
+              <div className="text-[36px] sm:text-[44px] md:text-[52px] font-bold tracking-[-0.04em] leading-[1] text-[#7C3AED]">
+                {stat.value}
               </div>
-            ))}
-          </motion.div>
-        </div>
+              <div className="mt-3 text-[12px] md:text-[13px] font-bold tracking-[0.08em] uppercase" style={{ color: 'var(--site-muted)' }}>
+                {stat.label}
+              </div>
+            </motion.div>
+          ))}
+        </motion.div>
 
-        {/* Scrolling marquee — Row 2 (reverse direction) */}
-        <div className="relative overflow-hidden">
-          <div className="absolute left-0 top-0 bottom-0 w-24 z-10 pointer-events-none" style={{ background: 'linear-gradient(to right, var(--site-bg), transparent)' }} />
-          <div className="absolute right-0 top-0 bottom-0 w-24 z-10 pointer-events-none" style={{ background: 'linear-gradient(to left, var(--site-bg), transparent)' }} />
-          <motion.div
-            className="flex gap-6"
-            animate={{ x: ['-50%', '0%'] }}
-            transition={{ repeat: Infinity, duration: 30, ease: 'linear' }}
-          >
-            {[...placeholderBrands.slice().reverse(), ...placeholderBrands.slice().reverse()].map((brand, i) => (
-              <div
-                key={`row2-${i}`}
-                className="flex-shrink-0 h-[80px] px-10 rounded-[16px] border border-[var(--site-border)] flex items-center justify-center hover:border-[#7C3AED]/50 hover:bg-[#7C3AED]/5 transition-all duration-300 group"
-              >
-                <span className="text-[18px] sm:text-[20px] font-semibold tracking-[-0.01em] whitespace-nowrap transition-colors duration-300 group-hover:text-[#7C3AED]" style={{ color: 'var(--site-muted)' }}>
-                  {brand}
-                </span>
+        <div className="relative pt-8 pb-12">
+          {/* Scrolling marquee — Row 1 */}
+          <div className="relative overflow-visible mb-6 sm:mb-8">
+            <div className="overflow-visible w-full">
+              <div className={`flex gap-6 w-max marquee-left ${isHovering ? 'marquee-paused' : ''}`}>
+                {/* 4 sets of row1Brands to ensure smooth infinite loop across wide screens with -25% translation */}
+                {[...row1Brands, ...row1Brands, ...row1Brands, ...row1Brands].map((brand, i) => renderBrand(brand, i))}
               </div>
-            ))}
-          </motion.div>
+            </div>
+          </div>
+
+          {/* Scrolling marquee — Row 2 (reverse direction) */}
+          <div className="relative overflow-visible">
+            <div className="overflow-visible w-full">
+              <div className={`flex gap-6 w-max marquee-right ${isHovering ? 'marquee-paused' : ''}`}>
+                {[...row2Brands, ...row2Brands, ...row2Brands, ...row2Brands].map((brand, i) => renderBrand(brand, i))}
+              </div>
+            </div>
+          </div>
         </div>
 
       </div>
@@ -444,7 +591,6 @@ const WorksSection = () => {
 
   return (
     <section id="work" className="py-16 md:py-24 relative overflow-hidden border-t border-[var(--site-border)] transition-colors duration-300" style={{ backgroundColor: 'var(--site-bg)' }}>
-
       <div className="max-w-[1400px] mx-auto px-5 md:px-12 relative z-10">
 
         {/* Header row */}
@@ -701,7 +847,6 @@ const TeamSection = () => {
 
   return (
     <section className="py-16 md:py-24 relative overflow-hidden border-t border-[var(--site-border)] transition-colors duration-300" style={{ backgroundColor: 'var(--site-bg)' }}>
-
       <div className="absolute right-[-45%] sm:right-[-10%] top-[2%] sm:top-[-8%] w-[1100px] max-w-[160%] sm:max-w-[85%] pointer-events-none select-none z-0">
         <img src={theme === 'dark' ? teamOrbit : teamOrbitWhite} alt="" aria-hidden="true" loading="lazy" className="w-full h-auto opacity-40 sm:opacity-80" />
         <div className="absolute inset-0" style={{ background: 'linear-gradient(to right, var(--site-bg) 0%, transparent 40%)' }}></div>
@@ -799,7 +944,8 @@ export default function MaLanding() {
   return (
     <>
       <style>{fontStyles}</style>
-      <div className="min-h-screen scroll-smooth transition-colors duration-300" style={{ backgroundColor: 'var(--site-bg)', color: 'var(--site-fg)', WebkitTextFillColor: 'inherit' }}>
+      <div className="min-h-screen scroll-smooth transition-colors duration-300 relative overflow-hidden" style={{ backgroundColor: 'var(--site-bg)', color: 'var(--site-fg)', WebkitTextFillColor: 'inherit' }}>
+        <AmbientOrb />
         <SiteNav />
         <main>
           <HeroSection />

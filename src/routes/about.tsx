@@ -2,7 +2,7 @@ import { createFileRoute, Link } from '@tanstack/react-router';
 import { motion } from 'framer-motion';
 import { ArrowRight, Users, Target, Globe, ShieldCheck } from 'lucide-react';
 import { PageShell, Section } from '@/components/site/PageShell';
-import team1 from '@/assets/Souvik seal - ceo.jpeg';
+import team1 from '@/assets/ai_creators/Ajith ( ai creator ).jpeg';
 import team2 from '@/assets/team-2.jpg';
 import team3 from '@/assets/team-3.jpg';
 import storySphere from '@/assets/story-sphere.png';

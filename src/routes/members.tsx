@@ -53,14 +53,14 @@ const majorFigures = [
     role: 'Co-Founder & CEO',
     bio: 'The brain of the operation, in the most literal sense. Souvik lives life on Sop\'s and runs on spreadsheets, and cold hard data — a walking encyclopedia who somehow makes numbers sound like a personality trait.',
     ig: 'souvik_seal',
-    image: teamSouvik,
+    image: imgAjith,
     imagePosition: 'object-center'
   }
 ];
 
 const gridMembers: { name: string; role: string; image: string; imagePosition?: string }[] = [
   { name: 'Adithya Krishna', role: 'AI Creator', image: imgAdithya },
-  { name: 'Ajith', role: 'AI Creator', image: imgAjith },
+  { name: 'Ajith', role: 'AI Creator', image: teamSouvik },
   { name: 'Syed Imran', role: 'AI Creator', image: imgImran, imagePosition: 'object-center' },
   { name: 'Ayush', role: 'AI Creator', image: imgAyush },
   { name: '', role: '', image: imgUnknown },

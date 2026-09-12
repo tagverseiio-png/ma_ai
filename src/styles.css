@@ -97,7 +97,9 @@
   --sidebar-ring: oklch(0.704 0.04 256.788);
 
   /* Site-specific theme tokens */
-  --site-bg: #F4F4F0;
+  --site-bg: #faf9fc;
+  --site-bg-image: radial-gradient(at top right, rgba(139, 92, 246, 0.1) 0%, transparent 50%),
+                   radial-gradient(at bottom left, rgba(139, 92, 246, 0.05) 0%, transparent 50%);
   --site-fg: #111111;
   --site-muted: #6b7280;
   --site-surface: #ffffff;
@@ -162,6 +164,7 @@
 
   /* Site-specific theme tokens — dark */
   --site-bg: #0B0B13;
+  --site-bg-image: none;
   --site-fg: #F0F0F0;
   --site-muted: #9ca3af;
   --site-surface: #1a1a2e;
@@ -197,6 +200,8 @@
 
   body {
     background-color: var(--site-bg);
+    background-image: var(--site-bg-image, none);
+    background-attachment: fixed;
     color: var(--site-fg);
     transition: background-color 0.3s ease, color 0.3s ease;
   }
