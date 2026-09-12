@@ -38,16 +38,16 @@ const AmbientOrb = () => {
   const opacity = useTransform(scrollY, [200, 600], [0, 1]);
 
   return (
-    <motion.div style={{ opacity }} className="fixed inset-0 pointer-events-none z-[1]">
+    <motion.div style={{ opacity }} className="fixed inset-0 pointer-events-none z-[1] overflow-hidden">
       <motion.div
         animate={{
-          x: ["0%", "150%", "50%", "200%", "0%"],
-          y: ["0%", "100%", "200%", "50%", "0%"],
+          x: ["5%", "60%", "30%", "70%", "5%"],
+          y: ["5%", "40%", "70%", "20%", "5%"],
           scale: [1, 1.3, 0.8, 1.2, 1],
           rotate: [0, 90, 180, 270, 360]
         }}
         transition={{ duration: 20, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute top-[-10%] left-[-10%] w-[300px] sm:w-[500px] h-[300px] sm:h-[500px] bg-[#8B5CF6]/12 dark:bg-[#8B5CF6]/15 blur-[100px] sm:blur-[140px] rounded-[40%_60%_70%_30%] pointer-events-none"
+        className="absolute top-0 left-0 w-[200px] h-[200px] sm:w-[300px] sm:h-[300px] md:w-[400px] md:h-[400px] lg:w-[500px] lg:h-[500px] bg-[#8B5CF6]/12 dark:bg-[#8B5CF6]/15 blur-[60px] sm:blur-[80px] md:blur-[120px] lg:blur-[140px] rounded-[40%_60%_70%_30%] pointer-events-none"
       />
     </motion.div>
   );
@@ -305,14 +305,14 @@ const BrandsSection = () => {
     return (
       <div
         key={`${brand.name}-${index}`}
-        className={`flex-shrink-0 h-[100px] sm:h-[130px] px-8 sm:px-12 rounded-[16px] flex items-center justify-center transition-all duration-500 ease-out cursor-default ${isHighlighted
+        className={`flex-shrink-0 h-[70px] sm:h-[130px] px-4 sm:px-12 rounded-[16px] flex items-center justify-center transition-all duration-500 ease-out cursor-default ${isHighlighted
             ? 'scale-110 z-10 -translate-y-2'
             : isDimmed
               ? 'opacity-20 scale-95 blur-[2px] border border-transparent'
               : 'hover:bg-black/5 dark:hover:bg-white/5 opacity-100 border border-transparent'
           }`}
       >
-        <div className={`flex items-center justify-center transition-all duration-500 ${isChallani ? 'overflow-hidden h-[65px] sm:h-[75px] w-[160px] sm:w-[190px]' : ''} ${brand.whiteBgInDark
+        <div className={`flex items-center justify-center transition-all duration-500 ${isChallani ? 'overflow-hidden h-[45px] sm:h-[75px] w-[110px] sm:w-[190px]' : ''} ${brand.whiteBgInDark
             ? isMilkyMist
               ? 'dark:bg-white/90 dark:py-3 dark:px-6 rounded-none'
               : 'dark:bg-white/90 dark:p-3 dark:rounded-xl'
@@ -321,7 +321,7 @@ const BrandsSection = () => {
           <img
             src={brand.logo}
             alt={brand.name}
-            className={`transition-all duration-500 ${!brand.whiteBgInDark && 'dark:drop-shadow-[0_0_12px_rgba(255,255,255,0.4)]'} ${isDimmed ? 'grayscale' : ''} ${isChallani ? 'object-cover w-full h-full' : 'max-h-[85px] max-w-[250px] object-contain'
+            className={`transition-all duration-500 ${!brand.whiteBgInDark && 'dark:drop-shadow-[0_0_12px_rgba(255,255,255,0.4)]'} ${isDimmed ? 'grayscale' : ''} ${isChallani ? 'object-cover w-full h-full' : 'max-h-[55px] sm:max-h-[85px] max-w-[150px] sm:max-w-[250px] object-contain'
               } ${isRareRabbit ? 'scale-[1.3]' : ''} ${isMilkyMist ? 'scale-[1.7]' : ''}`}
           />
         </div>
@@ -848,7 +848,8 @@ const TeamSection = () => {
   return (
     <section className="py-16 md:py-24 relative overflow-hidden border-t border-[var(--site-border)] transition-colors duration-300" style={{ backgroundColor: 'var(--site-bg)' }}>
       <div className="absolute right-[-45%] sm:right-[-10%] top-[2%] sm:top-[-8%] w-[1100px] max-w-[160%] sm:max-w-[85%] pointer-events-none select-none z-0">
-        <img src={theme === 'dark' ? teamOrbit : teamOrbitWhite} alt="" aria-hidden="true" loading="lazy" className="w-full h-auto opacity-40 sm:opacity-80" />
+        <img src={teamOrbitWhite} alt="" aria-hidden="true" loading="lazy" className="w-full h-auto opacity-40 sm:opacity-80 dark:hidden" />
+        <img src={teamOrbit} alt="" aria-hidden="true" loading="lazy" className="w-full h-auto opacity-40 sm:opacity-80 hidden dark:block" />
         <div className="absolute inset-0" style={{ background: 'linear-gradient(to right, var(--site-bg) 0%, transparent 40%)' }}></div>
         <div className="absolute inset-0" style={{ background: 'linear-gradient(to top, var(--site-bg) 0%, transparent 40%)' }}></div>
         <div className="absolute inset-0" style={{ background: 'linear-gradient(to bottom, var(--site-bg) 0%, transparent 15%)' }}></div>
