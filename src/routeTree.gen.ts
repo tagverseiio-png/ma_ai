@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AboutRouteImport } from './routes/about'
+import { Route as BrandsRouteImport } from './routes/brands'
 import { Route as CareersRouteImport } from './routes/careers'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as CookiesRouteImport } from './routes/cookies'
@@ -19,7 +20,9 @@ import { Route as InsightsRouteImport } from './routes/insights'
 import { Route as MembersRouteImport } from './routes/members'
 import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as ServicesRouteImport } from './routes/services'
+import { Route as TeamRouteImport } from './routes/team'
 import { Route as TermsRouteImport } from './routes/terms'
+import { Route as WhyRouteImport } from './routes/why'
 import { Route as WorkRouteImport } from './routes/work'
 
 const IndexRoute = IndexRouteImport.update({
@@ -30,6 +33,11 @@ const IndexRoute = IndexRouteImport.update({
 const AboutRoute = AboutRouteImport.update({
   id: '/about',
   path: '/about',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BrandsRoute = BrandsRouteImport.update({
+  id: '/brands',
+  path: '/brands',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CareersRoute = CareersRouteImport.update({
@@ -72,9 +80,19 @@ const ServicesRoute = ServicesRouteImport.update({
   path: '/services',
   getParentRoute: () => rootRouteImport,
 } as any)
+const TeamRoute = TeamRouteImport.update({
+  id: '/team',
+  path: '/team',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const TermsRoute = TermsRouteImport.update({
   id: '/terms',
   path: '/terms',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const WhyRoute = WhyRouteImport.update({
+  id: '/why',
+  path: '/why',
   getParentRoute: () => rootRouteImport,
 } as any)
 const WorkRoute = WorkRouteImport.update({
@@ -86,6 +104,7 @@ const WorkRoute = WorkRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/brands': typeof BrandsRoute
   '/careers': typeof CareersRoute
   '/contact': typeof ContactRoute
   '/cookies': typeof CookiesRoute
@@ -94,12 +113,15 @@ export interface FileRoutesByFullPath {
   '/members': typeof MembersRoute
   '/privacy': typeof PrivacyRoute
   '/services': typeof ServicesRoute
+  '/team': typeof TeamRoute
   '/terms': typeof TermsRoute
+  '/why': typeof WhyRoute
   '/work': typeof WorkRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/brands': typeof BrandsRoute
   '/careers': typeof CareersRoute
   '/contact': typeof ContactRoute
   '/cookies': typeof CookiesRoute
@@ -108,13 +130,16 @@ export interface FileRoutesByTo {
   '/members': typeof MembersRoute
   '/privacy': typeof PrivacyRoute
   '/services': typeof ServicesRoute
+  '/team': typeof TeamRoute
   '/terms': typeof TermsRoute
+  '/why': typeof WhyRoute
   '/work': typeof WorkRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/brands': typeof BrandsRoute
   '/careers': typeof CareersRoute
   '/contact': typeof ContactRoute
   '/cookies': typeof CookiesRoute
@@ -123,7 +148,9 @@ export interface FileRoutesById {
   '/members': typeof MembersRoute
   '/privacy': typeof PrivacyRoute
   '/services': typeof ServicesRoute
+  '/team': typeof TeamRoute
   '/terms': typeof TermsRoute
+  '/why': typeof WhyRoute
   '/work': typeof WorkRoute
 }
 export interface FileRouteTypes {
@@ -131,6 +158,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/about'
+    | '/brands'
     | '/careers'
     | '/contact'
     | '/cookies'
@@ -139,12 +167,15 @@ export interface FileRouteTypes {
     | '/members'
     | '/privacy'
     | '/services'
+    | '/team'
     | '/terms'
+    | '/why'
     | '/work'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/about'
+    | '/brands'
     | '/careers'
     | '/contact'
     | '/cookies'
@@ -153,12 +184,15 @@ export interface FileRouteTypes {
     | '/members'
     | '/privacy'
     | '/services'
+    | '/team'
     | '/terms'
+    | '/why'
     | '/work'
   id:
     | '__root__'
     | '/'
     | '/about'
+    | '/brands'
     | '/careers'
     | '/contact'
     | '/cookies'
@@ -167,13 +201,16 @@ export interface FileRouteTypes {
     | '/members'
     | '/privacy'
     | '/services'
+    | '/team'
     | '/terms'
+    | '/why'
     | '/work'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
+  BrandsRoute: typeof BrandsRoute
   CareersRoute: typeof CareersRoute
   ContactRoute: typeof ContactRoute
   CookiesRoute: typeof CookiesRoute
@@ -182,7 +219,9 @@ export interface RootRouteChildren {
   MembersRoute: typeof MembersRoute
   PrivacyRoute: typeof PrivacyRoute
   ServicesRoute: typeof ServicesRoute
+  TeamRoute: typeof TeamRoute
   TermsRoute: typeof TermsRoute
+  WhyRoute: typeof WhyRoute
   WorkRoute: typeof WorkRoute
 }
 
@@ -200,6 +239,13 @@ declare module '@tanstack/react-router' {
       path: '/about'
       fullPath: '/about'
       preLoaderRoute: typeof AboutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/brands': {
+      id: '/brands'
+      path: '/brands'
+      fullPath: '/brands'
+      preLoaderRoute: typeof BrandsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/careers': {
@@ -258,11 +304,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ServicesRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/team': {
+      id: '/team'
+      path: '/team'
+      fullPath: '/team'
+      preLoaderRoute: typeof TeamRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/terms': {
       id: '/terms'
       path: '/terms'
       fullPath: '/terms'
       preLoaderRoute: typeof TermsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/why': {
+      id: '/why'
+      path: '/why'
+      fullPath: '/why'
+      preLoaderRoute: typeof WhyRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/work': {
@@ -278,6 +338,7 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
+  BrandsRoute: BrandsRoute,
   CareersRoute: CareersRoute,
   ContactRoute: ContactRoute,
   CookiesRoute: CookiesRoute,
@@ -286,7 +347,9 @@ const rootRouteChildren: RootRouteChildren = {
   MembersRoute: MembersRoute,
   PrivacyRoute: PrivacyRoute,
   ServicesRoute: ServicesRoute,
+  TeamRoute: TeamRoute,
   TermsRoute: TermsRoute,
+  WhyRoute: WhyRoute,
   WorkRoute: WorkRoute,
 }
 export const routeTree = rootRouteImport

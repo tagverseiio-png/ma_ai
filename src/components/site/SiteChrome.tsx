@@ -80,14 +80,12 @@ const ThemedLogo = ({
 );
 
 const navLinks = [
-  { label: 'Home', to: '/' },
-  { label: 'Services', to: '/#services' },
-  { label: 'Work', to: '/#work' },
-  { label: 'Brands', to: '/#brands' },
-  { label: 'About', to: '/#about' },
-  { label: 'Insights', to: '/insights' },
-  { label: 'Careers', to: '/careers' },
-  { label: 'Contact', to: '/contact' },
+  { label: 'About', to: '/about' },
+  { label: 'Brands', to: '/brands' },
+  { label: 'Work', to: '/work' },
+  { label: 'Why', to: '/why' },
+  { label: 'Team', to: '/team' },
+  { label: 'Services', to: '/services' },
 ] as const;
 
 const ThemeToggle = () => {

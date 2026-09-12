@@ -1,10 +1,10 @@
 import { createFileRoute } from '@tanstack/react-router';
 import MaLanding from '@/components/MaLanding';
 
-export const Route = createFileRoute('/work')({
-  component: WorkPage,
+export const Route = createFileRoute('/brands')({
+  component: BrandsPage,
 });
 
-function WorkPage() {
+function BrandsPage() {
   return <MaLanding />;
 }
