@@ -80,6 +80,7 @@ const ThemedLogo = ({
 );
 
 const navLinks = [
+  { label: 'Home', to: '/' },
   { label: 'About', to: '/about' },
   { label: 'Brands', to: '/brands' },
   { label: 'Work', to: '/work' },
@@ -147,6 +148,14 @@ export const SiteNav = () => {
               <Link
                 key={item.to}
                 to={item.to}
+                onClick={(e) => {
+                  if (item.to === '/') {
+                    if (window.location.pathname === '/') {
+                      e.preventDefault();
+                    }
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                  }
+                }}
                 className="hover:opacity-100 transition-colors"
                 style={{ color: 'inherit' }}
                 activeProps={{ style: { color: 'var(--site-fg)', fontWeight: 'bold' } }}
@@ -187,7 +196,15 @@ export const SiteNav = () => {
               <Link
                 key={item.to}
                 to={item.to}
-                onClick={() => setOpen(false)}
+                onClick={(e) => {
+                  setOpen(false);
+                  if (item.to === '/') {
+                    if (window.location.pathname === '/') {
+                      e.preventDefault();
+                    }
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                  }
+                }}
                 className="py-4 border-b border-[var(--site-border)] text-[18px] font-bold tracking-[-0.03em] uppercase"
                 style={{ color: 'var(--site-fg)' }}
                 activeProps={{ style: { color: 'var(--site-fg)' } }}
