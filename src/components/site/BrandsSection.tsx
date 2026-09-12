@@ -6,7 +6,7 @@ import brandArckz from '@/assets/brands/ARKCKZ.png';
 import brandBaggrys from "@/assets/brands/Bagrry's.png";
 import brandHadaza from '@/assets/brands/Hadaza.png';
 import brandMilkyMist from '@/assets/brands/Milky_mist.png';
-import brandRareRabbit from '@/assets/brands/Rare_rabbit.png';
+import brandRareRabbit from '@/assets/brands/rare_rabbit.png';
 import brandAlluCinemas from '@/assets/brands/allu_cinemas.png';
 import brandChallani from '@/assets/brands/challani.png';
 import brandNextface from '@/assets/brands/nextface.png';
