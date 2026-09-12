@@ -12,11 +12,14 @@ import { TeamSection } from '@/components/site/TeamSection';
 import { ServicesSection } from '@/components/site/ServicesSection';
 import showReelVideo from '@/assets/SHOW REEL HD .mp4';
 
-const HeroSection = () => {
+import navLogoDarkImg from '@/assets/Ma_nav_logo_dark.png';
+
+const HeroSection = ({ introPhase }: { introPhase: 'video' | 'nav' | 'complete' }) => {
   const { scrollY } = useScroll();
   const [isMobile, setIsMobile] = useState(false);
   const [videoReady, setVideoReady] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
+  const hasSeekedRef = useRef(false);
 
   useEffect(() => {
     const handleResize = () => setIsMobile(window.innerWidth < 768);
@@ -29,25 +32,47 @@ const HeroSection = () => {
     const video = videoRef.current;
     if (!video) return;
 
-    const handleCanPlay = () => {
-      video.playbackRate = 1;
-      video.play().then(() => {
-        setVideoReady(true);
-      }).catch(() => {
-        setVideoReady(true);
-      });
+    const handleLoadedMetadata = () => {
+      if (!hasSeekedRef.current && video.duration > 3) {
+        video.currentTime = video.duration - 3;
+        hasSeekedRef.current = true;
+      }
     };
 
+    const handleCanPlay = () => {
+      video.playbackRate = 1;
+      setVideoReady(true);
+    };
+
+    video.addEventListener('loadedmetadata', handleLoadedMetadata);
+
     if (video.readyState >= 3) {
+      if (!hasSeekedRef.current && video.duration > 3) {
+        video.currentTime = video.duration - 3;
+        hasSeekedRef.current = true;
+      }
       handleCanPlay();
     } else {
       video.addEventListener('canplaythrough', handleCanPlay);
     }
 
     return () => {
+      video.removeEventListener('loadedmetadata', handleLoadedMetadata);
       video.removeEventListener('canplaythrough', handleCanPlay);
     };
   }, []);
+
+  // Handle video play based on introPhase
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video || !videoReady) return;
+
+    if (introPhase === 'video' || introPhase === 'nav' || introPhase === 'complete') {
+      video.play().catch(() => {});
+    } else {
+      video.pause();
+    }
+  }, [introPhase, videoReady]);
 
   useEffect(() => {
     const video = videoRef.current;
@@ -55,7 +80,7 @@ const HeroSection = () => {
 
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting) {
+        if (entry && entry.isIntersecting) {
           video.play().catch(() => { });
         } else {
           video.pause();
@@ -75,7 +100,6 @@ const HeroSection = () => {
     <section className="relative min-h-[100svh] bg-[#111111] flex flex-col overflow-hidden">
       <video
         ref={videoRef}
-        autoPlay
         loop
         muted
         playsInline
@@ -88,7 +112,7 @@ const HeroSection = () => {
           transform: 'translateZ(0)',
           backfaceVisibility: 'hidden',
           WebkitBackfaceVisibility: 'hidden',
-          opacity: videoReady ? 1 : 0,
+          opacity: (introPhase === 'video' || introPhase === 'nav' || introPhase === 'complete') && videoReady ? 1 : 0,
           transition: 'opacity 0.6s ease-in-out',
         }}
         suppressHydrationWarning
@@ -98,7 +122,13 @@ const HeroSection = () => {
 
       <div className="absolute inset-0 bg-black/40 z-0 pointer-events-none"></div>
 
-      <motion.div style={{ opacity: contentOpacity }} className="relative z-10 flex-grow flex flex-col justify-center px-6 md:px-16 lg:px-24 pt-24 md:pt-0">
+      <motion.div 
+        style={{ 
+          opacity: introPhase === 'complete' ? contentOpacity : 0,
+          transition: 'opacity 1s ease-in-out'
+        }} 
+        className="relative z-10 flex-grow flex flex-col justify-center px-6 md:px-16 lg:px-24 pt-24 md:pt-0"
+      >
         <div className="max-w-[700px]">
           <h1 className="text-[36px] sm:text-[50px] md:text-[64px] font-medium text-white leading-[1.1] mb-6 drop-shadow-md tracking-tight">
             We build worlds<br />that move you.
@@ -112,13 +142,27 @@ const HeroSection = () => {
         </div>
       </motion.div>
 
-      <motion.div style={{ opacity: contentOpacity, pointerEvents }} className="absolute right-6 md:right-16 top-1/2 -translate-y-1/2 z-20 hidden md:block">
+      <motion.div 
+        style={{ 
+          opacity: introPhase === 'complete' ? contentOpacity : 0, 
+          pointerEvents: introPhase === 'complete' ? pointerEvents : 'none',
+          transition: 'opacity 1s ease-in-out'
+        }} 
+        className="absolute right-6 md:right-16 top-1/2 -translate-y-1/2 z-20 hidden md:block"
+      >
         <Link to="/services" className="px-6 py-3 rounded-[30px] bg-white text-black text-[12px] font-bold tracking-[0.08em] uppercase hover:bg-[#8B5CF6] transition-colors shadow-lg">
           What we do
         </Link>
       </motion.div>
 
-      <motion.div style={{ opacity: contentOpacity, pointerEvents }} className="absolute bottom-10 left-6 md:left-16 lg:left-24 z-20 flex gap-6 md:gap-10">
+      <motion.div 
+        style={{ 
+          opacity: introPhase === 'complete' ? contentOpacity : 0, 
+          pointerEvents: introPhase === 'complete' ? pointerEvents : 'none',
+          transition: 'opacity 1s ease-in-out'
+        }} 
+        className="absolute bottom-10 left-6 md:left-16 lg:left-24 z-20 flex gap-6 md:gap-10"
+      >
         <a href="#" className="text-white/80 hover:text-white text-[11px] font-bold tracking-[0.15em] uppercase transition-colors">
           Website
         </a>
@@ -135,6 +179,28 @@ const HeroSection = () => {
 
 export default function MaLanding() {
   const location = useLocation();
+  const [introPhase, setIntroPhase] = useState<'video' | 'nav' | 'complete'>('video');
+
+  useEffect(() => {
+    // Prevent scrolling while intro is playing
+    if (introPhase !== 'complete' && introPhase !== 'nav') {
+      document.body.style.overflow = 'hidden';
+      window.scrollTo(0, 0);
+    } else {
+      document.body.style.overflow = '';
+    }
+    
+    // Chain each phase to the next with its own timeout
+    let timer: ReturnType<typeof setTimeout> | undefined;
+    
+    if (introPhase === 'video') {
+      timer = setTimeout(() => setIntroPhase('nav'), 3000); // 3s after video starts
+    } else if (introPhase === 'nav') {
+      timer = setTimeout(() => setIntroPhase('complete'), 2000); // 2s after nav appears
+    }
+    
+    return () => { if (timer) clearTimeout(timer); };
+  }, [introPhase]);
 
   useEffect(() => {
     // Map pathnames to section IDs
@@ -166,9 +232,9 @@ export default function MaLanding() {
       <style>{fontStyles}</style>
       <div className="min-h-screen scroll-smooth transition-colors duration-300 relative overflow-hidden" style={{ backgroundColor: 'var(--site-bg)', color: 'var(--site-fg)', WebkitTextFillColor: 'inherit' }}>
         <AmbientOrb />
-        <SiteNav />
+        <SiteNav showNav={introPhase === 'nav' || introPhase === 'complete'} transparentOnTop={true} />
         <main>
-          <HeroSection />
+          <HeroSection introPhase={introPhase} />
           <StorySection />
           <BrandsSection />
           <WorksSection />

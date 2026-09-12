@@ -119,7 +119,13 @@ const ThemeToggle = () => {
   );
 };
 
-export const SiteNav = () => {
+export const SiteNav = ({ 
+  showNav = true, 
+  transparentOnTop = false 
+}: { 
+  showNav?: boolean;
+  transparentOnTop?: boolean;
+}) => {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
 
@@ -135,15 +141,22 @@ export const SiteNav = () => {
     return () => { document.body.style.overflow = ''; };
   }, [open]);
 
+  const isTransparentTop = !scrolled && transparentOnTop && !open;
+
   return (
-    <>
-      <nav className={`fixed top-0 w-full z-[101] transition-all duration-300 ${scrolled || open ? 'backdrop-blur-xl' : ''} border-b border-[var(--site-border)]`} style={{ backgroundColor: scrolled || open ? 'color-mix(in srgb, var(--site-bg) 90%, transparent)' : 'var(--site-bg)' }}>
+    <div style={{
+      opacity: showNav ? 1 : 0,
+      pointerEvents: showNav ? 'auto' : 'none',
+      transition: 'opacity 1s ease-in-out'
+    }}>
+      <nav className={`fixed top-0 w-full z-[101] transition-all duration-300 ${scrolled || open ? 'backdrop-blur-xl border-b border-[var(--site-border)]' : (transparentOnTop ? 'border-transparent' : 'border-b border-[var(--site-border)]')}`} style={{ backgroundColor: scrolled || open ? 'color-mix(in srgb, var(--site-bg) 90%, transparent)' : (transparentOnTop ? 'transparent' : 'var(--site-bg)') }}>
         <div className="max-w-[1400px] mx-auto px-5 md:px-12 h-[80px] grid grid-cols-[minmax(0,1fr)_auto] items-center gap-4 md:flex md:justify-between">
           <Link to="/" className="flex items-center gap-3 cursor-pointer select-none" onClick={() => { setOpen(false); window.scrollTo({ top: 0, behavior: 'smooth' }); }}>
-            <ThemedLogo light={navLogoImg} dark={navLogoDarkImg} className="w-[120px] h-auto" loading="eager" />
+            {/* Force the dark mode (white text) logo when transparent on top so it contrasts with the dark video */}
+            <ThemedLogo light={isTransparentTop ? navLogoDarkImg : navLogoImg} dark={navLogoDarkImg} className="w-[120px] h-auto" loading="eager" />
           </Link>
 
-          <div className="hidden md:flex items-center gap-8 text-[15px] font-medium" style={{ color: 'var(--site-muted)' }}>
+          <div className="hidden md:flex items-center gap-8 text-[15px] font-medium" style={{ color: isTransparentTop ? 'rgba(255,255,255,0.8)' : 'var(--site-muted)' }}>
             {navLinks.map((item) => (
               <Link
                 key={item.to}
@@ -158,16 +171,22 @@ export const SiteNav = () => {
                 }}
                 className="hover:opacity-100 transition-colors"
                 style={{ color: 'inherit' }}
-                activeProps={{ style: { color: 'var(--site-fg)', fontWeight: 'bold' } }}
+                activeProps={{ style: { color: isTransparentTop ? '#ffffff' : 'var(--site-fg)', fontWeight: 'bold' } }}
                 activeOptions={{ exact: item.to === '/' }}
               >
                 {item.label}
               </Link>
             ))}
-            <ThemeToggle />
+            <div style={{ color: isTransparentTop ? '#ffffff' : 'var(--site-fg)' }}>
+              <ThemeToggle />
+            </div>
             <Link
               to="/contact"
-              className="ml-2 px-6 py-2.5 rounded-[40px] border-[1.5px] border-[var(--site-fg)] text-[var(--site-fg)] font-bold hover:bg-[#111111] hover:text-[#8B5CF6] hover:border-[#111111] transition-all flex items-center gap-2"
+              style={{
+                borderColor: isTransparentTop ? 'rgba(255,255,255,0.6)' : 'var(--site-fg)',
+                color: isTransparentTop ? '#ffffff' : 'var(--site-fg)'
+              }}
+              className="ml-2 px-6 py-2.5 rounded-[40px] border-[1.5px] font-bold hover:bg-[#111111] hover:text-[#8B5CF6] hover:border-[#111111] transition-all flex items-center gap-2"
             >
               Let's talk <ArrowRight size={16} />
             </Link>
@@ -180,8 +199,7 @@ export const SiteNav = () => {
               onClick={() => setOpen((v) => !v)}
               aria-label={open ? 'Close menu' : 'Open menu'}
               aria-expanded={open}
-              className="shrink-0 w-11 h-11 rounded-full border border-[var(--site-border)] flex items-center justify-center"
-              style={{ color: 'var(--site-fg)' }}
+              className={`shrink-0 w-11 h-11 rounded-full border flex items-center justify-center transition-colors ${isTransparentTop ? 'border-white/40 text-white hover:bg-white/10' : 'border-[var(--site-border)] text-[var(--site-fg)]'}`}
             >
               {open ? <X size={20} /> : <Menu size={20} />}
             </button>
@@ -223,7 +241,7 @@ export const SiteNav = () => {
           </Link>
         </div>
       )}
-    </>
+    </div>
   );
 };
 
