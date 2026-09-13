@@ -8,36 +8,7 @@ interface Props {
 }
 
 export const WhySection = ({ standalone }: Props) => {
-  const reasons = [
-    {
-      id: '01',
-      icon: <Users size={48} className="drop-shadow-[0_5px_10px_rgba(0,0,0,0.5)]" style={{ color: 'var(--site-fg)' }} />,
-      title: 'Human-centred.',
-      desc: 'Technology starts with people. Adoption is designed, not assumed.',
-      baseColor: 'from-[#3B82F6] to-[#8B5CF6]'
-    },
-    {
-      id: '02',
-      icon: <Target size={48} className="drop-shadow-[0_5px_10px_rgba(0,0,0,0.5)]" style={{ color: 'var(--site-fg)' }} />,
-      title: 'Outcome-first.',
-      desc: 'We start with the end in mind and build what drives measurable impact.',
-      baseColor: 'from-[#8B5CF6] to-[#8B5CF6]'
-    },
-    {
-      id: '03',
-      icon: <Globe size={48} className="drop-shadow-[0_5px_10px_rgba(0,0,0,0.5)]" style={{ color: 'var(--site-fg)' }} />,
-      title: 'Globally fluent.',
-      desc: '40+ languages. Cross-cultural teams. One global standard.',
-      baseColor: 'from-[#0EA5E9] to-[#3B82F6]'
-    },
-    {
-      id: '04',
-      icon: <ShieldCheck size={48} className="drop-shadow-[0_5px_10px_rgba(0,0,0,0.5)]" style={{ color: 'var(--site-fg)' }} />,
-      title: 'Responsibly delivered.',
-      desc: 'Ethical by design. Secure by default. Governance built in.',
-      baseColor: 'from-[#8B5CF6] to-[#8B5CF6]'
-    }
-  ];
+
 
   return (
     <section
@@ -76,34 +47,7 @@ export const WhySection = ({ standalone }: Props) => {
           </motion.div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {reasons.map((reason, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: index * 0.1, duration: 0.6 }}
-              className="border border-[var(--site-border)] rounded-[24px] p-6 sm:p-8 transition-all duration-300 relative overflow-hidden flex flex-col items-start group hover:border-[var(--site-fg)] hover:shadow-xl"
-              style={{ backgroundColor: 'var(--site-bg)' }}
-            >
-              <div className="font-medium text-[15px] mb-8" style={{ color: 'var(--site-fg)' }}>{reason.id}</div>
-              <div className="mb-10 relative flex justify-start items-center">
-                <div className={`absolute top-1/2 left-6 -translate-x-1/2 -translate-y-1/2 w-16 h-16 bg-gradient-to-r ${reason.baseColor} opacity-20 group-hover:opacity-40 transition-opacity duration-300 blur-[20px] rounded-full`}></div>
-                <div className="relative z-10 transition-transform duration-300 group-hover:scale-110 group-hover:-translate-y-2">
-                  {reason.icon}
-                </div>
-              </div>
-              <h3 className="text-[22px] font-bold mb-6 relative tracking-[-0.02em]" style={{ color: 'var(--site-fg)' }}>
-                {reason.title}
-                <div className={`absolute -bottom-3 left-0 w-8 h-[2px] bg-gradient-to-r ${reason.baseColor}`}></div>
-              </h3>
-              <p className="text-[15px] leading-[1.5] mt-4 font-normal" style={{ color: 'var(--site-muted)' }}>
-                {reason.desc}
-              </p>
-            </motion.div>
-          ))}
-        </div>
+
       </div>
     </section>
   );

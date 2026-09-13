@@ -51,28 +51,7 @@ const services: Service[] = [
     desc: "Role-based programs that build genuine AI fluency, from frontline teams to the boardroom.",
     detail: ["Role-based curricula", "Hands-on practice sessions", "Leadership briefings"],
   },
-  {
-    id: "05",
-    name: "Sales",
-    desc: "AI-augmented playbooks that help revenue teams research, personalise and close faster.",
-    detail: ["Account research", "Personalised outreach", "Pipeline and follow-up support"],
-  },
-  {
-    id: "06",
-    name: "Internal Teams",
-    desc: "Workflow redesign and custom copilots for Finance, Legal, IT, Operations and more.",
-    detail: ["Workflow mapping", "Function-specific copilots", "Process redesign"],
-  },
-  {
-    id: "07",
-    name: "HR",
-    desc: "AI embedded into the employee experience, responsibly and at scale.",
-    detail: [
-      "Employee-facing assistants",
-      "Responsible-use guardrails",
-      "Hiring and onboarding support",
-    ],
-  },
+
 ];
 
 const ServiceCard = ({ service, index }: { service: Service, index: number }) => {

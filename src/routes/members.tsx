@@ -14,6 +14,7 @@ import imgAjith from '@/assets/ai_creators/Ajith ( ai creator ).jpeg';
 import imgImran from '@/assets/ai_creators/SYED IMRAN ai creator.jpeg';
 import imgUnknown from '@/assets/ai_creators/WhatsApp Image 2026-09-10 at 00.15.49.jpeg';
 import imgAyush from '@/assets/ai_creators/ayush - ai creator.jpeg';
+import imgAmarnath from '@/assets/ai_creators/Amarnath - ai creator.png';
 
 export const Route = createFileRoute('/members')({
   head: () => ({
@@ -63,7 +64,8 @@ const gridMembers: { name: string; role: string; image: string; imagePosition?: 
   { name: 'Ajith', role: 'AI Creator', image: teamSouvik },
   { name: 'Syed Imran', role: 'AI Creator', image: imgImran, imagePosition: 'object-center' },
   { name: 'Ayush', role: 'AI Creator', image: imgAyush },
-  { name: '', role: '', image: imgUnknown },
+  { name: 'Monish', role: 'AI Creator', image: imgUnknown },
+  { name: 'Amarnath', role: 'AI Creator', image: imgAmarnath },
 ];
 
 const TOTAL_GRID_SLOTS = 20;

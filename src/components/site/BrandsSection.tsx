@@ -11,7 +11,7 @@ import brandAlluCinemas from '@/assets/brands/allu_cinemas.png';
 import brandChallani from '@/assets/brands/challani.png';
 import brandNextface from '@/assets/brands/nextface.png';
 import brandSpinSalon from '@/assets/brands/spin_salon.png';
-import brandSterling from '@/assets/brands/sterling.png';
+import brandSterling from '@/assets/brands/sterling(2).png';
 
 type BrandCategory = 'Luxe & Lifestyle' | 'Culinary Collection' | 'Entertainment Hub' | 'Wellness Collective';
 
@@ -60,6 +60,7 @@ export const BrandsSection = ({ standalone }: Props) => {
     const isChallani = brand.name === 'Challani Jewellery Mart';
     const isMilkyMist = brand.name === 'Milky Mist';
     const isRareRabbit = brand.name === 'Rare Rabbit';
+    const isSterling = brand.name === 'Sterling';
 
     return (
       <div
@@ -81,7 +82,7 @@ export const BrandsSection = ({ standalone }: Props) => {
             src={brand.logo}
             alt={brand.name}
             className={`transition-all duration-500 ${!brand.whiteBgInDark && 'dark:drop-shadow-[0_0_12px_rgba(255,255,255,0.4)]'} ${isDimmed ? 'grayscale' : ''} ${isChallani ? 'object-cover w-full h-full' : 'max-h-[55px] sm:max-h-[85px] max-w-[150px] sm:max-w-[250px] object-contain'
-              } ${isRareRabbit ? 'scale-[1.3]' : ''} ${isMilkyMist ? 'scale-[1.7]' : ''}`}
+              } ${isRareRabbit ? 'scale-[1.3]' : ''} ${isMilkyMist ? 'scale-[1.7]' : ''} ${isSterling ? 'scale-[1.5]' : ''}`}
           />
         </div>
       </div>
