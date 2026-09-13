@@ -21,32 +21,24 @@ export const Route = createFileRoute('/faq')({
 
 const faqs = [
   {
-    question: 'What does ma.ai do?',
-    answer: 'We are a strategy, design, and engineering studio that builds AI-powered products, brand experiences, and intelligent campaigns for ambitious companies.',
+    question: 'How fast is fast?',
+    answer: 'Short-form performance creative: 3–5 days. A full brand film: 2–3 weeks. Rush timelines exist and we\'ll tell you honestly what they cost.',
   },
   {
-    question: 'Who do you typically work with?',
-    answer: 'We partner with startups, scale-ups, and enterprise teams who want to turn complex ideas into simple, human-centred digital experiences.',
+    question: 'Will it look AI-generated?',
+    answer: 'Not if we\'ve done our job. The generation is one step of a pipeline that also includes direction, retouching, grade and sound. That\'s where the realism actually comes from.',
   },
   {
-    question: 'How do your projects usually start?',
-    answer: 'Most engagements begin with a discovery phase where we understand your goals, users, and constraints. From there we propose a tailored approach, timeline, and team.',
+    question: 'Do you shoot real footage too?',
+    answer: 'Yes. We\'re not precious about the method. We pick whatever gets the best result for the budget.',
   },
   {
-    question: 'What services do you offer?',
-    answer: 'Our services span AI strategy, product design, software engineering, data intelligence, and brand experience — often combined into end-to-end delivery.',
+    question: 'Can we use the work in paid ads?',
+    answer: 'Yes. Everything ships with commercial usage rights. We\'ll flag anything with limitations before we make it.',
   },
   {
-    question: 'Do you work with international clients?',
-    answer: 'Yes. While our studio is based in Chennai, India, we work with clients across time zones and have processes in place for remote collaboration.',
-  },
-  {
-    question: 'How long does a typical project take?',
-    answer: 'Timelines vary based on scope. A focused discovery or prototype may take a few weeks, while a full product build can span several months. We define this clearly during scoping.',
-  },
-  {
-    question: 'How can I join the team?',
-    answer: 'Visit our Careers page to see open roles. If you do not see a perfect fit, you can still send your portfolio to hello@ma.ai — we are always looking for curious people.',
+    question: 'Do we have to take all four services?',
+    answer: 'No. Plenty of clients start with video only. The services compound when combined, but they stand alone.',
   },
 ];
 

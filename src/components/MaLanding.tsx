@@ -9,7 +9,7 @@ import { BrandsSection } from '@/components/site/BrandsSection';
 import { WorksSection } from '@/components/site/WorksSection';
 import { WhySection } from '@/components/site/WhySection';
 import { TeamSection } from '@/components/site/TeamSection';
-import { ServicesSection } from '@/components/site/ServicesSection';
+import { ServicesSection, HomeFaqSection } from '@/components/site/ServicesSection';
 import showReelVideo from '@/assets/SHOW REEL HD .mp4';
 import finalDraftVideo from '@/assets/FINAL DRAFT (1).mp4';
 
@@ -274,6 +274,7 @@ export default function MaLanding() {
           <WhySection />
           <TeamSection />
           <ServicesSection />
+          <HomeFaqSection />
         </main>
         <SiteFooter />
       </div>

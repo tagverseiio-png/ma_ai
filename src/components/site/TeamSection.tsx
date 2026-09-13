@@ -37,7 +37,7 @@ export const TeamSection = ({ standalone }: Props) => {
     {
       name: 'Vinay Sakhrani',
       role: 'Co-Founder & Creative Director',
-      bio: 'The creative brain behind everything you see. Big believer in work-life balance — until a deadline says otherwise, and then it\'s an all-nighter, no questions asked. Chill by default, unstoppable on demand.',
+      bio: 'Leads the creative across every project. Measured by default, relentless when the work calls for it.',
       ig: 'Vinay_sakhrani',
       image: teamVinay
     },

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { Link } from "@tanstack/react-router";
-import { ArrowRight, Plus } from "lucide-react";
+import { ArrowRight, Plus, Minus } from "lucide-react";
 import { fadeInUp } from "@/components/site/SiteChrome";
 
 // Accent is the site-wide #8B5CF6 used across the hero, story and works sections.
@@ -21,37 +21,44 @@ interface Service {
 const services: Service[] = [
   {
     id: "01",
-    name: "Generative AI",
-    desc: "Custom GenAI agents, copilots and knowledge systems, built around your workflows and your data.",
+    name: "AI Video Production",
+    desc: "Photoreal film made with generative pipelines — story first, then shot list, then generation, then a proper grade and sound pass.",
     detail: [
-      "Agent and copilot design",
-      "Retrieval over your own data",
-      "Workflow integration and evals",
+      "Brand films, product launches & performance ads",
+      "UGC-style creative at scale",
+      "Delivered in every ratio with source files & captions",
     ],
   },
   {
     id: "02",
-    name: "Change Management via AI Video",
-    desc: "Personalised AI video that turns change communication into something people actually watch, at scale and in any language.",
+    name: "Video Production",
+    desc: "Real cameras, real crew — with AI for set extensions, impossible angles and the reshoot you'd otherwise fly back for.",
     detail: [
-      "Personalised video at scale",
-      "Multi-language delivery",
-      "Comms for rollouts and migrations",
+      "Concept, script, storyboard & direction",
+      "Edit, colour, sound design & VFX",
+      "Versioning and localisation",
     ],
   },
   {
     id: "03",
-    name: "Adoption",
-    desc: "Programs that turn AI pilots into everyday habits, built around behaviour change and measurable ROI.",
-    detail: ["Pilot-to-production planning", "Behaviour change design", "ROI measurement"],
+    name: "Performance Marketing",
+    desc: "Our media team runs the same assets they helped brief — creative and media decisions made in one conversation, not two agencies.",
+    detail: [
+      "Meta, Google, YouTube & TikTok",
+      "Full-funnel from prospecting to retention",
+      "Weekly reporting that says what to do next",
+    ],
   },
   {
     id: "04",
-    name: "Training",
-    desc: "Role-based programs that build genuine AI fluency, from frontline teams to the boardroom.",
-    detail: ["Role-based curricula", "Hands-on practice sessions", "Leadership briefings"],
+    name: "Social Media Management",
+    desc: "Always-on presence run by people who can also make the asset. If Tuesday's comments spark an idea, the video exists Wednesday.",
+    detail: [
+      "Channel strategy, calendars & scripting",
+      "Daily publishing & community management",
+      "Creator coordination & trend monitoring",
+    ],
   },
-
 ];
 
 const ServiceCard = ({ service, index }: { service: Service, index: number }) => {
@@ -228,3 +235,134 @@ export const ServicesSection = () => {
 };
 
 export default ServicesSection;
+
+// ─── Home FAQ Section ────────────────────────────────────────────────────────
+
+const homeFaqs = [
+  {
+    question: 'How fast is fast?',
+    answer: 'Short-form performance creative: 3–5 days. A full brand film: 2–3 weeks. Rush timelines exist and we\'ll tell you honestly what they cost.',
+  },
+  {
+    question: 'Will it look AI-generated?',
+    answer: 'Not if we\'ve done our job. The generation is one step of a pipeline that also includes direction, retouching, grade and sound. That\'s where the realism actually comes from.',
+  },
+  {
+    question: 'Do you shoot real footage too?',
+    answer: 'Yes. We\'re not precious about the method. We pick whatever gets the best result for the budget.',
+  },
+  {
+    question: 'Can we use the work in paid ads?',
+    answer: 'Yes. Everything ships with commercial usage rights. We\'ll flag anything with limitations before we make it.',
+  },
+  {
+    question: 'Do we have to take all four services?',
+    answer: 'No. Plenty of clients start with video only. The services compound when combined, but they stand alone.',
+  },
+];
+
+export const HomeFaqSection = () => {
+  const [openIndex, setOpenIndex] = useState<number | null>(null);
+
+  return (
+    <section
+      id="faq"
+      className="relative overflow-hidden py-16 md:py-24"
+      style={{
+        backgroundColor: 'var(--services-bg)',
+        borderTopWidth: '1px',
+        borderTopStyle: 'solid',
+        borderTopColor: 'var(--services-border)',
+      }}
+    >
+      {/* Ambient glow */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute top-[-20%] left-[-10%] h-[500px] w-[500px] rounded-full blur-[160px]"
+        style={{ backgroundColor: 'var(--services-accent-glow-2)' }}
+      />
+
+      <div className="relative z-10 mx-auto max-w-[1400px] px-5 md:px-12">
+        {/* Header */}
+        <div className="mb-12 md:mb-16 flex flex-col gap-4">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={fadeInUp}
+            className="flex items-center gap-3"
+          >
+            <div aria-hidden="true" className="h-2.5 w-2.5 rounded-full bg-[#8B5CF6]" />
+            <span
+              className="text-[12px] font-bold uppercase tracking-[0.1em] md:text-[13px]"
+              style={{ color: 'var(--services-text)' }}
+            >
+              FAQ
+            </span>
+          </motion.div>
+
+          <motion.h2
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={fadeInUp}
+            className="text-[40px] sm:text-[52px] md:text-[64px] font-bold leading-[0.95] tracking-[-0.04em]"
+            style={{ color: 'var(--services-text)' }}
+          >
+            Quick answers.
+          </motion.h2>
+        </div>
+
+        {/* Accordion */}
+        <div className="max-w-[860px]">
+          {homeFaqs.map((faq, index) => (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: index * 0.07, duration: 0.5, ease: EASE }}
+              className="border-b"
+              style={{ borderColor: 'var(--services-border)' }}
+            >
+              <button
+                onClick={() => setOpenIndex(openIndex === index ? null : index)}
+                className="group w-full py-6 flex items-start justify-between gap-6 text-left"
+              >
+                <span
+                  className="text-[17px] sm:text-[19px] font-semibold leading-[1.3] transition-colors duration-300 group-hover:text-[#8B5CF6]"
+                  style={{ color: 'var(--services-text)' }}
+                >
+                  {faq.question}
+                </span>
+                <span
+                  className="shrink-0 mt-1 h-8 w-8 rounded-full border flex items-center justify-center transition-all duration-300 group-hover:border-[#8B5CF6] group-hover:text-[#8B5CF6]"
+                  style={{ borderColor: 'var(--services-border)', color: 'var(--services-text-muted)' }}
+                >
+                  {openIndex === index ? <Minus size={15} /> : <Plus size={15} />}
+                </span>
+              </button>
+
+              {openIndex === index && (
+                <motion.div
+                  initial={{ height: 0, opacity: 0 }}
+                  animate={{ height: 'auto', opacity: 1 }}
+                  exit={{ height: 0, opacity: 0 }}
+                  transition={{ duration: 0.3, ease: EASE }}
+                  className="overflow-hidden"
+                >
+                  <p
+                    className="pb-6 text-[16px] leading-[1.7]"
+                    style={{ color: 'var(--services-text-muted)' }}
+                  >
+                    {faq.answer}
+                  </p>
+                </motion.div>
+              )}
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};
