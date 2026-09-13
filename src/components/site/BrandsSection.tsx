@@ -9,7 +9,7 @@ import brandMilkyMist from '@/assets/brands/Milky_mist.png';
 import brandRareRabbit from '@/assets/brands/rare_rabbit.png';
 import brandAlluCinemas from '@/assets/brands/allu_cinemas.png';
 import brandChallani from '@/assets/brands/challani.png';
-import brandNextface from '@/assets/brands/nextface.png';
+import brandNextface from '@/assets/brands/nxtface.png';
 import brandSpinSalon from '@/assets/brands/spin_salon.png';
 import brandSterling from '@/assets/brands/sterling(2).png';
 

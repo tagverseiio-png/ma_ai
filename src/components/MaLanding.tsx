@@ -11,6 +11,7 @@ import { WhySection } from '@/components/site/WhySection';
 import { TeamSection } from '@/components/site/TeamSection';
 import { ServicesSection } from '@/components/site/ServicesSection';
 import showReelVideo from '@/assets/SHOW REEL HD .mp4';
+import finalDraftVideo from '@/assets/FINAL DRAFT (1).mp4';
 
 import navLogoDarkImg from '@/assets/Ma_nav_logo_dark.png';
 
@@ -18,7 +19,8 @@ const HeroSection = ({ introPhase }: { introPhase: 'video' | 'nav' | 'complete' 
   const { scrollY } = useScroll();
   const [isMobile, setIsMobile] = useState(false);
   const [videoReady, setVideoReady] = useState(false);
-  const videoRef = useRef<HTMLVideoElement>(null);
+  const introVideoRef = useRef<HTMLVideoElement>(null);
+  const heroVideoRef = useRef<HTMLVideoElement>(null);
   const hasSeekedRef = useRef(false);
 
   useEffect(() => {
@@ -29,7 +31,7 @@ const HeroSection = ({ introPhase }: { introPhase: 'video' | 'nav' | 'complete' 
   }, []);
 
   useEffect(() => {
-    const video = videoRef.current;
+    const video = introVideoRef.current;
     if (!video) return;
 
     const handleLoadedMetadata = () => {
@@ -64,34 +66,44 @@ const HeroSection = ({ introPhase }: { introPhase: 'video' | 'nav' | 'complete' 
 
   // Handle video play based on introPhase
   useEffect(() => {
-    const video = videoRef.current;
-    if (!video || !videoReady) return;
-
-    if (introPhase === 'video' || introPhase === 'nav' || introPhase === 'complete') {
-      video.play().catch(() => {});
-    } else {
-      video.pause();
+    const introVideo = introVideoRef.current;
+    const heroVideo = heroVideoRef.current;
+    
+    if (introVideo && videoReady) {
+      if (introPhase !== 'complete') {
+        introVideo.play().catch(() => {});
+      } else {
+        introVideo.pause();
+      }
+    }
+    
+    if (heroVideo) {
+      if (introPhase === 'complete') {
+        heroVideo.play().catch(() => {});
+      } else {
+        heroVideo.pause();
+      }
     }
   }, [introPhase, videoReady]);
 
   useEffect(() => {
-    const video = videoRef.current;
-    if (!video) return;
+    const heroVideo = heroVideoRef.current;
+    if (!heroVideo) return;
 
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (entry && entry.isIntersecting) {
-          video.play().catch(() => { });
+        if (entry && entry.isIntersecting && introPhase === 'complete') {
+          heroVideo.play().catch(() => { });
         } else {
-          video.pause();
+          heroVideo.pause();
         }
       },
       { threshold: 0.1 }
     );
 
-    observer.observe(video);
+    observer.observe(heroVideo);
     return () => observer.disconnect();
-  }, []);
+  }, [introPhase]);
 
   const contentOpacity = useTransform(scrollY, [0, 150], [1, 0]);
   const pointerEvents = useTransform(scrollY, (v) => (v > 50 ? 'none' : 'auto'));
@@ -99,7 +111,28 @@ const HeroSection = ({ introPhase }: { introPhase: 'video' | 'nav' | 'complete' 
   return (
     <section className="relative min-h-[100svh] bg-[#111111] flex flex-col overflow-hidden">
       <video
-        ref={videoRef}
+        ref={introVideoRef}
+        muted
+        playsInline
+        preload="auto"
+        disablePictureInPicture
+        className="absolute inset-0 w-full h-full object-cover z-0"
+        style={{
+          objectPosition: 'center',
+          willChange: 'transform',
+          transform: 'translateZ(0)',
+          backfaceVisibility: 'hidden',
+          WebkitBackfaceVisibility: 'hidden',
+          opacity: introPhase !== 'complete' && videoReady ? 1 : 0,
+          transition: 'opacity 0.6s ease-in-out',
+        }}
+        suppressHydrationWarning
+      >
+        <source src={showReelVideo} type="video/mp4" suppressHydrationWarning />
+      </video>
+
+      <video
+        ref={heroVideoRef}
         loop
         muted
         playsInline
@@ -112,12 +145,12 @@ const HeroSection = ({ introPhase }: { introPhase: 'video' | 'nav' | 'complete' 
           transform: 'translateZ(0)',
           backfaceVisibility: 'hidden',
           WebkitBackfaceVisibility: 'hidden',
-          opacity: (introPhase === 'video' || introPhase === 'nav' || introPhase === 'complete') && videoReady ? 1 : 0,
+          opacity: introPhase === 'complete' ? 1 : 0,
           transition: 'opacity 0.6s ease-in-out',
         }}
         suppressHydrationWarning
       >
-        <source src={showReelVideo} type="video/mp4" suppressHydrationWarning />
+        <source src={finalDraftVideo} type="video/mp4" suppressHydrationWarning />
       </video>
 
       <div className="absolute inset-0 bg-black/40 z-0 pointer-events-none"></div>

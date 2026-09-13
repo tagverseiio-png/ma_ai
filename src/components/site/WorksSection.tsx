@@ -22,9 +22,9 @@ import yt1 from '@/assets/YouTube Video/Found Through Trust - goldenmatrimonial 
 
 const worksData = [
   // Showreel / Brand Films
-  { id: 1, title: 'MA AI Brand Film', type: 'Showreel / Brand Films', duration: '01:00', video: brandFilm1, desc: 'A showcase of AI-crafted stories, films and experiences.', featured: true },
-  { id: 2, title: 'Show Reel HD', type: 'Showreel / Brand Films', duration: '00:45', video: showReel2, desc: 'A showcase of AI-crafted stories, films and experiences.' },
-  { id: 3, title: 'Showreel 2', type: 'Showreel / Brand Films', duration: '01:15', video: showReel3, desc: 'A showcase of AI-crafted stories, films and experiences.' },
+  { id: 1, title: 'Showreel 1', type: 'Showreel / Brand Films', duration: '01:00', video: brandFilm1, desc: 'A showcase of AI-crafted stories, films and experiences.', featured: true },
+  { id: 2, title: 'Showreel 2', type: 'Showreel / Brand Films', duration: '00:45', video: showReel2, desc: 'A showcase of AI-crafted stories, films and experiences.' },
+  { id: 3, title: 'Showreel 3', type: 'Showreel / Brand Films', duration: '01:15', video: showReel3, desc: 'A showcase of AI-crafted stories, films and experiences.' },
   { id: 4, title: 'UGC Content', type: 'Showreel / Brand Films', duration: '00:30', video: ugc, desc: 'A showcase of AI-crafted stories, films and experiences.' },
   // Client Case Studies
   { id: 5, title: 'Hotel Feature', type: 'Client Case Studies', duration: '00:45', video: hotel1, desc: 'A showcase of AI-crafted stories, films and experiences.' },
