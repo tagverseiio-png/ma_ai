@@ -240,24 +240,20 @@ export default ServicesSection;
 
 const homeFaqs = [
   {
-    question: 'How fast is fast?',
-    answer: 'Short-form performance creative: 3–5 days. A full brand film: 2–3 weeks. Rush timelines exist and we\'ll tell you honestly what they cost.',
+    question: 'What does MA AI Studio do?',
+    answer: 'We combine AI, creativity, and strategy to create high-quality visual and digital content for brands — from concepts and campaigns to social media and advertising assets.',
   },
   {
-    question: 'Will it look AI-generated?',
-    answer: 'Not if we\'ve done our job. The generation is one step of a pipeline that also includes direction, retouching, grade and sound. That\'s where the realism actually comes from.',
+    question: 'How does AI fit into your creative process?',
+    answer: 'AI helps us move faster, explore more ideas, and bring concepts to life. We use it as a creative tool, while strategy, storytelling, and the final creative direction remain human-led.',
   },
   {
-    question: 'Do you shoot real footage too?',
-    answer: 'Yes. We\'re not precious about the method. We pick whatever gets the best result for the budget.',
+    question: 'Can you work with our existing brand identity?',
+    answer: 'Absolutely. We work within your brand guidelines, visual language, tone, and objectives to make sure the content feels consistent with your brand.',
   },
   {
-    question: 'Can we use the work in paid ads?',
-    answer: 'Yes. Everything ships with commercial usage rights. We\'ll flag anything with limitations before we make it.',
-  },
-  {
-    question: 'Do we have to take all four services?',
-    answer: 'No. Plenty of clients start with video only. The services compound when combined, but they stand alone.',
+    question: 'Can you create content for both social media and advertising?',
+    answer: 'Yes. We create content designed for organic social, paid campaigns, digital platforms, and other brand communication needs, depending on the campaign objective.',
   },
 ];
 

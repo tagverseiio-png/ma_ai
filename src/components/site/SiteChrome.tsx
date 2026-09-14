@@ -87,6 +87,7 @@ const navLinks = [
   { label: 'Why', to: '/why' },
   { label: 'Team', to: '/team' },
   { label: 'Services', to: '/services' },
+  { label: 'FAQ', to: '/faq' },
 ] as const;
 
 const ThemeToggle = () => {

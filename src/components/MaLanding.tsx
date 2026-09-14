@@ -11,7 +11,6 @@ import { WhySection } from '@/components/site/WhySection';
 import { TeamSection } from '@/components/site/TeamSection';
 import { ServicesSection, HomeFaqSection } from '@/components/site/ServicesSection';
 import showReelVideo from '@/assets/SHOW REEL HD .mp4';
-import finalDraftVideo from '@/assets/FINAL DRAFT (1).mp4';
 
 import navLogoDarkImg from '@/assets/Ma_nav_logo_dark.png';
 
@@ -150,7 +149,7 @@ const HeroSection = ({ introPhase }: { introPhase: 'video' | 'nav' | 'complete' 
         }}
         suppressHydrationWarning
       >
-        <source src={finalDraftVideo} type="video/mp4" suppressHydrationWarning />
+        <source src={showReelVideo} type="video/mp4" suppressHydrationWarning />
       </video>
 
       <div className="absolute inset-0 bg-black/40 z-0 pointer-events-none"></div>
@@ -243,7 +242,8 @@ export default function MaLanding() {
       '/work': 'work',
       '/why': 'why',
       '/team': 'team',
-      '/services': 'services'
+      '/services': 'services',
+      '/faq': 'faq'
     };
 
     const sectionId = pathToId[location.pathname];
