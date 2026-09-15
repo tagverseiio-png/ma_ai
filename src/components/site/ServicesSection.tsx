@@ -155,6 +155,9 @@ export const ServicesSection = () => {
         style={{ backgroundColor: 'var(--services-accent-glow-2)' }}
       />
 
+      <div className="absolute top-[10%] right-[5%] w-[400px] h-[400px] rounded-full bg-[#8B5CF6]/10 blur-[120px] pointer-events-none dark:hidden" />
+      <div className="absolute bottom-[5%] left-[-3%] w-[500px] h-[500px] rounded-full bg-[#7C3AED]/8 blur-[140px] pointer-events-none dark:hidden" />
+
       <div className="relative z-10 mx-auto max-w-[1400px] px-5 md:px-12">
         <div className="mb-14 flex flex-col gap-8 md:mb-20 md:flex-row md:items-start md:justify-between md:gap-12">
           <div className="flex flex-col items-start text-left">
@@ -263,6 +266,9 @@ export const HomeFaqSection = () => {
         className="pointer-events-none absolute top-[-20%] left-[-10%] h-[500px] w-[500px] rounded-full blur-[160px]"
         style={{ backgroundColor: 'var(--services-accent-glow-2)' }}
       />
+
+      <div className="absolute top-[10%] right-[5%] w-[400px] h-[400px] rounded-full bg-[#8B5CF6]/10 blur-[120px] pointer-events-none dark:hidden" />
+      <div className="absolute bottom-[5%] left-[-3%] w-[500px] h-[500px] rounded-full bg-[#7C3AED]/8 blur-[140px] pointer-events-none dark:hidden" />
 
       <div className="relative z-10 mx-auto max-w-[1400px] px-5 md:px-12">
         {/* Header */}

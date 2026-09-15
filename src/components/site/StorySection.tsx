@@ -14,6 +14,9 @@ export const StorySection = ({ standalone }: Props) => (
     className={`py-16 md:py-24 relative overflow-hidden transition-colors duration-300 ${standalone ? '' : 'border-t border-[var(--site-border)]'}`}
     style={{ backgroundColor: 'var(--site-bg)' }}
   >
+    <div className="absolute top-[-10%] left-[-5%] w-[500px] h-[500px] rounded-full bg-[#8B5CF6]/10 blur-[120px] pointer-events-none dark:hidden" />
+    <div className="absolute bottom-[-15%] right-[-8%] w-[600px] h-[600px] rounded-full bg-[#7C3AED]/8 blur-[140px] pointer-events-none dark:hidden" />
+
     <div className="max-w-[1400px] mx-auto px-5 md:px-12 relative z-10">
       <div className="grid lg:grid-cols-2 gap-10 lg:gap-12 items-center">
         <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={staggerContainer} className="relative z-20">

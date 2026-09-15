@@ -141,6 +141,9 @@ export const WorksSection = ({ standalone }: Props) => {
       className={`py-16 md:py-24 relative overflow-hidden transition-colors duration-300 ${standalone ? '' : 'border-t border-[var(--site-border)]'}`}
       style={{ backgroundColor: 'var(--site-bg)' }}
     >
+      <div className="absolute top-[-10%] left-[-5%] w-[500px] h-[500px] rounded-full bg-[#8B5CF6]/10 blur-[120px] pointer-events-none dark:hidden" />
+      <div className="absolute bottom-[-15%] right-[-8%] w-[600px] h-[600px] rounded-full bg-[#7C3AED]/8 blur-[140px] pointer-events-none dark:hidden" />
+
       <div className="max-w-[1400px] mx-auto px-5 md:px-12 relative z-10">
         <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-6 mb-10 md:mb-14">
           <div className="flex flex-col items-start text-left">

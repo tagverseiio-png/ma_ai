@@ -109,10 +109,10 @@ export const BrandsSection = ({ standalone }: Props) => {
         .marquee-paused { animation-play-state: paused; }
       `}</style>
 
-      <div className="absolute top-[-10%] left-[-5%] w-[500px] h-[500px] rounded-full bg-[#8B5CF6]/10 blur-[120px] pointer-events-none" />
-      <div className="absolute bottom-[-15%] right-[-8%] w-[600px] h-[600px] rounded-full bg-[#7C3AED]/8 blur-[140px] pointer-events-none" />
-      <div className="absolute top-[30%] right-[15%] w-[300px] h-[300px] rounded-full bg-[#A78BFA]/10 blur-[100px] pointer-events-none" />
-      <div className="absolute bottom-[10%] left-[10%] w-[250px] h-[250px] rounded-full bg-[#8B5CF6]/6 blur-[90px] pointer-events-none" />
+      <div className="absolute top-[-10%] left-[-5%] w-[500px] h-[500px] rounded-full bg-[#8B5CF6]/10 blur-[120px] pointer-events-none dark:hidden" />
+      <div className="absolute bottom-[-15%] right-[-8%] w-[600px] h-[600px] rounded-full bg-[#7C3AED]/8 blur-[140px] pointer-events-none dark:hidden" />
+      <div className="absolute top-[30%] right-[15%] w-[300px] h-[300px] rounded-full bg-[#A78BFA]/10 blur-[100px] pointer-events-none dark:hidden" />
+      <div className="absolute bottom-[10%] left-[10%] w-[250px] h-[250px] rounded-full bg-[#8B5CF6]/6 blur-[90px] pointer-events-none dark:hidden" />
 
       <div className="max-w-[1400px] mx-auto px-5 md:px-12 relative z-10">
         <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={staggerContainer} className="mb-12 md:mb-16 relative">
