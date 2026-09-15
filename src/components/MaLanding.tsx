@@ -7,7 +7,6 @@ import { AmbientOrb } from '@/components/site/AmbientOrb';
 import { StorySection } from '@/components/site/StorySection';
 import { BrandsSection } from '@/components/site/BrandsSection';
 import { WorksSection } from '@/components/site/WorksSection';
-import { WhySection } from '@/components/site/WhySection';
 import { TeamSection } from '@/components/site/TeamSection';
 import { ServicesSection, HomeFaqSection } from '@/components/site/ServicesSection';
 import showReelVideo from '@/assets/SHOW REEL HD .mp4';
@@ -240,7 +239,6 @@ export default function MaLanding() {
       '/about': 'about',
       '/brands': 'brands',
       '/work': 'work',
-      '/why': 'why',
       '/team': 'team',
       '/services': 'services',
       '/faq': 'faq'
@@ -271,7 +269,6 @@ export default function MaLanding() {
           <StorySection />
           <BrandsSection />
           <WorksSection />
-          <WhySection />
           <TeamSection />
           <ServicesSection />
           <HomeFaqSection />

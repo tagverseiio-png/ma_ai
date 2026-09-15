@@ -170,7 +170,7 @@ export const ServicesSection = () => {
                 className="text-[12px] font-bold uppercase tracking-[0.1em] md:text-[13px]"
                 style={{ color: 'var(--services-text)' }}
               >
-                06 / Services
+                05 / Services
               </span>
             </motion.div>
 

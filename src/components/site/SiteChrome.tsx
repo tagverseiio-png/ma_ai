@@ -84,7 +84,6 @@ const navLinks = [
   { label: 'About', to: '/about' },
   { label: 'Brands', to: '/brands' },
   { label: 'Work', to: '/work' },
-  { label: 'Why', to: '/why' },
   { label: 'Team', to: '/team' },
   { label: 'Services', to: '/services' },
   { label: 'FAQ', to: '/faq' },

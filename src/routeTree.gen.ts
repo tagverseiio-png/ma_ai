@@ -22,7 +22,6 @@ import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as ServicesRouteImport } from './routes/services'
 import { Route as TeamRouteImport } from './routes/team'
 import { Route as TermsRouteImport } from './routes/terms'
-import { Route as WhyRouteImport } from './routes/why'
 import { Route as WorkRouteImport } from './routes/work'
 
 const IndexRoute = IndexRouteImport.update({
@@ -90,11 +89,6 @@ const TermsRoute = TermsRouteImport.update({
   path: '/terms',
   getParentRoute: () => rootRouteImport,
 } as any)
-const WhyRoute = WhyRouteImport.update({
-  id: '/why',
-  path: '/why',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const WorkRoute = WorkRouteImport.update({
   id: '/work',
   path: '/work',
@@ -115,7 +109,6 @@ export interface FileRoutesByFullPath {
   '/services': typeof ServicesRoute
   '/team': typeof TeamRoute
   '/terms': typeof TermsRoute
-  '/why': typeof WhyRoute
   '/work': typeof WorkRoute
 }
 export interface FileRoutesByTo {
@@ -132,7 +125,6 @@ export interface FileRoutesByTo {
   '/services': typeof ServicesRoute
   '/team': typeof TeamRoute
   '/terms': typeof TermsRoute
-  '/why': typeof WhyRoute
   '/work': typeof WorkRoute
 }
 export interface FileRoutesById {
@@ -150,7 +142,6 @@ export interface FileRoutesById {
   '/services': typeof ServicesRoute
   '/team': typeof TeamRoute
   '/terms': typeof TermsRoute
-  '/why': typeof WhyRoute
   '/work': typeof WorkRoute
 }
 export interface FileRouteTypes {
@@ -169,7 +160,6 @@ export interface FileRouteTypes {
     | '/services'
     | '/team'
     | '/terms'
-    | '/why'
     | '/work'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -186,7 +176,6 @@ export interface FileRouteTypes {
     | '/services'
     | '/team'
     | '/terms'
-    | '/why'
     | '/work'
   id:
     | '__root__'
@@ -203,7 +192,6 @@ export interface FileRouteTypes {
     | '/services'
     | '/team'
     | '/terms'
-    | '/why'
     | '/work'
   fileRoutesById: FileRoutesById
 }
@@ -221,7 +209,6 @@ export interface RootRouteChildren {
   ServicesRoute: typeof ServicesRoute
   TeamRoute: typeof TeamRoute
   TermsRoute: typeof TermsRoute
-  WhyRoute: typeof WhyRoute
   WorkRoute: typeof WorkRoute
 }
 
@@ -318,13 +305,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TermsRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/why': {
-      id: '/why'
-      path: '/why'
-      fullPath: '/why'
-      preLoaderRoute: typeof WhyRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/work': {
       id: '/work'
       path: '/work'
@@ -349,7 +329,6 @@ const rootRouteChildren: RootRouteChildren = {
   ServicesRoute: ServicesRoute,
   TeamRoute: TeamRoute,
   TermsRoute: TermsRoute,
-  WhyRoute: WhyRoute,
   WorkRoute: WorkRoute,
 }
 export const routeTree = rootRouteImport

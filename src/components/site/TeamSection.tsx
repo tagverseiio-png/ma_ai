@@ -67,7 +67,7 @@ export const TeamSection = ({ standalone }: Props) => {
 
       <div className="max-w-[1400px] mx-auto px-5 md:px-12 relative z-10">
         <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeInUp} className="mb-10 md:mb-14">
-          <SectionEyebrow>05 / The team</SectionEyebrow>
+          <SectionEyebrow>04 / The team</SectionEyebrow>
           <h2 className="text-[48px] sm:text-[64px] md:text-[80px] lg:text-[96px] font-bold tracking-[-0.04em] leading-[0.9]" style={{ color: 'var(--site-fg)' }}>The minds</h2>
           <h2 className="text-[48px] sm:text-[64px] md:text-[80px] lg:text-[96px] font-bold mb-8 tracking-[-0.04em] leading-[0.9]" style={{ color: 'var(--site-fg)' }}>behind ma.ai</h2>
           <div className="h-[2px] w-20 bg-[#8B5CF6]/40 mb-6"></div>
