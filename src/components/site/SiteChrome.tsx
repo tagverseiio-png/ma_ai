@@ -355,8 +355,6 @@ export const SiteFooter = ({ hideCta = false }: { hideCta?: boolean }) => {
               <li><Link to="/about" className="hover:opacity-80 transition-colors">About us</Link></li>
               <li><Link to="/work" className="hover:opacity-80 transition-colors">Our work</Link></li>
               <li><Link to="/about" className="hover:opacity-80 transition-colors">Team</Link></li>
-              <li><Link to="/careers" className="hover:opacity-80 transition-colors">Careers</Link></li>
-              <li><Link to="/insights" className="hover:opacity-80 transition-colors">Blog</Link></li>
             </ul>
           </div>
 
@@ -375,8 +373,6 @@ export const SiteFooter = ({ hideCta = false }: { hideCta?: boolean }) => {
             <h4 className="font-bold mb-6 md:mb-8 text-[12px] tracking-widest uppercase border-b-[2px] inline-block pb-2" style={{ color: 'var(--site-fg)', borderColor: 'var(--site-fg)' }}>Resources</h4>
             <ul className="space-y-4 text-[14px] font-medium" style={{ color: 'var(--site-muted)' }}>
               <li><Link to="/work" className="hover:opacity-80 transition-colors">Case studies</Link></li>
-              <li><Link to="/insights" className="hover:opacity-80 transition-colors">Insights</Link></li>
-              <li><Link to="/insights" className="hover:opacity-80 transition-colors">Newsroom</Link></li>
               <li><Link to="/faq" className="hover:opacity-80 transition-colors">FAQs</Link></li>
             </ul>
           </div>
