@@ -84,7 +84,7 @@ function HorizontalVideoCard({ p, index, onPlayFullscreen }: { p: typeof worksDa
       transition={{ delay: index * 0.1, duration: 0.5, ease: "easeOut" }}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
-      className="group relative rounded-[20px] overflow-hidden bg-white dark:bg-transparent border border-[var(--site-border)] transition-shadow hover:shadow-xl cursor-pointer flex flex-col"
+      className="group relative rounded-[20px] overflow-hidden bg-[var(--site-bg)] dark:bg-transparent border border-[var(--site-border)] transition-shadow hover:shadow-xl cursor-pointer flex flex-col"
       onClick={() => onPlayFullscreen(p.video)}
     >
       <div className="relative h-[220px] md:h-[260px] overflow-hidden bg-[#05050A]">
@@ -191,7 +191,7 @@ export const WorksSection = ({ standalone }: Props) => {
                 key={cat.name}
                 aria-pressed={selected}
                 onClick={() => setCategory(cat.match)}
-                className={`group h-[42px] px-[13px] rounded-full border ${selected ? 'border-[#8B5CF6] bg-[#8B5CF6] text-[#111111]' : 'border-[var(--site-border)] text-[var(--site-fg)] bg-white dark:bg-transparent'} text-[11px] font-bold tracking-widest hover:bg-[#8B5CF6] hover:border-[#8B5CF6] hover:text-[#111111] transition-all duration-300 flex items-center uppercase overflow-hidden`}
+                className={`group h-[42px] px-[13px] rounded-full border ${selected ? 'border-[#8B5CF6] bg-[#8B5CF6] text-white' : 'border-[var(--site-border)] text-[var(--site-fg)] bg-white dark:bg-transparent'} text-[11px] font-bold tracking-widest hover:bg-[#8B5CF6] hover:border-[#8B5CF6] hover:text-white transition-all duration-300 flex items-center uppercase overflow-hidden`}
               >
                 <div className="shrink-0 flex items-center justify-center">{cat.icon}</div>
                 <span className={`transition-all duration-300 whitespace-nowrap overflow-hidden inline-block flex items-center ${selected ? 'max-w-[200px] opacity-100 ml-2' : 'max-w-[200px] opacity-100 ml-2 md:max-w-0 md:opacity-0 md:ml-0 group-hover:max-w-[200px] group-hover:opacity-100 group-hover:ml-2'}`}>

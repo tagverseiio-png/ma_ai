@@ -18,7 +18,7 @@ export const StorySection = ({ standalone }: Props) => (
       <div className="grid lg:grid-cols-2 gap-10 lg:gap-12 items-center">
         <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={staggerContainer} className="relative z-20">
           <div className="flex flex-col items-start mb-6 md:mb-8 relative z-10 text-left">
-            <SectionEyebrow>02 / About Us</SectionEyebrow>
+            <SectionEyebrow>01 / About Us</SectionEyebrow>
           </div>
 
           <motion.h2 variants={fadeInUp} className="text-[32px] sm:text-[44px] md:text-[52px] lg:text-[60px] font-bold tracking-[-0.04em] leading-[1.1] mb-8" style={{ color: 'var(--site-fg)' }}>

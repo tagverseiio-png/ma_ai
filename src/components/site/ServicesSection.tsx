@@ -2,7 +2,7 @@ import { useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { Link } from "@tanstack/react-router";
 import { ArrowRight, Plus, Minus } from "lucide-react";
-import { fadeInUp } from "@/components/site/SiteChrome";
+import { fadeInUp, SectionEyebrow } from "@/components/site/SiteChrome";
 
 // Accent is the site-wide #8B5CF6 used across the hero, story and works sections.
 // Tailwind resolves arbitrary colours at build time from the literal class string,
@@ -158,21 +158,7 @@ export const ServicesSection = () => {
       <div className="relative z-10 mx-auto max-w-[1400px] px-5 md:px-12">
         <div className="mb-14 flex flex-col gap-8 md:mb-20 md:flex-row md:items-start md:justify-between md:gap-12">
           <div className="flex flex-col items-start text-left">
-            <motion.div
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              variants={fadeInUp}
-              className="mb-10 flex items-center gap-3"
-            >
-              <div aria-hidden="true" className="h-2.5 w-2.5 rounded-full bg-[#8B5CF6]" />
-              <span
-                className="text-[12px] font-bold uppercase tracking-[0.1em] md:text-[13px]"
-                style={{ color: 'var(--services-text)' }}
-              >
-                05 / Services
-              </span>
-            </motion.div>
+            <SectionEyebrow>05 / Services</SectionEyebrow>
 
             <motion.h2
               initial="hidden"
@@ -281,21 +267,7 @@ export const HomeFaqSection = () => {
       <div className="relative z-10 mx-auto max-w-[1400px] px-5 md:px-12">
         {/* Header */}
         <div className="mb-12 md:mb-16 flex flex-col gap-4">
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={fadeInUp}
-            className="flex items-center gap-3"
-          >
-            <div aria-hidden="true" className="h-2.5 w-2.5 rounded-full bg-[#8B5CF6]" />
-            <span
-              className="text-[12px] font-bold uppercase tracking-[0.1em] md:text-[13px]"
-              style={{ color: 'var(--services-text)' }}
-            >
-              FAQ
-            </span>
-          </motion.div>
+          <SectionEyebrow>06 / FAQ</SectionEyebrow>
 
           <motion.h2
             initial="hidden"

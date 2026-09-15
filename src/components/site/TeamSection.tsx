@@ -101,11 +101,11 @@ export const TeamSection = ({ standalone }: Props) => {
                 <div className="space-y-1 mb-8">
                   <p className="text-gray-400 text-[13px] font-light leading-[1.6] line-clamp-4">{member.bio}</p>
                 </div>
+              </div>
 
                 <a href={`https://instagram.com/${member.ig}`} target="_blank" rel="noopener noreferrer" className="absolute bottom-6 right-6 sm:bottom-8 sm:right-8 w-11 h-11 rounded-full border border-white/20 flex items-center justify-center text-white hover:bg-[#7C3AED]/20 hover:border-[#7C3AED] transition-all cursor-pointer backdrop-blur-sm z-30">
                   <Instagram size={18} />
                 </a>
-              </div>
             </motion.div>
           ))}
         </div>

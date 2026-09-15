@@ -112,7 +112,7 @@ export const BrandsSection = ({ standalone }: Props) => {
       <div className="max-w-[1400px] mx-auto px-5 md:px-12 relative z-10">
         <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={staggerContainer} className="mb-12 md:mb-16 relative">
           <div className="relative z-10">
-            <SectionEyebrow>02.5 / Partners</SectionEyebrow>
+            <SectionEyebrow>02 / Partners</SectionEyebrow>
             <motion.h2 variants={fadeInUp} className="text-[36px] sm:text-[48px] md:text-[64px] font-bold tracking-[-0.04em] leading-[0.9] mb-4" style={{ color: 'var(--site-fg)' }}>
               <span className="text-[#8B5CF6]">Brands</span> we've<br />worked with
             </motion.h2>
