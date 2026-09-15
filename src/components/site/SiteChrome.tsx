@@ -386,7 +386,6 @@ export const SiteFooter = ({ hideCta = false }: { hideCta?: boolean }) => {
             <div className="flex gap-4 mt-auto">
               <a href="https://www.instagram.com/ma.ai.creative" target="_blank" rel="noreferrer noopener" className="w-12 h-12 rounded-full border flex items-center justify-center hover:bg-[#8B5CF6] hover:border-[#8B5CF6] transition-colors" style={{ backgroundColor: 'var(--site-surface)', borderColor: 'var(--site-border)', color: 'var(--site-fg)' }}><Instagram size={20} /></a>
               <a href="https://www.linkedin.com/company/ma-ai-in/home/" target="_blank" rel="noreferrer noopener" className="w-12 h-12 rounded-full border flex items-center justify-center hover:bg-[#8B5CF6] hover:border-[#8B5CF6] transition-colors" style={{ backgroundColor: 'var(--site-surface)', borderColor: 'var(--site-border)', color: 'var(--site-fg)' }}><Linkedin size={20} /></a>
-              <a href="https://www.linkedin.com/" target="_blank" rel="noreferrer noopener" className="w-12 h-12 rounded-full border flex items-center justify-center hover:bg-[#8B5CF6] hover:border-[#8B5CF6] transition-colors font-bold text-[20px]" style={{ backgroundColor: 'var(--site-surface)', borderColor: 'var(--site-border)', color: 'var(--site-fg)' }}>X</a>
             </div>
           </div>
 

@@ -32,7 +32,7 @@ const majorFigures = [
     name: 'Meena Chabbria',
     role: 'Founder & Chief Everything Officer',
     bio: 'The one who started it all — quite literally. Meena is sales, strategy and spotlight energy rolled into one person, and somehow makes multitasking look like a superpower. If Ma.ai has a face and a heartbeat, it\'s her.',
-    ig: 'mee.a_chhabbria',
+    ig: 'meena_chhabbria',
     image: teamMeena,
     imagePosition: 'object-center'
   },
@@ -54,7 +54,7 @@ const majorFigures = [
     name: 'Souvik Seal',
     role: 'Co-Founder & CEO',
     bio: 'The brain of the operation, in the most literal sense. Souvik lives life on Sop\'s and runs on spreadsheets, and cold hard data — a walking encyclopedia who somehow makes numbers sound like a personality trait.',
-    ig: 'souvik_seal',
+    ig: 'seal.souvik',
     image: imgAjith,
     imagePosition: 'object-center'
   }
@@ -75,7 +75,6 @@ const TOTAL_GRID_SLOTS = 20;
 function MembersPage() {
   return (
     <PageShell
-      index="05"
       eyebrow="The Team"
       title="The minds"
       accent="behind ma.ai"

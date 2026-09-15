@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { SiteNav, SiteFooter, fontStyles, fadeInUp, SectionEyebrow } from '@/components/site/SiteChrome';
 
 interface PageShellProps {
-  index: string;
+  index?: string;
   eyebrow: string;
   title: ReactNode;
   accent: ReactNode;
@@ -15,7 +15,7 @@ export const PageShell = ({ index, eyebrow, title, accent, intro, children }: Pa
   return (
     <>
       <style>{fontStyles}</style>
-      <div className="min-h-screen transition-colors duration-300" style={{ backgroundColor: 'var(--site-bg)', color: 'var(--site-fg)' }}>
+        <div className="min-h-screen transition-colors duration-300" style={{ backgroundColor: 'var(--site-bg)', backgroundImage: 'var(--site-bg-image, none)', backgroundAttachment: 'fixed', color: 'var(--site-fg)', WebkitTextFillColor: 'inherit' }}>
         <SiteNav />
         <main>
           <section className="relative pt-48 pb-24 overflow-hidden">
@@ -24,7 +24,7 @@ export const PageShell = ({ index, eyebrow, title, accent, intro, children }: Pa
             <div className="max-w-[1400px] mx-auto px-5 md:px-12 relative z-10">
               <motion.div initial="hidden" animate="visible" variants={fadeInUp}>
                 <div className="-ml-3">
-                  <SectionEyebrow>{index} / {eyebrow}</SectionEyebrow>
+                  <SectionEyebrow>{index ? `${index} / ${eyebrow}` : eyebrow}</SectionEyebrow>
                 </div>
                 <h1 className="text-[34px] sm:text-[52px] md:text-[84px] font-bold leading-[1.03] tracking-[-0.02em] max-w-[900px]">
                   {title}<br />

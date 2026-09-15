@@ -207,7 +207,7 @@ export const ServicesSection = () => {
             difference?
           </p>
           <Link
-            to="/services"
+            to="/contact"
             className="group inline-flex items-center gap-3 rounded-[40px] border-[1.5px] px-8 py-3.5 text-[13px] font-bold uppercase tracking-[0.08em] transition-colors hover:border-[#8B5CF6] hover:bg-[#8B5CF6] hover:text-[#111111]"
             style={{ borderColor: 'var(--services-border)', color: 'var(--services-text)' }}
           >
