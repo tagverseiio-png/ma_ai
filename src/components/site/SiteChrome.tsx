@@ -184,9 +184,9 @@ export const SiteNav = ({
               to="/contact"
               style={{
                 borderColor: isTransparentTop ? 'rgba(255,255,255,0.6)' : 'var(--site-fg)',
-                color: isTransparentTop ? '#ffffff' : 'var(--site-fg)'
+                color: isTransparentTop ? '#ffffff' : undefined
               }}
-              className="ml-2 px-6 py-2.5 rounded-[40px] border-[1.5px] font-bold hover:bg-[#111111] hover:text-[#8B5CF6] hover:border-[#111111] transition-all flex items-center gap-2"
+              className={`ml-2 px-6 py-2.5 rounded-[40px] border-[1.5px] font-bold hover:bg-[#111111] hover:text-[#A78BFA] hover:border-[#111111] transition-all flex items-center gap-2 ${!isTransparentTop ? 'text-[var(--site-fg)]' : ''}`}
             >
               Let's talk <ArrowRight size={16} />
             </Link>
