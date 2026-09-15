@@ -276,7 +276,7 @@ const NewsletterForm = () => {
   );
 };
 
-export const SiteFooter = () => {
+export const SiteFooter = ({ hideCta = false }: { hideCta?: boolean }) => {
   const emails = [
     'meena.chabbria@maonline.ai',
     'prarthana.chabbria@maonline.ai',
@@ -301,6 +301,8 @@ export const SiteFooter = () => {
   return (
     <footer className="pt-16 md:pt-20 transition-colors duration-300" style={{ backgroundColor: 'var(--site-bg)' }}>
       <div className="max-w-[1400px] mx-auto px-5 md:px-12">
+      {!hideCta && (
+      <>
         <SectionEyebrow>03 / START SOMETHING LOUD</SectionEyebrow>
 
         <h2 className="text-[48px] sm:text-[64px] md:text-[80px] lg:text-[90px] xl:text-[110px] font-bold leading-[0.9] tracking-[-0.05em] mb-12 md:mb-16 w-full" style={{ color: 'var(--site-fg)' }}>
@@ -332,6 +334,8 @@ export const SiteFooter = () => {
             <img src="/meta-logo.png" alt="Meta" className="h-[28px] w-auto mix-blend-multiply object-contain" />
           </div>
         </div>
+      </>
+      )}
 
         {/* Restored Columns Grid */}
         <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-5 gap-x-6 md:gap-x-8 gap-y-10 md:gap-y-16 mb-16 md:mb-20">

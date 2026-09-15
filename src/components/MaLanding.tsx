@@ -273,7 +273,7 @@ export default function MaLanding() {
           <ServicesSection />
           <HomeFaqSection />
         </main>
-        <SiteFooter />
+        <SiteFooter hideCta />
       </div>
     </>
   );

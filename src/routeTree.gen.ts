@@ -18,6 +18,7 @@ import { Route as CookiesRouteImport } from './routes/cookies'
 import { Route as FaqRouteImport } from './routes/faq'
 import { Route as InsightsRouteImport } from './routes/insights'
 import { Route as MembersRouteImport } from './routes/members'
+import { Route as OurworksRouteImport } from './routes/ourworks'
 import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as ServicesRouteImport } from './routes/services'
 import { Route as TeamRouteImport } from './routes/team'
@@ -69,6 +70,11 @@ const MembersRoute = MembersRouteImport.update({
   path: '/members',
   getParentRoute: () => rootRouteImport,
 } as any)
+const OurworksRoute = OurworksRouteImport.update({
+  id: '/ourworks',
+  path: '/ourworks',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const PrivacyRoute = PrivacyRouteImport.update({
   id: '/privacy',
   path: '/privacy',
@@ -105,6 +111,7 @@ export interface FileRoutesByFullPath {
   '/faq': typeof FaqRoute
   '/insights': typeof InsightsRoute
   '/members': typeof MembersRoute
+  '/ourworks': typeof OurworksRoute
   '/privacy': typeof PrivacyRoute
   '/services': typeof ServicesRoute
   '/team': typeof TeamRoute
@@ -121,6 +128,7 @@ export interface FileRoutesByTo {
   '/faq': typeof FaqRoute
   '/insights': typeof InsightsRoute
   '/members': typeof MembersRoute
+  '/ourworks': typeof OurworksRoute
   '/privacy': typeof PrivacyRoute
   '/services': typeof ServicesRoute
   '/team': typeof TeamRoute
@@ -138,6 +146,7 @@ export interface FileRoutesById {
   '/faq': typeof FaqRoute
   '/insights': typeof InsightsRoute
   '/members': typeof MembersRoute
+  '/ourworks': typeof OurworksRoute
   '/privacy': typeof PrivacyRoute
   '/services': typeof ServicesRoute
   '/team': typeof TeamRoute
@@ -156,6 +165,7 @@ export interface FileRouteTypes {
     | '/faq'
     | '/insights'
     | '/members'
+    | '/ourworks'
     | '/privacy'
     | '/services'
     | '/team'
@@ -172,6 +182,7 @@ export interface FileRouteTypes {
     | '/faq'
     | '/insights'
     | '/members'
+    | '/ourworks'
     | '/privacy'
     | '/services'
     | '/team'
@@ -188,6 +199,7 @@ export interface FileRouteTypes {
     | '/faq'
     | '/insights'
     | '/members'
+    | '/ourworks'
     | '/privacy'
     | '/services'
     | '/team'
@@ -205,6 +217,7 @@ export interface RootRouteChildren {
   FaqRoute: typeof FaqRoute
   InsightsRoute: typeof InsightsRoute
   MembersRoute: typeof MembersRoute
+  OurworksRoute: typeof OurworksRoute
   PrivacyRoute: typeof PrivacyRoute
   ServicesRoute: typeof ServicesRoute
   TeamRoute: typeof TeamRoute
@@ -277,6 +290,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof MembersRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/ourworks': {
+      id: '/ourworks'
+      path: '/ourworks'
+      fullPath: '/ourworks'
+      preLoaderRoute: typeof OurworksRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/privacy': {
       id: '/privacy'
       path: '/privacy'
@@ -325,6 +345,7 @@ const rootRouteChildren: RootRouteChildren = {
   FaqRoute: FaqRoute,
   InsightsRoute: InsightsRoute,
   MembersRoute: MembersRoute,
+  OurworksRoute: OurworksRoute,
   PrivacyRoute: PrivacyRoute,
   ServicesRoute: ServicesRoute,
   TeamRoute: TeamRoute,

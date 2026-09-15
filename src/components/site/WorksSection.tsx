@@ -25,7 +25,7 @@ const worksData = [
   { id: 1, title: 'Showreel 1', type: 'Showreel / Brand Films', duration: '01:00', video: brandFilm1, desc: 'A showcase of AI-crafted stories, films and experiences.', featured: true },
   { id: 2, title: 'Showreel 2', type: 'Showreel / Brand Films', duration: '00:45', video: showReel2, desc: 'A showcase of AI-crafted stories, films and experiences.' },
   { id: 3, title: 'Showreel 3', type: 'Showreel / Brand Films', duration: '01:15', video: showReel3, desc: 'A showcase of AI-crafted stories, films and experiences.' },
-  { id: 4, title: 'UGC Content', type: 'Showreel / Brand Films', duration: '00:30', video: ugc, desc: 'A showcase of AI-crafted stories, films and experiences.' },
+  { id: 4, title: 'Showreel 4', type: 'Showreel / Brand Films', duration: '00:30', video: ugc, desc: 'A showcase of AI-crafted stories, films and experiences.' },
   // Client Case Studies
   { id: 5, title: 'Hotel Feature', type: 'Client Case Studies', duration: '00:45', video: hotel1, desc: 'A showcase of AI-crafted stories, films and experiences.' },
   { id: 6, title: 'Katha Story', type: 'Client Case Studies', duration: '01:10', video: katha1, desc: 'A showcase of AI-crafted stories, films and experiences.' },
@@ -33,7 +33,7 @@ const worksData = [
   { id: 8, title: 'Ranthambore Final', type: 'Client Case Studies', duration: '01:45', video: ranthambore1, desc: 'A showcase of AI-crafted stories, films and experiences.' },
   { id: 9, title: 'Tadoba March', type: 'Client Case Studies', duration: '01:45', video: tadoba1, desc: 'A showcase of AI-crafted stories, films and experiences.' },
   // Micro Drama Series
-  { id: 10, title: 'Animation Story', type: 'Micro Drama Series', duration: '03:20', video: animation1, desc: 'A showcase of AI-crafted stories, films and experiences.' },
+  { id: 10, title: 'Micro Drama 1', type: 'Micro Drama Series', duration: '03:20', video: animation1, desc: 'A showcase of AI-crafted stories, films and experiences.' },
   // Social Media Vertical Content
   { id: 11, title: 'Hadaza Reel', type: 'Social Media Vertical Content', duration: '00:15', video: hadaza1, desc: 'A showcase of AI-crafted stories, films and experiences.' },
   { id: 12, title: 'Realistic Vertical', type: 'Social Media Vertical Content', duration: '00:30', video: realistic1, desc: 'A showcase of AI-crafted stories, films and experiences.' },
@@ -208,7 +208,7 @@ export const WorksSection = ({ standalone }: Props) => {
             Over 120 films, campaigns and AI experiments delivered for brands across 14 markets.
           </p>
           <Link
-            to="/work"
+            to="/ourworks"
             className="group px-8 py-3.5 rounded-[40px] border-[1.5px] border-[var(--site-fg)] bg-transparent text-[var(--site-fg)] font-bold hover:bg-[#111111] hover:text-[#8B5CF6] hover:border-[#111111] transition-all inline-flex items-center gap-3 tracking-[0.08em] text-[13px] uppercase"
           >
             Explore our works
