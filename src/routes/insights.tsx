@@ -29,7 +29,6 @@ const posts = [
 function InsightsPage() {
   return (
     <PageShell
-      index="04"
       eyebrow="Insights"
       title="Notes from"
       accent="the build."

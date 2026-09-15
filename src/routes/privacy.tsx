@@ -20,7 +20,6 @@ export const Route = createFileRoute('/privacy')({
 function PrivacyPage() {
   return (
     <PageShell
-      index="07"
       eyebrow="Legal"
       title="Privacy"
       accent="Policy"

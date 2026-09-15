@@ -23,7 +23,6 @@ function ContactPage() {
 
   return (
     <PageShell
-      index="06"
       eyebrow="Contact"
       title={<>You bring the <span className="text-[#7C3AED]">Idea.</span></>}
       accent={<>We bring it to <span className="text-[#7C3AED]">Life.</span></>}

@@ -303,7 +303,7 @@ export const SiteFooter = ({ hideCta = false }: { hideCta?: boolean }) => {
       <div className="max-w-[1400px] mx-auto px-5 md:px-12">
       {!hideCta && (
       <>
-        <SectionEyebrow>03 / START SOMETHING LOUD</SectionEyebrow>
+        <SectionEyebrow>START SOMETHING LOUD</SectionEyebrow>
 
         <h2 className="text-[48px] sm:text-[64px] md:text-[80px] lg:text-[90px] xl:text-[110px] font-bold leading-[0.9] tracking-[-0.05em] mb-12 md:mb-16 w-full" style={{ color: 'var(--site-fg)' }}>
           Bring the brief.<br />We'll bring the Future.

@@ -130,7 +130,10 @@ export default function OurWorksPage() {
 
   return (
     <SectionPageWrapper>
-      <section className="py-16 md:py-24 relative overflow-hidden" style={{ backgroundColor: 'var(--site-bg)' }}>
+      <section className="py-16 md:py-24 relative overflow-hidden">
+        <div className="absolute top-[-10%] left-[-5%] w-[500px] h-[500px] rounded-full bg-[#8B5CF6]/10 blur-[120px] pointer-events-none dark:hidden" />
+        <div className="absolute bottom-[-15%] right-[-8%] w-[600px] h-[600px] rounded-full bg-[#7C3AED]/8 blur-[140px] pointer-events-none dark:hidden" />
+
         <div className="max-w-[1400px] mx-auto px-5 md:px-12 relative z-10">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeInUp} className="mb-12 md:mb-16">
             <h1 className="text-[48px] sm:text-[64px] md:text-[80px] lg:text-[96px] font-bold mb-8 tracking-[-0.04em] leading-[0.9] max-w-[1000px]" style={{ color: 'var(--site-fg)' }}>

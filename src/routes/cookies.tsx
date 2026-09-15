@@ -20,7 +20,6 @@ export const Route = createFileRoute('/cookies')({
 function CookiesPage() {
   return (
     <PageShell
-      index="09"
       eyebrow="Legal"
       title="Cookie"
       accent="Policy"

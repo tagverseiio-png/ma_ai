@@ -20,7 +20,6 @@ export const Route = createFileRoute('/terms')({
 function TermsPage() {
   return (
     <PageShell
-      index="08"
       eyebrow="Legal"
       title="Terms of"
       accent="Service"

@@ -34,7 +34,6 @@ const perks = [
 function CareersPage() {
   return (
     <PageShell
-      index="05"
       eyebrow="Careers"
       title="Different minds."
       accent="One shared purpose."

@@ -15,7 +15,7 @@ export const SectionPageWrapper = ({ children }: { children: ReactNode }) => (
       className="min-h-screen scroll-smooth transition-colors duration-300 relative overflow-hidden"
       style={{ backgroundColor: 'var(--site-bg)', backgroundImage: 'var(--site-bg-image, none)', backgroundAttachment: 'fixed', color: 'var(--site-fg)', WebkitTextFillColor: 'inherit' }}
     >
-      <AmbientOrb />
+      <div className="dark:hidden"><AmbientOrb /></div>
       <SiteNav />
       <main>
         {/* Spacer so content clears the fixed nav bar */}
