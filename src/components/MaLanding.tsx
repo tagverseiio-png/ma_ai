@@ -9,7 +9,7 @@ import { BrandsSection } from '@/components/site/BrandsSection';
 import { WorksSection } from '@/components/site/WorksSection';
 import { TeamSection } from '@/components/site/TeamSection';
 import { ServicesSection, HomeFaqSection } from '@/components/site/ServicesSection';
-import showReelVideo from '@/assets/SHOW REEL HD .mp4';
+const showReelVideo = '/videos/SHOW REEL HD .mp4';
 
 import navLogoDarkImg from '@/assets/Ma_nav_logo_dark.png';
 

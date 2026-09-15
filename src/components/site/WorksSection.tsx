@@ -3,46 +3,30 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from '@tanstack/react-router';
 import { ArrowRight, Play, Film, Target, PlayCircle, Activity, Sparkles, Volume2, VolumeX, X } from 'lucide-react';
 import { SectionEyebrow, fadeInUp } from '@/components/site/SiteChrome';
-import hotel1 from '@/assets/Client Case Studies/HOTEL 1 (1).mp4';
-import katha1 from '@/assets/Client Case Studies/KATHA  (1).mp4';
-import manali1 from '@/assets/Client Case Studies/MANALI HIGH RES (1).mp4';
-import ranthambore1 from '@/assets/Client Case Studies/RANTHAMBORE FINAL   (1).mp4';
-import tadoba1 from '@/assets/Client Case Studies/TADOBA 30 MARCH (1).mp4';
-import animation1 from '@/assets/Micro Drama Series/ANIMATION (1).mp4';
-import brandFilm1 from '@/assets/showreel-Brandfilms/MA AI BRAND FILM (1) (1).mp4';
-import showReel2 from '@/assets/showreel-Brandfilms/SHOW REEL HD (2) (1).mp4';
-import showReel3 from '@/assets/showreel-Brandfilms/SHOWREEL 2 (1).mp4';
-import ugc from '@/assets/showreel-Brandfilms/UGC.mp4';
-import hadaza1 from '@/assets/Social Media Vertical Content/HADAZA REEL FY.mp4';
-import realistic1 from '@/assets/Social Media Vertical Content/REALSTIC .mp4';
-import campus1 from '@/assets/VFX Content/CAMPUS SHOES HD.mp4';
-import fastPaced1 from '@/assets/VFX Content/FAST PACED AD  (1).mp4';
-import rareRabbit1 from '@/assets/VFX Content/RARE RABBIT AI MODEL AD .mp4';
-import yt1 from '@/assets/YouTube Video/Found Through Trust - goldenmatrimonial (1) (1).mp4';
 
 const worksData = [
   // Showreel / Brand Films
-  { id: 1, title: 'Showreel 1', type: 'Showreel / Brand Films', duration: '01:00', video: brandFilm1, desc: 'A showcase of AI-crafted stories, films and experiences.', featured: true },
-  { id: 2, title: 'Showreel 2', type: 'Showreel / Brand Films', duration: '00:45', video: showReel2, desc: 'A showcase of AI-crafted stories, films and experiences.' },
-  { id: 3, title: 'Showreel 3', type: 'Showreel / Brand Films', duration: '01:15', video: showReel3, desc: 'A showcase of AI-crafted stories, films and experiences.' },
-  { id: 4, title: 'Showreel 4', type: 'Showreel / Brand Films', duration: '00:30', video: ugc, desc: 'A showcase of AI-crafted stories, films and experiences.' },
+  { id: 1, title: 'Showreel 1', type: 'Showreel / Brand Films', duration: '01:00', video: '/videos/showreel-Brandfilms/MA AI BRAND FILM (1) (1).mp4', desc: 'A showcase of AI-crafted stories, films and experiences.', featured: true },
+  { id: 2, title: 'Showreel 2', type: 'Showreel / Brand Films', duration: '00:45', video: '/videos/showreel-Brandfilms/SHOW REEL HD (2) (1).mp4', desc: 'A showcase of AI-crafted stories, films and experiences.' },
+  { id: 3, title: 'Showreel 3', type: 'Showreel / Brand Films', duration: '01:15', video: '/videos/showreel-Brandfilms/SHOWREEL 2 (1).mp4', desc: 'A showcase of AI-crafted stories, films and experiences.' },
+  { id: 4, title: 'Showreel 4', type: 'Showreel / Brand Films', duration: '00:30', video: '/videos/showreel-Brandfilms/UGC.mp4', desc: 'A showcase of AI-crafted stories, films and experiences.' },
   // Client Case Studies
-  { id: 5, title: 'Hotel Feature', type: 'Client Case Studies', duration: '00:45', video: hotel1, desc: 'A showcase of AI-crafted stories, films and experiences.' },
-  { id: 6, title: 'Katha Story', type: 'Client Case Studies', duration: '01:10', video: katha1, desc: 'A showcase of AI-crafted stories, films and experiences.' },
-  { id: 7, title: 'Manali High Res', type: 'Client Case Studies', duration: '01:45', video: manali1, desc: 'A showcase of AI-crafted stories, films and experiences.' },
-  { id: 8, title: 'Ranthambore Final', type: 'Client Case Studies', duration: '01:45', video: ranthambore1, desc: 'A showcase of AI-crafted stories, films and experiences.' },
-  { id: 9, title: 'Tadoba March', type: 'Client Case Studies', duration: '01:45', video: tadoba1, desc: 'A showcase of AI-crafted stories, films and experiences.' },
+  { id: 5, title: 'Hotel Feature', type: 'Client Case Studies', duration: '00:45', video: '/videos/Client Case Studies/HOTEL 1 (1).mp4', desc: 'A showcase of AI-crafted stories, films and experiences.' },
+  { id: 6, title: 'Katha Story', type: 'Client Case Studies', duration: '01:10', video: '/videos/Client Case Studies/KATHA  (1).mp4', desc: 'A showcase of AI-crafted stories, films and experiences.' },
+  { id: 7, title: 'Manali High Res', type: 'Client Case Studies', duration: '01:45', video: '/videos/Client Case Studies/MANALI HIGH RES (1).mp4', desc: 'A showcase of AI-crafted stories, films and experiences.' },
+  { id: 8, title: 'Ranthambore Final', type: 'Client Case Studies', duration: '01:45', video: '/videos/Client Case Studies/RANTHAMBORE FINAL   (1).mp4', desc: 'A showcase of AI-crafted stories, films and experiences.' },
+  { id: 9, title: 'Tadoba March', type: 'Client Case Studies', duration: '01:45', video: '/videos/Client Case Studies/TADOBA 30 MARCH (1).mp4', desc: 'A showcase of AI-crafted stories, films and experiences.' },
   // Micro Drama Series
-  { id: 10, title: 'Micro Drama 1', type: 'Micro Drama Series', duration: '03:20', video: animation1, desc: 'A showcase of AI-crafted stories, films and experiences.' },
+  { id: 10, title: 'Micro Drama 1', type: 'Micro Drama Series', duration: '03:20', video: '/videos/Micro Drama Series/ANIMATION (1).mp4', desc: 'A showcase of AI-crafted stories, films and experiences.' },
   // Social Media Vertical Content
-  { id: 11, title: 'Hadaza Reel', type: 'Social Media Vertical Content', duration: '00:15', video: hadaza1, desc: 'A showcase of AI-crafted stories, films and experiences.' },
-  { id: 12, title: 'Realistic Vertical', type: 'Social Media Vertical Content', duration: '00:30', video: realistic1, desc: 'A showcase of AI-crafted stories, films and experiences.' },
+  { id: 11, title: 'Hadaza Reel', type: 'Social Media Vertical Content', duration: '00:15', video: '/videos/Social Media Vertical Content/HADAZA REEL FY.mp4', desc: 'A showcase of AI-crafted stories, films and experiences.' },
+  { id: 12, title: 'Realistic Vertical', type: 'Social Media Vertical Content', duration: '00:30', video: '/videos/Social Media Vertical Content/REALSTIC .mp4', desc: 'A showcase of AI-crafted stories, films and experiences.' },
   // VFX Content
-  { id: 13, title: 'Campus Shoes', type: 'VFX Content', duration: '01:12', video: campus1, desc: 'A showcase of AI-crafted stories, films and experiences.' },
-  { id: 14, title: 'Fast Paced Ad', type: 'VFX Content', duration: '00:40', video: fastPaced1, desc: 'A showcase of AI-crafted stories, films and experiences.' },
-  { id: 15, title: 'Rare Rabbit AI Model', type: 'VFX Content', duration: '00:25', video: rareRabbit1, desc: 'A showcase of AI-crafted stories, films and experiences.' },
+  { id: 13, title: 'Campus Shoes', type: 'VFX Content', duration: '01:12', video: '/videos/VFX Content/CAMPUS SHOES HD.mp4', desc: 'A showcase of AI-crafted stories, films and experiences.' },
+  { id: 14, title: 'Fast Paced Ad', type: 'VFX Content', duration: '00:40', video: '/videos/VFX Content/FAST PACED AD  (1).mp4', desc: 'A showcase of AI-crafted stories, films and experiences.' },
+  { id: 15, title: 'Rare Rabbit AI Model', type: 'VFX Content', duration: '00:25', video: '/videos/VFX Content/RARE RABBIT AI MODEL AD .mp4', desc: 'A showcase of AI-crafted stories, films and experiences.' },
   // YouTube Video
-  { id: 16, title: 'Golden Matrimonial', type: 'YouTube Video', duration: '00:58', video: yt1, desc: 'A showcase of AI-crafted stories, films and experiences.' },
+  { id: 16, title: 'Golden Matrimonial', type: 'YouTube Video', duration: '00:58', video: '/videos/YouTube Video/Found Through Trust - goldenmatrimonial (1) (1).mp4', desc: 'A showcase of AI-crafted stories, films and experiences.' },
 ];
 
 function HorizontalVideoCard({ p, index, onPlayFullscreen }: { p: typeof worksData[0], index: number, onPlayFullscreen: (videoUrl: string) => void }) {
