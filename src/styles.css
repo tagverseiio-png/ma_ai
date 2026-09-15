@@ -97,8 +97,8 @@
   --sidebar-ring: oklch(0.704 0.04 256.788);
 
   /* Site-specific theme tokens */
-  --site-bg: #f0e8ff;
-  --site-bg-image: linear-gradient(135deg, #f5f0ff 0%, #e8deff 30%, #f0e8ff 60%, #ece4ff 100%);
+  --site-bg: #e6e0ee;
+  --site-bg-image: linear-gradient(135deg, #ece7f0 0%, #ddd5e8 30%, #e6e0ee 60%, #e3dde9 100%);
   --site-fg: #111111;
   --site-muted: #6b7280;
   --site-surface: #ffffff;
@@ -113,7 +113,7 @@
   --glass-card-border: rgba(0,0,0,0.06);
 
   /* Services section — light */
-  --services-bg: #ede5ff;
+  --services-bg: #e2dbed;
   --services-text: #111111;
   --services-text-muted: rgba(17,17,17,0.55);
   --services-text-secondary: rgba(17,17,17,0.75);
