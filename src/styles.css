@@ -97,9 +97,8 @@
   --sidebar-ring: oklch(0.704 0.04 256.788);
 
   /* Site-specific theme tokens */
-  --site-bg: #faf9fc;
-  --site-bg-image: radial-gradient(at top right, rgba(139, 92, 246, 0.1) 0%, transparent 50%),
-                   radial-gradient(at bottom left, rgba(139, 92, 246, 0.05) 0%, transparent 50%);
+  --site-bg: #f5f0ff;
+  --site-bg-image: linear-gradient(135deg, #f8f5ff 0%, #ede5ff 50%, #f5f0ff 100%);
   --site-fg: #111111;
   --site-muted: #6b7280;
   --site-surface: #ffffff;
